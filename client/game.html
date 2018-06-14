@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Online Adventures</title>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="client/css/game.css">
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body>
+		<div id="gameContainer">
+			<div id="chatContainer">
+				<div id="chatSettings" class="clearfix">
+					<div>
+						<div id="chatMinimize">&#9866;</div>
+						<div id="chatMaximize">+</div>
+					</div>
+					<div>
+						<div id="whisperUnseenCounter">
+							<span>&#9993; </span>
+							<span id="whisperUnseenCounterValue">8</span>
+						</div>
+					</div>
+					<div id="partyHeader">
+						<span id="showPartyUI">&#9749;</span>
+						<span id="leaveParty">&times;</span>
+					</div>		
+				</div>
+				<div id="chatHeader" class="clearfix">
+					<div class="chat-link selected-chat-link">Global</div>
+					<div class="chat-link">Area</div>
+					<div class="chat-link">Party</div>
+					<div class="chat-link">Whisper</div>
+					<div class="chat-link">Combat</div>
+				</div>
+				<div id="chatContent">
+					<div id="messages">
+						<div class="messages">
+							
+						</div>
+						<div class="messages">
+							
+						</div>
+						<div class="messages">
+							
+						</div>
+						<div class="messages">
+							
+						</div>
+						<div class="messages">
+							
+						</div>
+					</div>
+					<div>
+						<input type="text" id="chatInput">
+					</div>
+				</div>
+			</div>
+
+			<div id="partyUI">
+				<div class="clearfix">
+					<span id="closePartyUI">&times;</span>
+				</div>
+				<div>
+					<label>Party name</label>
+					<input type="text" id="partyName">
+				</div>
+				<div>
+					<button id="createParty">Create</button>
+					<button id="joinParty">Join</button>
+				</div>
+			</div>
+
+			<div id="heroUI">
+				<div class="clearfix">
+					<div class="clearfix">
+						<div class="level-container">
+							<span id="heroLevel">1</span>
+						</div>
+						<div class="exp-gold-container">
+							<div>
+								<label>Exp</label>
+								<span id="heroExp">0</span>
+							</div>
+							<div>
+								<label>Gold</label>
+								<span id="heroGold">0</span>
+							</div>
+						</div>
+					</div>
+					<div id="heroAbilitiesUI" class="clearfix">
+					</div>
+				</div>
+				<div class="clearfix">
+					<div class="hero-stats-container">
+						<div>
+							<label>Attack</label>
+							<span id="heroAttack">55</span>
+						</div>
+						<div>
+							<label>Defence</label>
+							<span id="heroDefence">50</span>
+						</div>
+					</div>
+					<div class="bars-container">
+						<div class="bar-container">
+							<div id="health"></div>
+							<div id="healthValue"></div>
+						</div>
+						<div class="bar-container">
+							<div id="energy"></div>
+							<div id="energyValue"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			
+		<div id="loginScreen">
+			<form>
+				<div>
+					<label for="loginUsername">Username: </label>
+					<input type="text" id="loginUsername" value="a">
+				</div>
+				<div>
+					<label for="loginPassword">Password: </label>
+					<input type="text" id="loginPassword" value="a">
+				</div>
+				<div>
+					<input type="submit" id="loginBtn" value="Login"></input>
+				</div>
+				<div>
+					<a href="#" id="showRegisterScreen">Don't have an account?</a>
+				</div>
+				<div id="loginErrors">
+					
+				</div>
+			</form>
+		</div>
+
+		<div id="registerScreen">
+			<form>				
+				<div>
+					<label for="registerEmail">Email: </label>
+					<input type="email" id="registerEmail">
+				</div>
+				<div>
+					<label for="registerUsername">Username: </label>
+					<input type="text" id="registerUsername">
+				</div>
+				<div>
+					<label for="registerPassword">Password: </label>
+					<input type="password" id="registerPassword">
+				</div>
+				<div>
+					<label for="registerPasswordConfirm">Confirm password: </label>
+					<input type="password" id="registerPasswordConfirm">
+				</div>				
+				<div>
+					<input type="submit" id="registerBtn" value="Register"></input>
+				</div>
+				<div>
+					<a href="#" id="showLoginScreen">Already have an account?</a>
+				</div>
+				<div id="registerErrors">
+					
+				</div>
+			</form>
+		</div>
+
+		<div id="heroCreationScreen" class="clearfix">
+			<div id="heroesList" class="clearfix">
+				
+			</div>
+			<div>
+				<div id="heroesDetailed">
+					
+				</div>
+				<div id="heroCreationForm">
+					<div>
+						<label>Selected hero: </label>
+						<span id="selectedHero"></span>
+					</div>
+					<div>
+						<label for="heroName">Hero name: </label>
+						<input type="text" id="heroName">
+						<span id="create">Create</span>
+					</div>
+					<div id="creationErrors">
+						
+					</div>
+					<div>
+						<a href="#" id="showHeroSelection">Back to hero selection</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="heroSelectionScreen">
+			<h1 id="heroSelectionWelcome">Welcome Nikola</h1>
+			<div id="ownedHeroes">
+				<div class="my-hero">
+					<h3>Blades</h3>
+					<div class="hero-img">
+						
+					</div>
+					<div class="my-hero-progress">
+						<div>
+							<label>Level: </label>
+							<span>1</span>
+						</div>
+						<div>
+							<label>Gold: </label>
+							<span>333</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="heroSelectionBtns">
+				<button id="play">Play</button>
+				<button id="deleteHero">Delete hero</button>
+				<button id="showHeroCreation">Create hero</button>
+			</div>
+		</div>
+
+		
+
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="client/js/game/dist/main.js"></script>
+	</body>
+</html>
+

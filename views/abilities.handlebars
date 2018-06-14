@@ -1,0 +1,126 @@
+<div class="abilities-page">
+	<div class="clearfix">
+		<div class="new-ability">
+			<h2>Create new ability</h2>
+			<form method="post" action="/admin/newAbility">
+				<div>
+					<label>Name </label>
+					<input type="text" name="_name">
+				</div>
+				<div>
+					<label>Sprite </label>
+					<input type="text" name="_sprite">
+				</div>
+				<div>
+					<label>Sound</label>
+					<input type="text" name="_sound">
+				</div>
+				<div>
+					<label>Width</label>
+					<input type="number" name="_width">
+				</div>
+				<div>
+					<label>Height</label>
+					<input type="number" name="_height">
+				</div>
+				<div>
+					<label>Damage</label>
+					<input type="number" name="_damage">
+				</div>
+				<div>
+					<label>Speed</label>
+					<input type="number" name="_speed">
+				</div>
+				<div>
+					<label>Range</label>
+					<input type="number" name="_range">
+				</div>
+				<div>
+					<label>Cooldown </label>
+					<input type="number" name="_cooldown">
+				</div>
+				<div>
+					<label>Description </label>
+					<textarea name="_description" cols="25" rows="3"></textarea>
+				</div>
+				<div>
+					<input type="submit" value="Create">
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="edit-abilities-header clearfix">
+		<div>
+			<h2>Edit existing abilities</h2>
+		</div>
+		<div class="ability-search">
+			<label>Search</label>
+			<input type="text" onkeyup="filterAbilities(this.value)">
+		</div>
+	</div>
+	<div class="abilities-container">
+		{{#abilities}}
+		<div class="ability" id="ability-{{id}}">
+			<form method="post" action="/admin/updateAbility">
+				<div 
+					class="ability-icon"
+					style="background-image:url(/client/assets/images/{{sprite}})">
+				</div>
+				<div class="ability-name">
+					<label>Name</label>
+					<input type="text" name="name" value="{{name}}">
+				</div>
+				<div>
+					<label>Sprite</label>
+					<input type="text" name="sprite" value="{{sprite}}">
+				</div>
+				<div>
+					<label>Sound</label>
+					<input type="text" name="sound" value="{{sound}}">
+				</div>
+				<div>
+					<label>Width</label>
+					<input type="number" name="width" value="{{width}}">
+				</div>
+				<div>
+					<label>Height</label>
+					<input type="number" name="height" value="{{height}}">
+				</div>
+				<div>
+					<label>Damage</label>
+					<input type="number" name="damage" value="{{damage}}">
+				</div>
+				<div>
+					<label>Speed</label>
+					<input type="number" name="speed" value="{{speed}}">
+				</div>
+				<div>
+					<label>Range</label>
+					<input type="number" name="_range" value="{{_range}}">
+				</div>
+				<div>
+					<label>Cooldown</label>
+					<input type="number" name="cooldown" value={{cooldown}}>
+				</div>
+				<div class="description">
+					<label>Description</label>
+					<textarea 
+						name="description"cols="25" rows="3">{{description}}</textarea>
+				</div>
+				<div>
+					<input type="hidden" name="id" value={{id}}>
+					<input 
+						type="button" 
+						onclick="deleteAbility({{id}})"
+						value="Delete"
+					>
+					<input type="submit" value="Save">
+				</div>
+			</form>
+		</div>
+		{{/abilities}}
+	</div>
+</div>
+
+<script src="/client/js/admin/abilities/main.js"></script>

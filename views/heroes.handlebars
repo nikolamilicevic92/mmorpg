@@ -1,0 +1,82 @@
+{{#data}}
+<div class="hero-data">
+	<form method="post" action="/admin/heroes">
+		<div class="clearfix">
+			<div class="hero-basic-data">
+				<div>
+					<h3>Basic info</h3>
+				</div>
+				<div class="hero-img-container">
+					<div class="hero-img" style="background:url(/client/assets/images/{{sprite}})">
+						
+					</div>
+				</div>
+				<div>
+					<label>Type</label>
+					<input type="text" name="type" value="{{type}}">
+				</div>
+				<div>
+					<label>Sprite</label>
+					<input type="text" name="sprite" value="{{sprite}}">
+				</div>
+			</div>
+			<div class="hero-combat-data">
+				<div>
+					<h3>Combat stats</h3>
+				</div>
+				<div>
+					<label>Base attack</label>
+					<input type="number" name="base_attack" value="{{base_attack}}">
+				</div>
+				<div>
+					<label>Base defence</label>
+					<input type="number" name="base_defence" value="{{base_defence}}">
+				</div>
+				<div>
+					<label>Base mobility</label>
+					<input type="number" name="base_mobility" value="{{base_mobility}}">
+				</div>
+				<div>
+					<label>Base health</label>
+					<input type="number" name="base_health" value="{{base_health}}">
+				</div>
+			</div>
+			<div class="hero-description">
+				<div>
+					<h3>Description</h3>
+				</div>
+				<textarea name="description" rows="7" cols="50">{{description}}</textarea>
+			</div>
+		</div>
+		<div class="hero-form1-submit clearfix">
+			<input type="hidden" name="hero_id" value="{{id}}">
+			<input type="submit" value="Save">
+		</div>
+	</form>
+	<h3>Abilities</h3>
+	<div class="hero-abilities clearfix">
+	{{#abilities}}
+		<div class="hero-ability" id="{{../id}}-{{id}}">
+			<label>{{name}}</label>
+			<button onclick="removeAbilityFromHero({{../id}}, {{id}})">x</button>
+		</div>
+	{{/abilities}}
+	</div>
+	<div class="add-new-ability-to-hero">
+		<h3>Add new ability</h3>
+		<form method="post" action="/admin/addNewAbilityToHero">
+			<div>
+				<select name="abilityID">
+					{{#../allAbilities}}
+					<option value="{{id}}">{{name}}</option>
+					{{/../allAbilities}}
+				</select>
+				<input type="hidden" name="heroTypeID" value="{{id}}">
+				<input type="submit" value="Add">
+			</div>
+		</form>
+	</div>
+</div>
+{{/data}}
+
+<script src="/client/js/admin/heroes/main.js"></script>

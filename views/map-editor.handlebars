@@ -1,0 +1,111 @@
+<div class="map-editor clearfix">
+	<div id="canvasContainer">
+		<canvas></canvas>
+	</div>
+	<div id="toolsContainer">
+		<div id="spritesContainer">
+			
+		</div>
+		<div id="brushSettings">
+			<div id="brushSize" class="clearfix divided">
+				<div>
+					<label>Brush size:</label>
+				</div>
+				<div>
+					<label>H: </label>
+					<input type="number" id="brushSizeH" value="1">
+					<label>V: </label>
+					<input type="number" id="brushSizeV" value="1">
+				</div>
+			</div>
+			<div class="clearfix divided">
+				<div>
+					<label>Rectangle selection </label>
+					<input type="checkbox" id="rectSelection">
+				</div>
+				<div>
+					<label>New layer </label>
+					<input type="checkbox" id="newLayer">
+					<button id="undo">UNDO</button>
+					<button id="redo">REDO</button>
+				</div>
+			</div>
+			<div class="clearfix divided">
+				<div>
+					<label>Tile ID: </label>
+					<input type="number" id="tileID" value="1">
+				</div>
+				<div>
+					<button id="background">PAINT BACKGROUND</button>
+				</div>
+			</div>
+			<div class="clearfix divided">
+				<div>
+					<label>Change ID only: </label>
+					<input type="checkbox" id="changeIDOnly">
+				</div>
+				<div>
+					<label>Show matching IDs: </label>
+					<input type="checkbox" id="showMatchingIDs">
+				</div>
+			</div>
+			<div class="clearfix divided">
+				<div>
+					<label>Active sprite: </label>
+					<select id="sprites">
+					
+					</select>
+				</div>
+				<div>
+					<label>Eraser: </label>
+					<input type="checkbox" id="eraser">
+					<button id="reset">RESET</button>
+				</div>
+			</div>
+			<div class="clearfix divided">
+				<div>
+					<label>Selected tile position: </label>
+				</div>
+				<div>
+					<label>X: </label>
+					<input type="number" id="tileX" value="0" readonly>
+					<label>Y: </label>
+					<input type="number" id="tileY" value="0" readonly>
+				</div>
+			</div>
+			<div class="clearfix divided">
+				<div>
+					<label>Camera position: </label>
+				</div>
+				<div id="cameraPosition">
+					<label>X: </label>
+					<input type="number" id="cameraX" value="0">
+					<label>Y: </label>
+					<input type="number" id="cameraY" value="0">
+				</div>
+			</div>
+			<div class="clearfix divided">
+				<div>
+					<label>Mouse position: </label>
+				</div>
+				<div id="mousePosition">
+					<label>X: </label>
+					<input type="number" id="mouseX" value="0" readonly>
+					<label>Y: </label>
+					<input type="number" id="mouseY" value="0" readonly>
+				</div>
+			</div>
+			<div class="clearfix divided">
+				<div>
+					<input type="text" id="mapSaveName">
+					<button id="save">Save</button>
+				</div>
+				<div>
+					<input type="text" id="mapLoadName">
+					<button id="load">Load</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/client/js/admin/map_builder/dist/main.js"></script>

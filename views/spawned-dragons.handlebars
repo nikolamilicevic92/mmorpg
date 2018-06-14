@@ -1,0 +1,103 @@
+<div class="dragons-page-spawned">
+	<div id="spawnNewDragon">
+		<h3>Spawn new dragon</h3>
+		<form method="post" action="/admin/spawnNewDragon">
+			<div>
+				<label>Position</label>
+				<span>
+					<label>X</label>
+					<input type="number" name="X">
+					<label>Y</label>
+					<input type="number" name="Y">
+				</span>
+			</div>
+			<div>
+				<label>Type </label>
+				<select name="id_dragon_type">
+					{{#types}}
+					<option value="{{id}}">{{name}}</option>
+					{{/types}}
+				</select>
+			</div>
+			<div>
+				<label>Default animation</label>
+				<select name="default_animation">
+				{{#animations}}
+				<option value="{{id}}">{{name}}</option>
+				{{/animations}}
+				</select>
+			</div>
+			<div class="clearfix">
+				<input type="submit" value="Save">
+			</div>
+		</form>
+	</div>
+	<div id="spawnedDragonsContainer" class="clearfix">
+		<div class="search-spawned clearfix">
+			<div>
+				<label>X</label>
+				<input type="number" id="searchX" value="0">
+				<label>Y</label>
+				<input type="number" id="searchY" value="0">
+				<label>Width</label>
+				<input type="number" id="searchWidth" value="10000">
+				<label>Height</label>
+				<input type="number" id="searchHeight" value="10000">
+				<button onclick="filterSpawned()">Filter</button>
+				<button onclick="resetSpawned()">Reset</button>
+			</div>
+			<h3>Edit spawned dragons</h3>
+		</div>
+		{{#spawned}}
+		<div class="spawned-dragon" id="spawnedDragon-{{id}}">
+			<form method="post" action="/admin/updateSpawnedDragon">
+				<div>
+					<label>Position</label>
+					<span>
+						<label>X</label>
+						<input type="number" name="X" value="{{X}}">
+						<label>Y</label>
+						<input type="number" name="Y" value="{{Y}}">
+					</span>
+				</div>
+				<div>
+					<label>Type </label>
+					<select value="{{id_dragon_type}}" name="id_dragon_type">
+						{{#../types}}
+						<option 
+							value="{{id}}"
+							{{isSelected id ../id_dragon_type}}
+							>{{name}}
+						</option>
+						{{/../types}}
+					</select>
+				</div>
+				<div>
+					<label>Default animation</label>
+					<select name="default_animation" value="{{default_animation}}">
+						{{#../animations}}
+						<option 
+							value="{{id}}"
+							{{isSelected id ../default_animation}}
+							>
+							{{name}}
+						</option>
+						{{/../animations}}
+					</select>
+				</div>
+				<div class="clearfix">
+					<input type="hidden" name="id" value="{{id}}">
+					<input 
+						type="button" 
+						onclick="deleteSpawnedDragon({{id}})"
+						value="Delete"
+					>
+					<input type="submit" value="Save">
+				</div>
+			</form>
+		</div>
+		{{/spawned}}
+	</div>
+</div>
+
+<script src="/client/js/admin/dragons/main.js"></script>

@@ -1,0 +1,685 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Open Sans', sans-serif;;
+}
+.clearfix::after {
+	content: '';
+	display: block;
+	clear: both;
+	height: 1px;
+	visibility: hidden;
+}
+#gameContainer, canvas {
+	margin: auto;
+	position: relative;
+}
+/*****************Login Screen*****************/
+
+#loginScreen,
+#registerScreen {
+	width: 422px;
+	margin: auto;
+	margin-top: 200px;
+	padding: 10px;
+}
+#loginScreen form > div,
+#registerScreen form > div {
+	margin-bottom: 5px;
+}
+#loginScreen label,
+#registerScreen label {
+	display: inline-block;
+	width: 145px;
+}
+#loginScreen input,
+#registerScreen input {
+	padding: 3px;
+	width: 250px;
+}
+#loginScreen input[type="submit"],
+#registerScreen input[type="submit"] {
+	width: 250px;
+	margin-left: 149px;
+}
+#loginScreen a {
+	margin-left: 220px;
+}
+#registerScreen a {
+	margin-left: 205px;
+}
+#registerErrors,
+#loginErrors {
+	text-align: center;
+	padding: 10px;
+	color: red;
+}
+
+/**************End Of Login Screen**************/
+
+
+
+
+/****************Register Screen****************/
+#registerScreen {
+	display: none;
+}
+/************End Of Register Screen*************/
+
+
+/**************Hero Selection Screen************/
+
+#heroSelectionScreen {
+	display: none;
+	width: 1000px;
+	margin: auto;
+	padding-top: 30px;
+}
+#heroSelectionScreen h1 {
+	text-align: center;
+}
+#ownedHeroes {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	/*height: 500px;*/
+}
+.my-hero {
+	border: 1px solid gray;
+	padding: 5px;
+	margin: 15px;
+	width: 215px;
+	/*height: 170px;*/
+	position: relative;
+	transition: top 0.15s;
+}
+.my-hero:hover {
+	top: 3px;
+	cursor: pointer;
+}
+.my-hero-selected {
+	top: 3px;
+	outline: 2px solid blue;
+}
+.my-hero h3 {
+	text-align: center;
+	margin-bottom: 10px;
+}
+.my-hero .hero-img {
+	margin: auto;
+	margin-bottom: 10px;
+}
+.my-hero-progress > div {
+	margin-bottom: 5px;
+	border: 1px solid gray;
+}
+.my-hero-progress label {
+	display: inline-block;
+	width: 110px;
+	padding-left: 5px;
+}
+.my-hero-progress span {
+	display: inline-block;
+	width: 89px;
+	text-align: center;
+	padding-right: 5px;
+}
+#heroSelectionBtns {
+	display: flex;
+	justify-content: center;
+}
+#heroSelectionBtns > button {
+	margin-right: 15px;
+	width: 120px;
+	padding: 3px;
+	background-color: blue;
+	color: white;
+}
+#heroSelectionBtns > button:hover:not(:disabled) {
+	cursor: pointer;
+}
+
+
+/**********End Of Hero Selection Screen*********/
+
+
+
+/**************Hero Creation Screen*************/
+#heroCreationScreen {
+	width: 1200px;
+	margin: auto;
+	display: none;
+}
+#heroCreationScreen h1,
+#heroCreationScreen h3 {
+	margin-bottom: 5px;
+}
+#heroCreationScreen > div {
+	float: left;
+	width: 49%;
+}
+#heroesList {
+	padding-top: 15px;
+}
+#heroesList > div {
+	float: left;
+	width: 49%;
+	position: relative;
+	transition: top 0.15s;
+}
+#heroesList > div:hover {
+	top: 3px;
+	cursor: pointer;
+}
+.hero-card:nth-child(2n+1) {
+	margin-right: 10px;
+}
+.hero-card {
+	height: 120px;
+	margin-bottom: 15px;
+	outline: 1px solid gray;
+	padding-left: 5px;
+	cursor: pointer;
+}
+.hero-card > div > div {
+	margin-bottom: 5px;
+}
+.red {
+	display: inline-block;
+	background-color: red;
+	height: 18px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+.hero-card label {
+	display: inline-block;
+	width: 70px;
+}
+.hero-card > div {
+	float: left;
+	width: 70%;
+}
+.hero-card > div:last-child {
+	width: 29%;
+}
+.hero-img-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+.hero-img {
+	width: 32px;
+	height: 36px;
+	overflow: hidden;
+	background-position: -33px -72px !important;
+}
+
+#heroesDetailed {
+	height: 565px;
+	padding: 15px;
+}
+.hero-description {
+	height: 180px;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.ability {
+	height: 95px;
+	outline: 1px solid gray;
+	margin-bottom: 5px;
+}
+.ability-description {
+	padding: 5px;
+}
+.hero-detailed {
+	display: none;
+}
+.hero-detailed:first-child {
+	display: block;
+}
+.ability-icon {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+	float: left;
+}
+.ability-name {
+	height: 40px;
+	width: 200px;
+	line-height: 40px;
+	float: left;
+}
+.ability-description {
+	clear: both;
+}
+
+
+#heroCreationForm {
+	padding: 0 15px;
+}
+#heroCreationForm label {
+	display: inline-block;
+	width: 170px;
+}
+#heroCreationForm input {
+	width: 200px;
+}
+#create {
+	float: right;
+	background-color: blue;
+	color: white;
+	display: inline-block;
+	width: 165px;
+	text-align: center;
+	padding: 3px;
+	cursor: pointer;
+}
+#heroCreationForm > div {
+	margin-bottom: 5px;
+}
+#heroCreationForm a {
+	display: block;
+	text-align: right;
+}
+#creationErrors {
+	height: 25px;
+}
+
+
+/**********End Of Hero Creation Screen***********/
+
+
+/******************Chat**************************/
+
+#chatContainer {
+	position: absolute;
+	width: 332px;
+	bottom: 5px;
+	left: 5px;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 1;
+	border-top-left-radius: 9px;
+	border-top-right-radius: 9px;
+	overflow: hidden;
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; 
+}
+#chatContainer > div:first-child {
+	background-color: rgba(0, 0, 0, 0.45);
+	cursor: move;
+}
+#chatHeader {
+	width: 100%;
+	font-size: 13px;
+	font-weight: bold;
+}
+#chatHeader > div {
+	float: left;
+	width: 66px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.45);
+	border-right: 1px solid rgba(0, 0, 0, 0.45);
+	/*border-top: 1px solid white;*/
+	cursor: pointer;
+}
+#chatHeader > div:last-child {
+	border-right: none;
+}
+#chatSettubgs * {
+	transition: 0.15s;
+}
+#chatSettings > div {
+	width: 67px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	color: white;
+	float: right;
+	font-weight: bold;
+	font-size: 20px;
+	padding: 0;
+}
+#chatMaximize {
+	display: none;
+}
+#chatMinimize:hover,
+#chatMaximize:hover,
+#partyHeader span:hover {
+	/*color: rgba(0, 0, 0, 0.9);*/
+	background-color: rgba(0, 0, 0, 0.6);
+}
+#whisperUnseenCounter {
+	/*display: none;*/
+	/*margin-right: 38px;*/
+	font-size: 12px;
+	color: #f56bff;
+}
+#partyHeader {
+	color: #6092f7;
+}
+#partyHeader > span {
+	display: inline-block;
+	width: 66px;
+	font-size: 14px;
+	text-align: center;
+}
+#partyHeader #leaveParty {
+	display: none;
+}
+#partyHeader > span:last-child {
+	font-size: 16px;
+}
+.whisper-sender:hover {
+	cursor: pointer;
+}
+.messages {
+	height: 250px;
+	padding: 10px;
+	overflow: auto;
+	cursor: text;
+}
+.messages p {
+	margin-bottom: 10px;
+}
+.messages::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.messages::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 5px; 
+}
+ 
+/* Handle */
+.messages::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 5px; 
+}
+#messages > div:not(:first-child) {
+	display: none;
+}
+#chatInput {
+	width: 100%;
+	padding: 5px;
+	padding-left: 10px;
+	border: none;
+	border-top: 1px dashed black;
+	outline: none;
+	background-color: rgba(0, 0, 0, 0.4);
+	color: white;
+}
+#chatContainer .messages:first-child, 
+#chatHeader > div:first-child {
+	color: #bca705;
+}
+#chatContainer .messages:nth-child(2), 
+#chatHeader > div:nth-child(2) {
+	color: #b181f9;
+}
+#chatContainer .messages:nth-child(3), 
+#chatHeader > div:nth-child(3) {
+	color: #6092f7;
+}
+#chatContainer .messages:nth-child(4), 
+#chatHeader > div:nth-child(4) {
+	color: #f56bff;
+}
+#chatContainer .messages:nth-child(5), 
+#chatHeader > div:nth-child(5) {
+	color: #a84d03;
+}
+#chatHeader div.selected-chat-link {
+	border-bottom: none;
+	background-color: rgba(0, 0, 0, 0.25)
+}
+#chatHeader div:hover, #chatMinMax:hover {
+	cursor: pointer;
+}
+#chatHeader div:hover:not(.selected-chat-link) {
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+#chatContainer input {
+	border-top: 1px dashed gray;
+}
+#chatContainer .messages .sender {
+	font-weight: bold;
+	margin-right: 5px;
+}
+/*Party UI*/
+#partyUI {
+	position: absolute;
+	top: 40%;
+	left: 40%;
+	display: none;
+	padding: 0 15px 15px 15px;
+	border-radius: 6px;
+	z-index: 5;
+	background-color: rgba(0, 0, 0, 0.4);
+	color: white;
+}
+#partyUI div.clearfix * {
+	float: right;
+}
+#closePartyUI {
+	font-size: 20px;
+}
+#partyUI > div {
+	margin-bottom: 10px;
+}
+#partyUI label {
+	display: inline-block;
+	width: 100px;
+}
+#createParty input {
+	width: 135px;
+	padding: 3px!important;
+}
+#createParty, #joinParty {
+	width: 75px;
+	padding: 1px;
+	border-radius: 3px;
+	outline: none;
+	border: none;
+}
+#createParty {
+	margin-left: 105px;
+	margin-right: 5px;
+}
+#closePartyUI, #createParty, #joinParty {
+	cursor: pointer;
+}
+
+/****************End Of Chat**********************/
+
+
+/*********************Hero UI*********************/
+
+#heroUI {
+	width: 458px;
+	position: absolute;
+	bottom: 5px;
+	left: 400px;
+	z-index: 1;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.4);
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	border-radius: 10px;
+	display: none;
+	cursor: move;
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; 
+}
+#heroUI label {
+	font-size: 13px;
+}
+#heroUI div.clearfix > div {
+	float: left;
+}
+#heroUI > div.clearfix:first-child {
+	height: 50px;
+	border-bottom: 1px solid gray;
+}
+#heroUI > div.clearfix:last-child {
+	height: 60px;
+}
+#heroUI > div:first-child {
+	/*margin-bottom: 5px;*/
+}
+#heroUI > div:last-child {
+	/*padding-top: 5px;*/
+}
+#heroUI > div.clearfix > div:first-child {
+	width: 151px;
+	margin-right: 5px;
+	border-right: 1px solid gray;
+}
+#heroUI > div.clearfix > div:last-child {
+	width: 300px;
+}
+.level-container {
+	width: 50px;
+	height: 50px;
+	padding-top: 10px;
+}
+#heroLevel {
+	display: block;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	border: 2px solid yellow;
+	border-radius: 50%;
+	margin: auto;
+	text-align: center;
+}
+.exp-gold-container,
+.hero-stats-container {
+	width: 100px;
+	height: 50px;
+}
+.hero-stats-container {
+	height: 60px;
+}
+.exp-gold-container > div {
+	height: 25px;
+}
+.hero-stats-container > div {
+	height: 30px;
+}
+.exp-gold-container div *,
+.hero-stats-container div * {
+	display: inline-block;
+	height: 25px;
+	line-height: 25px;
+	padding: 0 3px;
+}
+.hero-stats-container div * {
+	height: 30px;
+	line-height: 30px;
+}
+.exp-gold-container label {
+	width: 40px;
+}
+.exp-gold-container span {
+	width: 54px;
+	text-align: right;
+	padding-right: 5px;
+}
+.hero-stats-container label {
+	width: 90px;
+	padding-left: 5px;
+}
+.hero-stats-container span {
+	width: 54px;
+	padding-right: 5px;
+	text-align: right;
+}
+#heroAbilitiesUI {
+	padding: 5px;
+	padding-left: 10px;
+}
+#heroAbilitiesUI > div {
+	float: left;
+	width: 40px;
+	height: 40px;
+	margin-right: 5px;
+	line-height: 40px;
+	text-align: center;
+	color: white;
+}
+.bars-container {
+	padding: 6px 5px 0 5px;
+}
+.bar-container {
+	position: relative;
+	background-color: white;
+	border-radius: 10px;
+	overflow: hidden;
+}
+#health {
+	background-color: red;
+}
+#energy {
+	background-color: orange;
+}
+.bar-container:first-child {
+	margin-bottom: 10px;
+}
+.bar-container > div {
+	height: 21px;
+	/*width: 60%;
+	text-align: center;*/
+}
+#healthValue,
+#energyValue {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 21px;
+	width: 100%;
+	text-align: center;
+	line-height: 21px;
+	font-size: 13px;
+	color: black;
+}
+.ability-icon {
+	border: 1px solid white;
+	border-radius: 5px;
+	overflow: hidden;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+#heroExp {
+	color: orange;
+}
+#heroGold {
+	color: yellow;
+}
+#heroAttack {
+	color: #ff3200;
+}
+#heroDefence {
+	color: aqua;
+}
+
+/*****************End Of Hero UI*******************/

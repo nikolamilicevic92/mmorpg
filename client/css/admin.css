@@ -1,0 +1,453 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+html {
+    overflow-y: scroll;
+}
+.clearfix::after {
+	content: '';
+	display: block;
+	clear: both;
+	height: 1px;
+	visibility: hidden;
+}
+.divider {
+	width: 100%;
+	height: 100px;
+}
+main {
+	width: 1200px;
+	margin: auto;
+}
+header {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	padding: 30px 0 0px 0;
+	background-color: black;
+	margin-bottom: 30px;
+}
+header nav {
+	width: 1200px;
+	margin: auto;
+}
+header nav ul {
+	list-style: none;
+	background-color: black;
+}
+header nav ul li {
+	float: left;
+	position: relative;
+	margin-right: 5px;
+}
+header nav ul li a {
+	display: block;
+	width: 170px;
+	text-decoration: none;
+	text-align: center;
+	color: white;
+	height: 40px;
+	line-height: 40px;
+}
+header nav a:hover {
+	background-color: white;
+	color: black;
+}
+header nav ul li ul a {
+	outline: 1px solid black;
+}
+header nav ul li > ul {
+	position: absolute;
+	display: none;
+	top: 100%;
+	left: 0;
+	width: 100%;
+}
+header nav ul li:hover > ul {
+	display: block;
+}
+/*********************Heroes Page********************/
+
+.hero-data {
+	padding: 15px;
+	outline: 1px solid gray;
+	margin-bottom: 15px;
+}
+h3 {
+	margin-bottom: 10px;
+}
+.hero-data > form {
+	margin-bottom: 10px;
+}
+.hero-data > form > div > div{
+	float: left;
+	width: 33%;
+	padding: 5px;
+}
+.hero-basic-data > div,
+.hero-combat-data > div {
+	margin-bottom: 10px;
+}
+.hero-basic-data label,
+.hero-combat-data label {
+	display: inline-block;
+	width: 150px;
+} 
+.hero-img-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.hero-img {
+	width: 32px;
+	height: 36px;
+	background-position: -33px -72px !important;
+	overflow: hidden;
+}
+.hero-form1-submit input[type="submit"] {
+	float: right;
+	margin-right: 25px;
+}
+.hero-abilities {
+	margin-bottom: 10px;
+}
+.hero-ability {
+	float: left;
+	margin-right: 20px;
+}
+.hero-ability button {
+	width: 25px;
+	height: 25px;
+	font-weight: bold;
+	/*font-size: 25px;*/
+	line-height: 25px;
+	text-align: center;
+	color: red;
+}
+
+/***************End Of Heroes Page**************/
+
+
+/*****************Abilities Page****************/
+.abilities-page {
+	padding-top: 30px;
+}
+.abilities-page input[type="submit"],
+.abilities-page input[type="button"] {
+	cursor: pointer;
+}
+.abilities-page > div:first-child {
+	margin-bottom: 30px;
+}
+.abilities-page form {
+	width: 345px;
+	/*height: 250px;*/
+	margin: 10px;
+	border: 1px solid gray;
+	border-radius: 5px;
+	float: left;
+	padding: 10px;
+}
+.abilities-page h2 {
+	padding-left: 10px;
+	margin-bottom: 20px;
+}
+.ability-search label {
+	margin-right: 10px;
+}
+.abilities-container {
+	/*height: 530px;
+	overflow-x: auto;*/
+}
+.abilities-page .edit-abilities-header > div {
+	float: left;
+	width: 68%;
+}
+.abilities-page .edit-abilities-header > div:last-child {
+	width: 29%;
+}
+.abilities-page form > div {
+	margin-bottom: 5px;
+}
+.ability-icon {
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.abilities-page .ability label,
+.abilities-page .new-ability label {
+	display: inline-block;
+	width: 105px;
+	border-bottom: 1px dashed gray;
+	margin-right: 3px;
+}
+.abilities-page .description label,
+.abilities-page label[for="_description"] {
+	vertical-align: top;
+	border: none;
+}
+.abilities-page input {
+	padding: 3px;
+	width: 200px;
+}
+.abilities-page .ability input[type="submit"],
+.abilities-page .ability input[type="button"] {
+	width: 97px;
+	float: right;
+	padding: 3px;
+	margin-right: 7px;
+}
+.abilities-page .ability input[type="button"] {
+	margin-right: 10px;
+}
+.abilities-page .new-ability input[type="submit"] {
+	float: right;
+	padding: 3px;
+	margin-right: 12px;
+}
+.abilities-page textarea {
+	padding: 3px;
+	resize: none;
+}
+
+/*************End Of Abilities Page**************/
+
+
+
+
+
+/****************Start Of Dragons Page**********/
+
+.dragons-page-types .dragon-type {	
+	width: 350px;	
+}
+.dragons-page-types #newDragonType {
+	width: 720px;
+}
+#newDragonType input[type="submit"] {
+	width: 180px;
+	float: right;
+	margin-right: 15px;
+}
+#dragonTypesContainer div.clearfix input {
+	width: 84px;
+	float: right;
+	margin-right: 8px;
+}
+#dragonTypesContainer h3 {
+	padding-left: 15px;
+	display: inline-block;
+	width: 70%;
+}
+#dragonTypesContainer > div:first-child span label{
+	width: 70px;
+}
+.dragons-page-types .dragon-type form {
+	border: 1px solid gray;
+	border-radius: 5px;
+}
+.dragons-page-types h2{
+	text-align: center;
+	margin-bottom: 30px;
+}
+#newDragonType {
+	margin-left: 12px;
+	margin-bottom: 30px;
+}
+#newDragonType h3 {
+	padding: 5px;
+}
+#newDragonType form > div:not(:last-child) {
+	float: left;
+	margin-bottom: 10px;
+} 
+#newDragonType form > div:first-of-type {
+	margin-right: 20px;
+}
+.dragons-page-types .dragon-type {
+	float: left;
+	margin: 10px;
+}
+.dragons-page-types label {
+	display: inline-block;
+	width: 150px;
+}
+.dragon-img {
+	width: 144px;
+	height: 124px;
+	margin: auto;
+	overflow: hidden;
+	background-position: 0 -248px;
+}
+.dragons-page-types form > div {
+	padding: 10px 5px;
+}
+.dragons-page-types form > div > div {
+	margin-bottom: 5px;
+}
+.dragons-page-types input {
+	padding: 3px;
+}
+
+/*Spawned Ones*/
+.dragons-page-spawned select {
+	padding: 2px;
+}
+#spawnNewDragon,
+.spawned-dragon {
+	width: 350px;
+	padding: 10px;
+}
+#spawnNewDragon {
+	margin-left: 15px;
+	margin-bottom: 30px;
+}
+#spawnNewDragon h3 {
+	margin-bottom: 20px;
+}
+.dragons-page-spawned form > div {
+	margin-bottom: 10px;
+}
+.dragons-page-spawned form > div > label {
+	display: inline-block;
+	width: 150px;
+}
+.dragons-page-spawned input[type="number"] {
+	width: 65px;
+	padding: 2px;
+}
+.dragons-page-spawned select {
+	width: 165px;
+	text-align: center;
+}
+#spawnNewDragon input[type="submit"] {
+	width: 165px;
+	float: right;
+	margin-right: 10px;
+	padding: 5px;
+}
+.spawned-dragon {
+	border: 1px solid gray;
+	border-radius: 5px;
+	float: left;
+	margin: 10px;
+}
+.spawned-dragon input[type="submit"],
+.spawned-dragon input[type="button"] {
+	float: right;
+	width: 80px;
+	margin-right: 11px;
+}
+.spawned-dragon input[type="submit"] {
+	margin-right: 5px;
+}
+.search-spawned {
+	margin-bottom: 30px;
+}
+.search-spawned > div {
+	float: right;
+}
+.search-spawned div {
+	margin-right: 100px;
+}
+.search-spawned h3 {
+	width: 300px;
+	float: left;
+	padding-left: 20px;
+}
+.search-spawned input {
+	margin-right: 5px;
+}
+.search-spawned button {
+	width: 80px;
+	padding: 3px;
+}
+/****************End Of Dragons Page**********/
+
+
+/*****************Map Editor******************/
+
+.map-editor {
+	margin: 0;
+	padding: 0;
+	font-family: Arial;
+	font-size: 13px;
+}
+.map-editor > div {
+	float: left;
+}
+.map-editor canvas {
+	outline: 1px solid gray;
+	cursor: crosshair;
+	margin-right: 5px;
+}
+.map-editor button {
+	padding: 2px 1px;
+	font-size: 10px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.map-editor #toolsContainer {
+	width: 400px;
+}
+.map-editor #spritesContainer {
+	overflow: auto;
+	height: 350px;
+	position: relative;
+}
+.map-editor .spriteContainer {
+	/*padding-left: 2px;*/
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.map-editor .piece {
+	margin: 0;
+	/*outline: 1px solid gray;*/
+	float: left;
+}
+.map-editor .piece:hover:not(.selected-piece) {
+	transform: scale(1.1);
+	outline: 1px dashed black;
+}
+.map-editor .selected-piece {
+	transform: scale(1.1);
+	outline: 1px dashed black;
+}
+.map-editor #brushSettings {
+	padding-top: 3px;
+}
+.map-editor #brushSettings > div {
+	padding-left: 5px;
+	margin-bottom: 4px;
+}
+.map-editor #brushSize [type="number"],
+.map-editor #tileID {
+	display: inline-block;
+	width: 50px;
+}
+.map-editor #cameraPosition [type="number"],
+.map-editor #mousePosition [type="number"],
+.map-editor #tileX, #tileY {
+	display: inline-block;
+	width: 60px;
+	font-size: 12px;
+}
+.map-editor .divided > div {
+	float: left;
+	width: 45%;
+}
+.map-editor #mapSaveName, #mapLoadName {
+	display: inline-block;
+	width: 130px;
+}
+
+/**************End Of Map Editor**************/

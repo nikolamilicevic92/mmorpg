@@ -1,0 +1,21 @@
+{
+  "name": "To be added...",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Multiplayer game with a backend",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server/app.js"
+  },
+  "author": "Nikola Milicevic",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "formidable": "^1.2.1",
+    "mysql": "^2.15.0",
+    "socket.io": "^2.1.1"
+  }
+}
