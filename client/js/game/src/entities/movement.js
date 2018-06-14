@@ -10,18 +10,20 @@ export class BasicMovement {
 	}
 
 	update() {
-		const speed    = this.getSpeed(),
+		if(this.hero.props.canMove) {
+			const speed    = this.getSpeed(),
 		      velocity = this.getVelocity(speed)
-		if(this.hero.props.energy < 100) {
-			this.hero.props.energy += 0.1
-		}
-		 this.updateHeroAnimation(velocity)
-		 this.checkMapCollision(velocity)
-		.then(v => {
-			if(this.hero.props.canMove) {
-				this.setHeroPosition(v)
+			if(this.hero.props.energy < 100) {
+				this.hero.props.energy += 0.1
 			}
-		})
+			 this.updateHeroAnimation(velocity)
+			 this.checkMapCollision(velocity)
+			.then(v => {
+				if(this.hero.props.canMove) {
+					this.setHeroPosition(v)
+				}
+			})
+		}
 	}
 
 	getSpeed() {

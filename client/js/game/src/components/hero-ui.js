@@ -3,6 +3,7 @@ import { getById, make, getByClass } from '../util/dom-functions'
 export class HeroUI {
 	
 	constructor(game) {
+		this.game       = game
 		this.abilities  = game.self.abilities
 		this.props      = game.self.props
 		this.container  = getById('heroUI')
@@ -21,6 +22,13 @@ export class HeroUI {
 	}
 
 	init() {
+		this.container.addEventListener('mouseover', () => {
+			this.game.mouse.hide()
+		})
+		this.container.addEventListener('mouseout', () => {
+			this.game.mouse.show()
+		})
+		this.container.oncontextmenu = ev => ev.preventDefault()
 		let ability, icon
 		for(let id in this.props.abilities) {
 			ability = this.props.abilities[id]
@@ -44,7 +52,7 @@ export class HeroUI {
 	//Should check if state changed and only then update
 	update() {
 		this.level.innerText   = this.props.level
-		this.exp.innerText     = this.props.experience
+		this.exp.innerText     = this.props.experience + '/' + this.props.expToNextLevel
 		this.gold.innerText    = this.props.gold
 		this.attack.innerText  = this.props.attack
 		this.defence.innerText = this.props.defence

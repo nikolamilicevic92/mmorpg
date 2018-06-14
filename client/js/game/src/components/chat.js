@@ -16,9 +16,11 @@ export class Chat {
 		this.input        = getById('chatInput')
 		this.inputValues  = ['', '', '', '', '']
 		this.cardTypes    = ['global', 'area', 'party', 'whisper', 'combat']
+		this.msgCount     = [0, 0, 0, 0, 0]
+		this.msgsPerCard  = 50
+		this.maxMsgLength = 100
 		this.badgeCont    = getById('whisperUnseenCounter')
 		this.badge        = getById('whisperUnseenCounterValue')
-		this.inFocus      = false
 		this.badgeValue   = 0
 		this.activeCard   = 0
 		this.party        = false
@@ -33,52 +35,49 @@ export class Chat {
 	}
 
 	init() {
+		this.container.addEventListener('mouseover', () => {
+			this.game.mouse.hide()
+		})
+		this.container.addEventListener('mouseout', () => {
+			this.game.mouse.show()
+		})
+		this.partyUI.addEventListener('mouseover', () => {
+			this.game.mouse.hide()
+		})
+		this.partyUI.addEventListener('mouseout', () => {
+			this.game.mouse.show()
+		})
+		this.container.oncontextmenu = ev => ev.preventDefault()
+		this.partyUI.oncontextmenu = ev => ev.preventDefault()
 		this.showPartyUI.addEventListener('click', () => {
 			show(this.partyUI)
+			this.partyName.focus()
 		})
 		this.closePartyUI.addEventListener('click', () => {
 			hide(this.partyUI)
 		})
 		this.createParty.addEventListener('click', () => {
-			const name = this.partyName.value.trim()
-			if(name == '') return
-			this.socket.emit('party', {
-				code: 'make',
-				name: name,
-				id  : this.game.self.props.id
-			})
-			this.partyName.value = ''
+			 this.isValidPartyName()
+			.then(name => this.emitPartyEvent({code: 'make', name}))
+			.catch(err => this.alertPartyInfo(err, true))
 		})
 		this.joinParty.addEventListener('click', () => {
-			const name = this.partyName.value.trim()
-			if(name == '') return
-			this.socket.emit('party', {
-				code     : 'join', 
-				name     : name,
-				id       : this.game.self.props.id,
-				heroName : this.game.self.props.name
-			})
-			this.partyName.value = ''
+			 this.isValidPartyName()
+			.then(name => this.emitPartyEvent({code: 'join', name}))
+			.catch(err => this.alertPartyInfo(err, true))
 		})
 		this.leaveParty.addEventListener('click', () => {
-			this.socket.emit('party', {
-				code     : 'leave',
-				name     : this.party,
-				id       : this.game.self.props.id,
-				heroName : this.game.self.props.name
-			})
-			this.party                 = ''
-			this.allCards[2].innerHTML = ''
-			this.inputValues[2]        = ''
-			if(this.activeCard == 2) {
-				this.input.value = ''
-			}
+			this.emitPartyEvent({code: 'join', name: this.party})
+			this.party = ''
+			this.resetPartyChat()
 			hide(this.leaveParty)
 			show(this.showPartyUI)
 		})
 		for(let i = 0; i < this.allLinks.length; i++) {
-			const link = this.allLinks[i]
-			link.addEventListener('click', () => {
+			this.allLinks[i].addEventListener('click', () => {
+				show(this.chatContent)
+				hide(this.maximize)
+				show(this.minimize)
 				this.activeCard = i
 				this.hideAll()
 				this.showCard(i)
@@ -94,8 +93,11 @@ export class Chat {
 			hide(this.maximize)
 			show(this.minimize)
 		})
-		this.input.addEventListener('focus', () => this.inFocus = true)
-		this.input.addEventListener('blur' , () => this.inFocus = false)
+		this.partyName.addEventListener('focus', () => this.game.self.props.canMove = false)
+		this.partyName.addEventListener('blur' , () => this.game.self.props.canMove = true)
+		this.input.setAttribute('maxlength', this.maxMsgLength)
+		this.input.addEventListener('focus', () => this.game.self.props.canMove = false)
+		this.input.addEventListener('blur' , () => this.game.self.props.canMove = true)
 		this.input.addEventListener('keyup', ev => {
 			if(ev.keyCode == 13) {
 				if(this.input.value != '') {
@@ -122,14 +124,15 @@ export class Chat {
 	}
 
 	showCard(i) {
-		show(this.allCards[i])
+		const card = this.allCards[i], link = this.allLinks[i]
+		show(card)
 		if(i == 3) {
 			this.badgeValue = 0
 			this.badge.innerText = ''
 			hide(this.badgeCont)
 		}
-		this.scrollCardDown(this.allCards[i])
-		this.allLinks[i].classList.add('selected-chat-link')
+		this.scrollCardDown(card)
+		link.classList.add('selected-chat-link')
 		this.input.value = this.inputValues[i]
 		if(i == 4) {
 			this.input.style.borderTop = '1px solid transparent'
@@ -151,22 +154,27 @@ export class Chat {
 		let data = {}
 		if(this.activeCard == 3) {
 			data = this.parseWhisperInput(message)
-			if(data) {
-				this.socket.emit('chat', Object.assign(
-					{}, data, {
-						sender: this.game.selectedHero,
-						activeCard: 3
-					}
-				))
-				this.appendMessage({
-					sender: '@' + data.to,
-					message: data.message,
+			if(!data) return
+			data.message = this.validateMessage(data.message)
+			if(!data.message) return	
+			this.socket.emit('chat', Object.assign(
+				{}, data, {
+					sender: this.game.selectedHero,
 					activeCard: 3
-				})
-				this.clear(`@${data.to} `)
-			}
+				}
+			))
+			this.appendMessage({
+				sender: '@' + data.to,
+				message: data.message,
+				activeCard: 3
+			})
+			this.clear(`@${data.to} `)
+
 			//If it is a party
 		} else if(this.activeCard == 2) {
+			this.clear()
+			message = this.validateMessage(message)
+			if(!message) return
 			if(this.party != '') {
 				this.socket.emit('party', {
 					code    : 'message',
@@ -175,16 +183,17 @@ export class Chat {
 					name    : this.party
 				})
 			} else {
-				alert('You are not in a party')
+				this.alertChatError('You are not in a party')
 			}
-			this.clear()
 		} else {
+			this.clear()
+			message = this.validateMessage(message)
+			if(!message) return
 			this.socket.emit('chat', {
 				activeCard : this.activeCard,
 				sender     : this.game.selectedHero,
 				message    : message
 			})
-			this.clear()
 		}
 	}
 
@@ -195,18 +204,12 @@ export class Chat {
 
 	parseWhisperInput(text) {
 		if(!text.startsWith('@')) {
-			this.input.value = 'Invalid format, use @name my message'
-			this.input.style.color = '#ff3200'
-			setTimeout(() => {
-				this.input.value = ''
-				this.input.style.color = 'white'
-			}, 3000)
+			this.alertChatError('Invalid format, use @name my message')
 			return false
 		} else {
 			const arr = text.split(' '),
 			      to  = arr[0].substring(1),
 			      msg = arr.slice(1).join(' ')
-
 			return {
 				to, message: msg
 			}
@@ -217,6 +220,8 @@ export class Chat {
 		const sender  = make('span.sender', '(' + data.sender + ') : '),
 			  message = make('span', data.message),
 			  p       = make('p')
+
+		//When clicking on a sender name in whisper, @sender is placed in input
 		if(data.activeCard == 3) {
 			sender.addEventListener('click', () => {
 				this.clear(`@${data.sender} `)
@@ -225,13 +230,22 @@ export class Chat {
 			})
 			sender.classList.add('whisper-sender')
 		}
+
 		p.appendChild(sender)
 		p.appendChild(message)
 		const card = this.allCards[data.activeCard]
 		card.appendChild(p) 
+
+		//Removing first message if card has too many messages
+		if(++this.msgCount[data.activeCard] > this.msgsPerCard) {
+			card.removeChild(card.querySelector('p:first-child'))
+		}
+
 		if(!this.playerMovedScroll(card)) {
 			this.scrollCardDown(card)
 		}
+
+		//Displaying whisper counter
 		if(data.activeCard == 3 && this.activeCard != 3) {
 			this.badgeValue++
 			this.badge.innerText = this.badgeValue
@@ -239,23 +253,78 @@ export class Chat {
 		}
 	}
 
+	validateMessage(message) {
+		message = message.trim().substring(0, this.maxMsgLength)
+		if(message == '') return false
+
+		return message.replace(/fuck/g, '****')
+	}
+
+	isValidPartyName() {
+		return new Promise((resolve, reject) => {
+			const name = this.partyName.value.trim()
+			if(name == '') {
+				reject('Party name missing')
+			} else {
+				resolve(name)
+			}
+		})
+	}
+
+	emitPartyEvent(data) {
+		const pack = Object.assign(
+			{}, data, {
+				id       : this.game.self.props.id,
+				heroName : this.game.self.props.name
+			})
+		this.socket.emit('party', pack)
+		this.partyName.value = ''
+	}
+
 	onPartyEvent(data) {
 		if(data.code == 'created') {
 			this.party = data.name
-			hide(this.partyUI)
-			hide(this.showPartyUI)
-			show(this.leaveParty)
-			alert('Successfully created a party! ' + data.name)
+			this.hidePartyUI()
 		} else if(data.code == 'nameTaken') {
-			alert('A party with that name already exists')
+			this.alertPartyInfo('Party already exists', true)
 		} else if(data.code == 'joined') {
 			this.party = data.name
-			hide(this.partyUI)
-			hide(this.showPartyUI)
-			show(this.leaveParty)
-			alert('You have joined a party! ' + data.name)
+			this.hidePartyUI()
 		} else if(data.code == 'notFound') {
-			alert('Party with that name does not exist')
+			this.alertPartyInfo('Party not found', true)
 		}
+	}
+
+	hidePartyUI() {
+		hide(this.partyUI)
+		hide(this.showPartyUI)
+		show(this.leaveParty)
+	}
+
+	resetPartyChat() {
+		this.allCards[2].innerHTML = ''
+		this.inputValues[2]        = ''
+		this.msgCount[2]           = 0
+		if(this.activeCard == 2) {
+			this.input.value = ''
+		}
+	}
+
+	alertChatError(msg) {
+		this.input.value = msg
+		this.input.style.color = '#ff3200'
+		setTimeout(() => {
+			this.input.value = ''
+			this.input.style.color = 'white'
+		}, 3000)
+	}
+
+	alertPartyInfo(msg, err = false) {
+		this.partyName.value = msg
+		this.partyName.style.color = err ? 'red' : 'green'
+		setTimeout(() => {
+			this.partyName.value = ''
+			this.partyName.style.color = 'black'
+		}, 3000)
 	}
 }

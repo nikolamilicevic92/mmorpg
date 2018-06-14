@@ -16,13 +16,7 @@ export class LoginScreen {
 	init() {
 		this.submit.addEventListener('click', ev => {
 			ev.preventDefault()
-			const username = this.username.value.trim(),
-				  password = this.password.value.trim()
-			
-			this.errors.value = ''
-			if(this.validate(username, password)) {
-				this.send(username, password)
-			}
+			this.trySubmit()
 		})
 		this.link.addEventListener('click', ev => {
 			ev.preventDefault()
@@ -53,6 +47,16 @@ export class LoginScreen {
 			return false
 		}
 		return true
+	}
+
+	trySubmit() {
+		const username = this.username.value.trim(),
+			  password = this.password.value.trim()
+		
+		this.errors.value = ''
+		if(this.validate(username, password)) {
+			this.send(username, password)
+		}
 	}
 
 	send(username, password) {

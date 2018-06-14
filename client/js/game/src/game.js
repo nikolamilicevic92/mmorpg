@@ -40,7 +40,7 @@ export class Game {
 		this.soundManager   = new SoundManager()
 		this.renderer       = new Renderer(this, 1200, 768)
 		this.chat           = new Chat(this)
-		this.charUI         = null
+		this.heroUI         = null
 		this.loginScreen    = new LoginScreen(this)
 		this.map            = new Map(this)
 		this.camera         = new Camera(this)
@@ -58,12 +58,20 @@ export class Game {
 		this.intervalHandle = null
 		this.username       = ''
 		this.selectedHero   = ''
+		this.stoped         = false
+		this.movableDom.enableMovement(document.getElementById('heroUI'))
+		this.movableDom.enableMovement(
+			document.getElementById('chatContainer'), 
+			document.getElementById('chatSettings')
+		)
 		this.loadAssets(ASSET_SOURCES.images, ASSET_SOURCES.sounds)
 		.then(() => this.soundManager.init(this.assets.sounds))
 	}
 
 
 	start() {
+		this.stoped = false
+
 		this.renderer.show()
 		this.mouse.init()
 
@@ -77,11 +85,6 @@ export class Game {
 		// this.chat = new Chat(this)
 		this.heroUI = new HeroUI(this)
 		this.heroUI.show()
-
-		this.movableDom.enableMovement(this.heroUI.container)
-		this.movableDom.enableMovement(
-			this.chat.container, this.chat.settings
-		)
 	}
 
 
@@ -165,6 +168,8 @@ export class Game {
 	}
 	
 	render() {
+		if(this.stoped) return
+
 		this.renderer.clear()
 		this.map.render()
 		
@@ -177,7 +182,7 @@ export class Game {
 		for(let id in this.dragons) {
 			this.dragons[id].render()
 		}
-		// this.mouse.render()
+		this.mouse.render()
 		requestAnimationFrame(() => this.render())
 	}
 

@@ -19,15 +19,7 @@ export class RegisterScreen {
 	init() {
 		this.submit.addEventListener('click', ev => {
 			ev.preventDefault()
-			const email = this.email.value.trim(),
-				  username = this.username.value.trim(),
-				  password = this.password.value.trim(),
-				  passwordConfirm = this.passwordConfirm.value.trim()
-			this.errors.value = ''
-			if(this.validate(email, username, password, passwordConfirm)) {
-				this.send(email, username, password)
-				this.clear()
-			}
+			this.trySubmit()
 		})
 		this.link.addEventListener('click', ev => {
 			ev.preventDefault()
@@ -64,6 +56,18 @@ export class RegisterScreen {
 			return false
 		}
 		return true
+	}
+
+	trySubmit() {
+		const email = this.email.value.trim(),
+			  username = this.username.value.trim(),
+			  password = this.password.value.trim(),
+			  passwordConfirm = this.passwordConfirm.value.trim()
+		this.errors.value = ''
+		if(this.validate(email, username, password, passwordConfirm)) {
+			this.send(email, username, password)
+			this.clear()
+		}
 	}
 
 	send(email, username, password) {
