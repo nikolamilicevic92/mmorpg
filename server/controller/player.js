@@ -80,4 +80,5 @@ module.exports = class Player {
 			.catch(msg => reject(msg))
 		})
 	}
+
 }

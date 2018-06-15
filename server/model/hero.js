@@ -99,7 +99,13 @@ module.exports = class Hero {
 	static update(data) {
 		return new Promise((resolve, reject) => {
 			conn.query(
-				`update hero set id_quest = ${data.questID}, level = ${data.level}, experience = ${data.experience}, health = ${data.health}, gold = ${data.gold}, X = ${data.X}, Y = ${data.Y} where name = `
+				`update hero set id_quest = ${data.questID}, level = ${data.level}, 
+				 experience = ${data.experience}, health = ${data.health}, 
+				 gold = ${data.gold}, X = ${data.X}, Y = ${data.Y} where id = ${data.id}`,
+				(err, res) => {
+					if(err) throw err
+					resolve()
+				}
 			)
 		})
 	}

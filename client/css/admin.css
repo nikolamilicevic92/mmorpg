@@ -44,6 +44,9 @@ header nav ul li {
 	position: relative;
 	margin-right: 5px;
 }
+header nav ul #logout {
+	float: right;
+}
 header nav ul li a {
 	display: block;
 	width: 170px;
@@ -52,6 +55,7 @@ header nav ul li a {
 	color: white;
 	height: 40px;
 	line-height: 40px;
+	transition: all 0.1s ease-out;
 }
 header nav a:hover {
 	background-color: white;
@@ -70,33 +74,46 @@ header nav ul li > ul {
 header nav ul li:hover > ul {
 	display: block;
 }
-/*********************Heroes Page********************/
 
+
+
+/*********************Heroes Page********************/
+.heroes-page {
+	width: 1200px;
+	margin: auto;
+}
 .hero-data {
-	padding: 15px;
-	outline: 1px solid gray;
-	margin-bottom: 15px;
-}
-h3 {
-	margin-bottom: 10px;
-}
-.hero-data > form {
-	margin-bottom: 10px;
-}
-.hero-data > form > div > div{
+	width: 580px;
 	float: left;
-	width: 33%;
-	padding: 5px;
+	padding: 10px;
+	border: 1px solid gray;
+	border-radius: 5px;
+	margin: 10px;
 }
-.hero-basic-data > div,
-.hero-combat-data > div {
-	margin-bottom: 10px;
+.hero-data > div {
+	float: left;
+	width: 275px;
 }
-.hero-basic-data label,
-.hero-combat-data label {
+.hero-data-left input {
+	padding: 1px 3px;
+}
+.hero-data-left textarea {
+	resize: none;
+	padding: 3px;
+}
+.hero-data-left label {
 	display: inline-block;
+	width: 110px;
+}
+.hero-data-left input[type="submit"] {
+	margin-left: 114px;
+}
+.hero-data-left > div {
+	margin-bottom: 5px;
+}
+.hero-data-left input {
 	width: 150px;
-} 
+}
 .hero-img-container {
 	display: flex;
 	justify-content: center;
@@ -108,16 +125,17 @@ h3 {
 	background-position: -33px -72px !important;
 	overflow: hidden;
 }
-.hero-form1-submit input[type="submit"] {
-	float: right;
-	margin-right: 25px;
-}
 .hero-abilities {
-	margin-bottom: 10px;
+	height: 204px;
+	overflow-y: auto;
+	padding-left: 10px;
 }
 .hero-ability {
-	float: left;
-	margin-right: 20px;
+	margin-bottom: 5px;
+}
+.hero-ability label {
+	display: inline-block;
+	width: 223px;
 }
 .hero-ability button {
 	width: 25px;
@@ -127,6 +145,23 @@ h3 {
 	line-height: 25px;
 	text-align: center;
 	color: red;
+}
+.hero-data-right {
+	padding: 40px 5px;
+}
+.add-new-ability-to-hero {
+	margin-bottom: 10px;
+}
+.add-new-ability-to-hero input {
+	padding: 1px 3px;
+	width: 50px;
+}
+.hero-data-right p {
+	margin-bottom: 6px;
+	font-weight: bold;
+}
+.hero-data-right select {
+	width: 210px;
 }
 
 /***************End Of Heroes Page**************/
@@ -207,6 +242,14 @@ h3 {
 .abilities-page .ability input[type="button"] {
 	margin-right: 10px;
 }
+.abilities-page .new-ability h2 {
+	text-align: center;
+	margin-bottom: 30px;
+}
+.abilities-page .new-ability form {
+	margin: auto;
+	float: none;
+}
 .abilities-page .new-ability input[type="submit"] {
 	float: right;
 	padding: 3px;
@@ -258,11 +301,14 @@ h3 {
 	margin-bottom: 30px;
 }
 #newDragonType {
-	margin-left: 12px;
-	margin-bottom: 30px;
+	padding-top: 30px;
+	margin: auto;
 }
 #newDragonType h3 {
 	padding: 5px;
+}
+#newDragonType form {
+
 }
 #newDragonType form > div:not(:last-child) {
 	float: left;
@@ -326,6 +372,10 @@ h3 {
 .dragons-page-spawned select {
 	width: 165px;
 	text-align: center;
+}
+#spawnNewDragon {
+	margin: auto;
+	padding-top: 30px;
 }
 #spawnNewDragon input[type="submit"] {
 	width: 165px;

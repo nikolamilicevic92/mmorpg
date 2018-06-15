@@ -35,6 +35,15 @@ module.exports = class Hero {
 		return props
 	}
 
+	updateDBState() {
+		heroModel.update({
+			questID: this.props.id_quest, level: this.props.level,
+			experience: this.props.experience, health: this.props.health,
+			gold: this.props.gold, X: this.props.X, Y: this.props.Y,
+			id: this.props.id
+		}).catch(err => console.log(err))
+	}
+
 	static getHeroesData(socket) {
 		 heroModel.getHeroesData()
 		.then(data => socket.emit('heroesData', data))

@@ -101,6 +101,10 @@ export class ProjectileEmiter {
 						data  : { ID }
 					})
 					const damage = this.props.damage * this.hero.props.attack + this.hero.props.bonusAttack
+					this.game.chat.appendMessage({
+						activeCard: 4,
+						message   : `Did ${damage} damage to ${dragon.props.name}`
+					}, true)
 					this.socket.emit('dragonHit', {
 						name  : this.hero.props.name,
 						ID    : dID,

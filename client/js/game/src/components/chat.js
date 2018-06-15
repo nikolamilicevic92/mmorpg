@@ -1,3 +1,4 @@
+import { Point } from '../tools/geometry'
 import { getById, make, getByClass, show, hide } from '../util/dom-functions'
 
 export class Chat {
@@ -19,6 +20,7 @@ export class Chat {
 		this.msgCount     = [0, 0, 0, 0, 0]
 		this.msgsPerCard  = 50
 		this.maxMsgLength = 100
+		this.areaRange    = 1500
 		this.badgeCont    = getById('whisperUnseenCounter')
 		this.badge        = getById('whisperUnseenCounterValue')
 		this.badgeValue   = 0
@@ -48,14 +50,12 @@ export class Chat {
 			this.game.mouse.show()
 		})
 		this.container.oncontextmenu = ev => ev.preventDefault()
-		this.partyUI.oncontextmenu = ev => ev.preventDefault()
+		this.partyUI.oncontextmenu   = ev => ev.preventDefault()
 		this.showPartyUI.addEventListener('click', () => {
 			show(this.partyUI)
 			this.partyName.focus()
 		})
-		this.closePartyUI.addEventListener('click', () => {
-			hide(this.partyUI)
-		})
+		this.closePartyUI.addEventListener('click', () => hide(this.partyUI))
 		this.createParty.addEventListener('click', () => {
 			 this.isValidPartyName()
 			.then(name => this.emitPartyEvent({code: 'make', name}))
@@ -67,7 +67,7 @@ export class Chat {
 			.catch(err => this.alertPartyInfo(err, true))
 		})
 		this.leaveParty.addEventListener('click', () => {
-			this.emitPartyEvent({code: 'join', name: this.party})
+			this.emitPartyEvent({code: 'leave', name: this.party})
 			this.party = ''
 			this.resetPartyChat()
 			hide(this.leaveParty)
@@ -99,10 +99,8 @@ export class Chat {
 		this.input.addEventListener('focus', () => this.game.self.props.canMove = false)
 		this.input.addEventListener('blur' , () => this.game.self.props.canMove = true)
 		this.input.addEventListener('keyup', ev => {
-			if(ev.keyCode == 13) {
-				if(this.input.value != '') {
-					this.sendMessage()
-				}
+			if(ev.keyCode == 13 && this.input.value != '') {
+				this.sendMessage()
 			} else {
 				this.inputValues[this.activeCard] = this.input.value
 			}
@@ -134,6 +132,7 @@ export class Chat {
 		this.scrollCardDown(card)
 		link.classList.add('selected-chat-link')
 		this.input.value = this.inputValues[i]
+		//Disabling input in combat chat
 		if(i == 4) {
 			this.input.style.borderTop = '1px solid transparent'
 			this.input.disabled = true
@@ -185,6 +184,18 @@ export class Chat {
 			} else {
 				this.alertChatError('You are not in a party')
 			}
+			//If it is area chat we're sending our coordinates as well
+		} else if(this.activeCard == 1) {
+			this.clear()
+			message = this.validateMessage(message)
+			if(!message) return
+			this.socket.emit('chat', {
+				activeCard : this.activeCard,
+				sender     : this.game.selectedHero,
+				message    : message,
+				X          : this.game.self.props.X,
+				Y          : this.game.self.props.Y
+			})
 		} else {
 			this.clear()
 			message = this.validateMessage(message)
@@ -216,8 +227,20 @@ export class Chat {
 		}
 	}
 
-	appendMessage(data) {
-		const sender  = make('span.sender', '(' + data.sender + ') : '),
+	appendMessage(data, combat = false) {
+		//If it is area chat, checking if sender is within range
+		if(data.activeCard == 1) {
+			if(Point.distance({
+				X: data.X, Y: data.Y
+			}, {
+				X: this.game.self.props.X,
+				Y: this.game.self.props.Y
+			}) > this.areaRange) {
+				return
+			}
+		}
+
+		const sender  = make('span.sender', combat ? '' : '(' + data.sender + ') : '),
 			  message = make('span', data.message),
 			  p       = make('p')
 

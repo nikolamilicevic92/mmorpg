@@ -554,12 +554,6 @@ canvas {
 #heroUI > div.clearfix:last-child {
 	height: 60px;
 }
-#heroUI > div:first-child {
-	/*margin-bottom: 5px;*/
-}
-#heroUI > div:last-child {
-	/*padding-top: 5px;*/
-}
 #heroUI > div.clearfix > div:first-child {
 	width: 151px;
 	margin-right: 5px;
@@ -663,8 +657,6 @@ canvas {
 }
 .bar-container > div {
 	height: 21px;
-	/*width: 60%;
-	text-align: center;*/
 }
 #healthValue,
 #energyValue {
@@ -699,7 +691,7 @@ canvas {
 	color: yellow;
 }
 #heroAttack {
-	color: #ff3200;
+	color: red;
 }
 #heroDefence {
 	color: aqua;

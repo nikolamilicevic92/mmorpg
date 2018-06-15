@@ -115,6 +115,7 @@ export class DragonRenderer {
 		this.renderDragonSprite()
 		this.renderDragonHealthBar()
 		this.renderDragonHealthPoints()
+		this.renderDragonInfo()
 	}
 
 	renderDragonSprite() {
@@ -148,6 +149,17 @@ export class DragonRenderer {
 			align: 'center',
 			X    : this.dragonX,
 			Y    : this.dragonTopLeftY + 15
+		})
+	}
+
+	renderDragonInfo() {
+		this.renderer.fillText({
+			text : this.dragon.props.name,
+			color: this.dragon.props.infoColor,
+			font : '13px sans-serif',
+			align: 'center',
+			X    : this.dragonX,
+			Y    : this.dragonTopLeftY - 18
 		})
 	}
 }

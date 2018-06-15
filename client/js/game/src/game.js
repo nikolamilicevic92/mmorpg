@@ -58,7 +58,6 @@ export class Game {
 		this.intervalHandle = null
 		this.username       = ''
 		this.selectedHero   = ''
-		this.stoped         = false
 		this.movableDom.enableMovement(document.getElementById('heroUI'))
 		this.movableDom.enableMovement(
 			document.getElementById('chatContainer'), 
@@ -168,7 +167,6 @@ export class Game {
 	}
 	
 	render() {
-		if(this.stoped) return
 
 		this.renderer.clear()
 		this.map.render()
@@ -184,11 +182,5 @@ export class Game {
 		}
 		this.mouse.render()
 		requestAnimationFrame(() => this.render())
-	}
-
-	
-
-	distance(x1, y1, x2, y2) {
-		return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2))
 	}
 }

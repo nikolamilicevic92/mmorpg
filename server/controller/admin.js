@@ -1,6 +1,7 @@
 const heroModel    = require('../model/hero'),
 	  abilityModel = require("../model/ability"),
 	  dragonModel  = require("../model/dragon"),
+	  playerModel  = require('../model/player'),
 	  baseUrl      = require('../base-url'),
 	  fs           = require('fs')
 
@@ -92,6 +93,19 @@ module.exports = class Admin {
 		.catch(err => console.log(err))
 	}
 
+	static showSpawnNewDragon(req, res) {
+		 let promises = []
+		 promises.push(dragonModel.getAllTypes())
+		 promises.push(dragonModel.getDragonAnimations())
+		 Promise.all(promises)
+		.then(data => {
+			res.render('spawn-new-dragon', {
+				types:      data[0],
+				animations: data[1]
+			})
+		}).catch(err => console.log(err))
+	}
+
 	static updateSpawnedDragon(req, res) {
 		 dragonModel.updateSpawnedDragon(req.body)
 		.then(() => Admin.redirectTo(res, 'spawned-dragons'))
@@ -175,6 +189,25 @@ module.exports = class Admin {
 				}
 			} 
 		)
+	}
+
+	static players(req, res) {
+		 playerModel.getAll()
+		.then(players => {
+			let promises = []
+			players.forEach(player => {
+				promises.push(heroModel.getByUsername(player.username))
+			})
+			Promise.all(promises)
+			.then(heroes => {
+				heroes.forEach((ownedHeroes, i) => {
+					players[i].ownedHeroes = ownedHeroes
+					console.log(ownedHeroes)
+				})
+				console.log(players)
+				res.render('players', { players })
+			}).catch(err => console.log(err))
+		}).catch(err => console.log(err))
 	}
 
 	static redirectTo(res, page) {

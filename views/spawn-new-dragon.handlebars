@@ -1,0 +1,37 @@
+<div class="dragons-page-spawned">
+	<div id="spawnNewDragon">
+		<h3><!-- Spawn new dragon --></h3>
+		<form method="post" action="/admin/spawnNewDragon">
+			<div>
+				<label>Position</label>
+				<span>
+					<label>X</label>
+					<input type="number" name="X">
+					<label>Y</label>
+					<input type="number" name="Y">
+				</span>
+			</div>
+			<div>
+				<label>Type </label>
+				<select name="id_dragon_type">
+					{{#types}}
+					<option value="{{id}}">{{name}}</option>
+					{{/types}}
+				</select>
+			</div>
+			<div>
+				<label>Default animation</label>
+				<select name="default_animation">
+				{{#animations}}
+				<option value="{{id}}">{{name}}</option>
+				{{/animations}}
+				</select>
+			</div>
+			<div class="clearfix">
+				<input type="submit" value="Save">
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="/client/js/admin/dragons/main.js"></script>

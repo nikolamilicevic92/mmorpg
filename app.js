@@ -1,5 +1,7 @@
 const express    = require('express'),
       app        = express(),
+      session    = require('express-session'),
+      parseurl   = require('parseurl'),
       path       = require('path'),
       formidable = require('formidable'),
       serv       = require('http').Server(app),
@@ -160,15 +162,55 @@ setInterval(() => {
 	}
 }, 16)
 
+//Saving hero progress and position every second
+setInterval(() => {
+	for(let id in HEROES) {
+		HEROES[id].updateDBState()
+	}
+}, 1000)
 
 
 
 
+app.use(session({
+	resave: false,
+	saveUninitialized: true,
+	secret: 'tobechanged'
+}))
 
-
+app.use(require('body-parser').urlencoded({limit: '50mb', extended: true}))
 
 app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, '/client/game.html'))
+})
+
+app.get('/admin/login', (req, res) => {
+	res.sendFile(__dirname + '/views/login.html')
+})
+
+app.get('/admin/logouttt', (req, res) => {
+	req.session.destroy()
+	Admin.redirectTo(res, 'login')
+})
+
+app.post('/admin/login', (req, res) => {
+	const admin = {username: 'test', password: '123'}
+	if(req.body.username == admin.username &&
+		req.body.password == admin.password) {
+		req.session.loggedIn = true
+		Admin.redirectTo(res, 'heroes')
+	} else {
+		Admin.redirectTo(res, 'login')
+	}
+})
+
+//Middleware not allowing request to go further unless session is set
+app.use((req, res, next) => {
+	if(req.url.includes('admin') && !req.session.loggedIn) {
+		Admin.redirectTo(res, 'login')
+	} else {
+		next()
+	}
 })
 
 app.get('/admin/map-editor', (req, res) => {
@@ -183,17 +225,32 @@ app.get('/admin/abilities', (req, res) => {
 	Admin.abilities(req, res)
 })
 
+app.get('/admin/new-ability', (req, res) => {
+	res.render('new-ability')
+})
+
 app.get('/admin/dragon-types', (req, res) => {
 	Admin.dragonTypes(req, res)
+})
+
+app.get('/admin/new-dragon-type', (req, res) => {
+	res.render('new-dragon-type')
 })
 
 app.get('/admin/spawned-dragons', (req, res) => {
 	Admin.spawnedDragons(req, res)
 })
 
-// Post requests
+app.get('/admin/spawn-new-dragon', (req, res) => {
+	Admin.showSpawnNewDragon(req, res)
+})
 
-app.use(require('body-parser').urlencoded({limit: '50mb', extended: true}))
+app.get('/admin/players', (req, res) => {
+	console.log('/admin/players route hit')
+	Admin.players(req, res)
+})
+
+// Post requests
 
 app.post('/admin/heroes', (req, res) => {
 	 Admin.updateHeroes(req, res)
