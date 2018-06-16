@@ -62,11 +62,11 @@ export class Point {
 	}
 
 	static distance(p1, p2) {
-		return Math.sqrt(Math.pow(p2.X - p1.X, 2) + Math.pow(p2.Y - p1.Y, 2));
+		return Math.sqrt(Math.pow(p2.X - p1.X, 2) + Math.pow(p2.Y - p1.Y, 2))
 	}
 
 	static manhattanDistance(p1, p2) {
-		return {X: Math.abs(p1.X - p2.X), y: Math.abs(p1.Y - p2.Y)};
+		return {X: Math.abs(p1.X - p2.X), y: Math.abs(p1.Y - p2.Y)}
 	}
 }
 

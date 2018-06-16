@@ -11,6 +11,7 @@ const express    = require('express'),
       Chat       = require('./server/controller/chat'),
       Admin      = require('./server/controller/admin'),
       Dragon     = require('./server/controller/dragon'),
+      Arena      = require('./server/managers/arena'),
       handlebars = require('express-handlebars').create({
       	defaultLayout: 'main',
       	helpers      : {
@@ -25,11 +26,13 @@ app.engine('handlebars', handlebars.engine)
 app.set('view engine', 'handlebars')
 
 
-let PLAYERS = {}
-let HEROES = {}
+let PLAYERS       = {}
+let HEROES        = {}
 let NAMES_SOCKETS = {}
-let PARTIES = {}
-let DRAGONS = {}
+let PARTIES       = {}
+let DRAGONS       = {}
+let FIREBALLS     = {}
+const ARENA = new Arena(DRAGONS, HEROES, FIREBALLS)
 
 //Safety measure in case of server crash
 Player.logoutEveryone()
@@ -111,6 +114,10 @@ io.sockets.on('connection', socket => {
 		DRAGONS[data.ID].takeDamage(data, NAMES_SOCKETS)
 	})
 
+	socket.on('fireballDeath', ID => {
+		socket.broadcast.emit('fireballDeath', ID)
+	})
+
 	socket.on('chat', data => {
 		Chat.process(socket, data, NAMES_SOCKETS, io)
 	})
@@ -160,6 +167,9 @@ setInterval(() => {
 	for(let id in HEROES) {
 		HEROES[id].socket.emit('updatePackage', data)
 	}
+
+	//Arena
+	ARENA.update()
 }, 16)
 
 //Saving hero progress and position every second
@@ -308,6 +318,13 @@ app.post('/admin/load-map', (req, res) => {
 	Admin.loadMap(req, res)
 })
 
+app.post('/admin/set-char-slots', (req, res) => {
+	Admin.setCharSlots(req, res)
+})
+
+app.post('/admin/update-owned-hero', (req, res) => {
+	Admin.updateOwnedHero(req, res)
+})
 
 
 

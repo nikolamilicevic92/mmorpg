@@ -210,6 +210,18 @@ module.exports = class Admin {
 		}).catch(err => console.log(err))
 	}
 
+	static setCharSlots(req, res) {
+		 playerModel.setCharSlots(req.body.id, req.body.char_slots)
+		.then(() => Admin.redirectTo(res, 'players'))
+		.catch(err => console.log(err))
+	}
+
+	static updateOwnedHero(req, res) {
+		 heroModel.update(req.body)
+		.then(() => Admin.redirectTo(res, 'players'))
+		.catch(err => console.log(err))
+	}
+
 	static redirectTo(res, page) {
 		res.writeHead(301, {
 			Location: baseUrl + 'admin/' + page

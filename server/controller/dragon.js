@@ -51,12 +51,16 @@ module.exports = class Dragon {
 		return props
 	}
 
+	animation(animation) {
+		this.updater.setAnimation(animation)
+	}
+
 	static makeDragon(props) {
 		return new Dragon(Object.assign(
 			{}, props, {
 				activeAnimation: props.defaultAnimation,
 				health: props.max_health, time: 0, frame: 0,
-				interval: 250
+				interval: 250, canAttack: true
 			} 
 		))
 	}
@@ -117,5 +121,9 @@ module.exports = class Dragon {
 		this.props.Y      = this.props.originY
 		this.props.dead   = false
 
+	}
+
+	canAttack() {
+		return this.props.canAttack
 	}
 }

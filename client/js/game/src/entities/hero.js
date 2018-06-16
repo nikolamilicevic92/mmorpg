@@ -1,4 +1,3 @@
-// import { BasicAttack } from './attacks'
 import { animations } from '../config/character-animations'
 import { BasicMovement } from './movement'
 import { HeroRenderer } from './renderer'
@@ -23,11 +22,27 @@ export class Hero {
 		this.abilities       = AbilityFactory.makeAbilities(this, keybinds)
 	}
 
+	set health(value) {
+		if(value < 0) {
+			this.props.health = 1
+			this.respawn()
+		} else {
+			this.props.health = value
+			if(this.props.health > this.props.maxHealth) {
+				this.props.health = this.props.maxHealth
+			}
+		}		
+	}
+
+	get health() { return this.props.health }
+
 	update() {
 		this.movementManager.update()
 		for(let id in this.abilities) {
 			this.abilities[id].update()
 		}
+		// console.log(this.props.health, this.props.maxHealth * this.props.healthRegen)
+		this.health += this.props.maxHealth * this.props.healthRegen
 	}
 
 
@@ -99,6 +114,7 @@ export class Hero {
 			bonusDefence     : 0,
 			bonusRunningSpeed: 1,
 			energy           : 100,
+			healthRegen      : 0.00001,
 			canMove          : true,
 			infoColor        : activeStats.infoColor ? activeStats.infoColor : 'white',
 			levelUpAura      : false,
@@ -107,6 +123,7 @@ export class Hero {
 			{}, baseStats, activeStats, defaultStats, 
 			Hero.propsPerLevel(baseStats, activeStats.level)
 		)
+		props.health = activeStats.health
 		return new Hero(game, props)
 	}
 
@@ -121,5 +138,13 @@ export class Hero {
 		setTimeout(() => this.props.levelUpAura = false, 1500)
 	}
 
-	
+	respawn() {
+		const location = this.findClosestCamp()
+		this.props.X = location.X
+		this.props.Y = location.Y
+	}
+
+	findClosestCamp() {
+		return { X: 300, Y: 9600 }
+	}
 }

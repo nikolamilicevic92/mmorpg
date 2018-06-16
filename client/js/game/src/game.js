@@ -12,7 +12,7 @@ import { MovableDom } from './tools/movable-dom'
 // import { Mage } from './entities/mage'
 // import { Healer } from './entities/healer'
 import { Dragon } from './entities/dragon'
-// import { Firebal } from './entities/attacks'
+import { Fireball } from './entities/fireball'
 import { Hero } from './entities/hero'
 
 // import { ANIMATIONS } from './config/animations'
@@ -50,12 +50,11 @@ export class Game {
 		this.assets         = {images: {}, sounds: {}}
 		this.heroes         = {}
 		this.dragons        = {}
-		this.firebals       = {}
+		this.fireballs       = {}
 		this.registerScreen = new RegisterScreen(this) 
 		this.heroCreation   = new HeroCreation(this)
 		this.heroSelection  = new HeroSelection(this)
 		this.self           = null
-		this.intervalHandle = null
 		this.username       = ''
 		this.selectedHero   = ''
 		this.movableDom.enableMovement(document.getElementById('heroUI'))
@@ -69,21 +68,46 @@ export class Game {
 
 
 	start() {
-		this.stoped = false
-
 		this.renderer.show()
 		this.mouse.init()
-
 		this.soundManager.play('Woodland Fantasy.mp3', true)
 		this.soundManager.setVolume('Woodland Fantasy.mp3', 0.2)
-		
-		this.intervalHandle = setInterval(() => this.update(), 16)
+		setInterval(() => this.update(), 16)
 		this.render()
-
-		
-		// this.chat = new Chat(this)
 		this.heroUI = new HeroUI(this)
 		this.heroUI.show()
+	}
+
+	update() {
+		this.camera.update()	
+		this.soundManager.update()
+		this.self.update()
+		for(let id in this.heroes) {
+			this.heroes[id].updateAbilitiesInstances()
+		}
+		for(let id in this.fireballs) {
+			this.fireballs[id].update()
+		}
+		this.heroUI.update()
+		this.socket.emit('selfState', this.self.getProps())
+	}
+	
+	render() {
+		this.renderer.clear()
+		this.map.render()	
+		for(let id in this.heroes) {
+			this.heroes[id].render()
+		}
+		this.self.render()
+		this.map.renderLastLayer()
+		for(let id in this.fireballs) {
+			this.fireballs[id].render()
+		}
+		for(let id in this.dragons) {
+			this.dragons[id].render()
+		}
+		this.mouse.render()
+		requestAnimationFrame(() => this.render())
 	}
 
 
@@ -123,6 +147,18 @@ export class Game {
 			this.dragons[props.id].setProps(props)
 		}
 	}
+
+	//Firebals
+
+	addFireball(props) {
+		this.fireballs[props.ID] = new Fireball(this, props) 
+	}
+
+	removeFireball(id) {
+		delete this.fireballs[id]
+	}
+
+	//Assets
 	
 	loadAssets(imgSources, soundSources) {
 		return new Promise((resolve, reject) => {
@@ -151,36 +187,5 @@ export class Game {
 		})
 	}
 
-	update() {
-		this.camera.update()
-		
-		this.soundManager.update()
-
-		this.self.update()
-		for(let id in this.heroes) {
-			this.heroes[id].updateAbilitiesInstances()
-		}
-
-		this.heroUI.update()
-
-		this.socket.emit('selfState', this.self.getProps())
-	}
 	
-	render() {
-
-		this.renderer.clear()
-		this.map.render()
-		
-		for(let id in this.heroes) {
-			this.heroes[id].render()
-		}
-		this.self.render()
-
-		this.map.renderLastLayer()
-		for(let id in this.dragons) {
-			this.dragons[id].render()
-		}
-		this.mouse.render()
-		requestAnimationFrame(() => this.render())
-	}
 }

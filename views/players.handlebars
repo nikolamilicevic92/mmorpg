@@ -1,0 +1,46 @@
+<div class="players-page">
+	{{#players}}
+	<div class="player">
+		<div class="player-info">
+			<form method="post" action="/admin/set-char-slots">
+				<h2>{{username}}</h2>
+				<span>{{email}}</span>
+				<label>Char slots</label>
+				<input type="number" name="char_slots" value="{{char_slots}}">
+				<input type="hidden" name="id" value={{id}}>
+				<input type="submit" value="Save">
+			</form>
+		</div>
+		<div class="owned-heroes">
+			<h3>Owned heroes</h3>		
+			<div>
+				<label class="medium">Name</label>
+				<label class="medium">Type</label>
+				<label class="medium">Experience</label>
+				<label class="tiny">Level</label>
+				<label class="tiny">Gold</label>
+				<label class="tiny">Health</label>
+				<label class="tiny">X</label>
+				<label class="tiny">Y</label>
+			</div>
+			{{#ownedHeroes}}
+			<div>
+				<form method="post" action="/admin/update-owned-hero">
+					<input type="text" value="{{name}}" class="medium" readonly>
+					<input type="text" value="{{type}}" class="medium" readonly>
+					<input type="number" name="experience" value="{{experience}}" class="medium">
+					<input type="number" name="level" value="{{level}}" class="tiny">
+					<input type="number" name="gold" value="{{gold}}" class="tiny">
+					<input type="number" name="health" value="{{health}}" class="tiny">
+					<input type="number" name="X" value="{{X}}" class="tiny">
+					<input type="number" name="Y" value="{{Y}}" class="tiny">
+					<input type="hidden" name="id" value="{{id}}">
+					<input type="hidden" name="questID" value="{{id_quest}}">
+					<input type="submit" value="Save" class="tiny">
+				</form>
+			</div>
+			{{/ownedHeroes}}
+		</div>
+	</div>
+	{{/players}}
+</div>

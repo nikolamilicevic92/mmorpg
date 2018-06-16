@@ -501,3 +501,50 @@ header nav ul li:hover > ul {
 }
 
 /**************End Of Map Editor**************/
+
+
+
+
+
+/*************Players - Owned Heroes**********/
+.player {
+	border: 1px solid gray;
+	border-radius: 10px;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+.player-info {
+	margin-bottom: 15px;
+}
+.player-info h2,
+.player-info span {
+	display: inline-block;
+	width: 200px;
+}
+.player-info input[type="number"] {
+	width: 50px;
+}
+.owned-heroes h3 {
+	margin-bottom: 20px;
+}
+.owned-heroes label {
+	outline: 1px solid gray;
+}
+.owned-heroes > div:first-of-type {
+	margin-bottom: 10px;
+}
+.owned-heroes .medium,
+.owned-heroes .tiny {
+	text-align: center;
+	padding: 2px 0;
+}
+.owned-heroes .medium {
+	display: inline-block;
+	width: 160px;
+}
+.owned-heroes .tiny {
+	display: inline-block;
+	width: 85px;
+
+}
+/*******End Of Players - Owned Heroes*********/

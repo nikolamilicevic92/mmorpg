@@ -81,5 +81,11 @@ export class Client {
 		socket.on('expGoldBoost', data => {
 			this.game.self.parseDragonRewards(data)
 		})
+
+		socket.on('fireball', data => {
+			this.game.addFireball(data)
+		})
+
+		socket.on('fireballDeath', ID => this.game.removeFireball(ID))
 	}
 }

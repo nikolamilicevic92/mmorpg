@@ -22,6 +22,13 @@ class StaticDragonUpdater {
 		}
 	}
 
+	setAnimation(animation) {
+		if(animation == this.props.activeAnimation) return
+		this.props.activeAnimation = animation
+		this.props.time  = 0
+		this.props.frame = 0
+	}
+
 	
 }
 

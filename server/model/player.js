@@ -155,6 +155,18 @@ class Player {
 		)
 	}
 
+	static setCharSlots(id, char_slots) {
+		return new Promise((resolve, reject) => {
+			conn.query(
+				`update player set char_slots = ${char_slots} where id = ${id}`,
+				(err, res) => {
+					if(err) throw err
+					resolve()
+				}
+			)
+		})
+	}
+
 }
 
 module.exports = Player
