@@ -4,7 +4,7 @@ export class HeroRenderer {
 		this.hero     = hero
 		this.renderer = hero.game.renderer
 		this.topLeft  = hero.game.camera.topLeft
-		this.sprite   = hero.game.assets.images[hero.props.sprite]
+		this.sprite   = hero.props.sprite
 		this.hWidth   = hero.props.width / 2
 		this.hHeight  = hero.props.height / 2
 		this.width    = hero.props.width
@@ -60,20 +60,15 @@ export class HeroRenderer {
 	}
 
 	renderHeroInfo() {
-		this.renderer.fillText({
-			text : this.hero.props.name,
-			color: this.hero.props.infoColor,
-			font : '13px sans-serif',
-			align: 'center',
-			X    : this.heroX,
-			Y    : this.heroTopLeftY - 18
+		this.renderer.text(this.hero.props.name, this.heroX, this.heroTopLeftY - 18, {
+			fill : this.hero.props.infoColor,
+			font : '13px sans-serif'
 		})
 	}
 
 	renderLevelUpAura() {
-		console.log('Rendering lvl up aura at: ', this.heroX - 45, this.heroTopLeftY - 75)
 		this.renderer.image(
-			this.hero.game.assets.images['level-up.png'],
+			'level-up.png',
 			0, 0, 80, 120,
 			this.heroX - 45,
 			this.heroTopLeftY - 70,
@@ -88,7 +83,7 @@ export class DragonRenderer {
 		this.dragon   = dragon
 		this.renderer = dragon.game.renderer
 		this.topLeft  = dragon.game.camera.topLeft
-		this.sprite   = dragon.game.assets.images[dragon.props.sprite]
+		this.sprite   = dragon.props.sprite
 		this.hWidth   = dragon.props.width / 2
 		this.hHeight  = dragon.props.height / 2
 		this.width    = dragon.props.width
@@ -119,8 +114,8 @@ export class DragonRenderer {
 	}
 
 	renderDragonSprite() {
-		const     frame = this.dragon.props.frame
-		const animation = this.dragon.animations[this.dragon.props.activeAnimation]  
+		const     frame = this.dragon.props.frame,
+		      animation = this.dragon.animations[this.dragon.props.activeAnimation]  
 		this.renderer.image(
 			this.sprite,
 			animation[frame][0], animation[frame][1],
@@ -142,24 +137,16 @@ export class DragonRenderer {
 	}
 
 	renderDragonHealthPoints() {
-		this.renderer.fillText({
-			text : parseInt(this.dragon.props.health),
-			color: 'white',
-			font : '12px sans-serif',
-			align: 'center',
-			X    : this.dragonX,
-			Y    : this.dragonTopLeftY + 15
+		this.renderer.text(parseInt(this.dragon.props.health), this.dragonX, this.dragonTopLeftY + 15, {
+			fill: 'white',
+			font : '12px sans-serif'
 		})
 	}
 
 	renderDragonInfo() {
-		this.renderer.fillText({
-			text : this.dragon.props.name,
-			color: this.dragon.props.infoColor,
-			font : '13px sans-serif',
-			align: 'center',
-			X    : this.dragonX,
-			Y    : this.dragonTopLeftY - 18
+		this.renderer.text(this.dragon.props.name, this.dragonX, this.dragonTopLeftY - 18, {
+			fill : this.dragon.props.infoColor,
+			font : '13px sans-serif'
 		})
 	}
 }

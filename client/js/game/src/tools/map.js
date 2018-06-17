@@ -112,18 +112,18 @@ export class Map {
 		if(start) n = start
 		let max = this.tiles[i][j].length
 		if(end) max = end		
-		const layers = this.tiles[i][j];
+		const layers = this.tiles[i][j]
 		for(; n < max; n++) {
-			const layer = layers[n];
-			const spriteIndex = layer[0];
-			const img = this.game.assets.images[this.sprites[spriteIndex]];
-			const sX = layer[1];
-			const sY = layer[2];
+			const layer       = layers[n],
+				  spriteIndex = layer[0],
+				  sX          = layer[1],
+				  sY          = layer[2]
 			this.game.renderer.image(
-				img, sX, sY, this.tileSize, this.tileSize,
+				this.sprites[spriteIndex], 
+				sX, sY, this.tileSize, this.tileSize,
 				parseInt(j * this.tileSize - this.game.camera.topLeft.X), 
 				parseInt(i * this.tileSize - this.game.camera.topLeft.Y), 
-			);
+			)
 		}
 	}
 

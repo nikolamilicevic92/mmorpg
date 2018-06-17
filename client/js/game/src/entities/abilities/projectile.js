@@ -4,7 +4,7 @@ import { VectorFromPoints, Point, Vector, rectCollision } from '../../tools/geom
 class Projectile {
 
 	constructor(emiter, location, target) {
-		this.image             = emiter.hero.game.assets.images[emiter.props.sprite]
+		this.sprite            = emiter.props.sprite
 		this.width             = emiter.props.width
 		this.height            = emiter.props.height
 		this.halfWidth         = this.width / 2
@@ -43,16 +43,12 @@ class Projectile {
 
 	render() {
 		const p = Point.subtract(this.location, this.cameraTopLeft)
-		this.renderer.ctx.save()
-		this.renderer.ctx.translate(parseInt(p.X), parseInt(p.Y))
-		this.renderer.ctx.rotate(this.velocity.angle)
-		this.renderer.image(
-			this.image, 
-			0, 0, 
-			this.width, this.height,
-			-this.halfWidth, -this.halfHeight
+		this.renderer.rotate(this.velocity.angle)
+		this.renderer.imageBasic(
+			this.sprite, 
+			parseInt(p.X), parseInt(p.Y), 
+			this.width, this.height	
 		)
-		this.renderer.ctx.restore()
 	}
 }
 
@@ -151,7 +147,6 @@ export class ProjectileEmiter {
 		const target   = {X: this.mouse.worldX, Y: this.mouse.worldY},
 			  location = {X: this.hero.props.X, Y: this.hero.props.Y},
 			  ID       = Math.random()
-		console.log(location, target)
 		this.addInstance({ 
 			ID, location, target 
 		})

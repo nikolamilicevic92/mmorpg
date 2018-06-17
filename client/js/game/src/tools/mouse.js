@@ -81,7 +81,7 @@ export class Mouse {
 	render() {
 		if(this.hidden) return
 		this.game.renderer.image(
-			this.game.assets.images['small-sword.png'],
+			'small-sword.png',
 			0, 0, 16, 16,
 			parseInt(this.X), parseInt(this.Y),
 			20, 20

@@ -11,12 +11,13 @@
 	height: 1px;
 	visibility: hidden;
 }
-#gameContainer, canvas {
+#gameContainer {
+	display: none;
 	margin: auto;
 	position: relative;
 }
-canvas {
-	cursor: none;
+#gameContainer canvas {
+	cursor: none!important;
 }
 /*****************Login Screen*****************/
 
@@ -515,7 +516,8 @@ canvas {
 	width: 458px;
 	position: absolute;
 	bottom: 5px;
-	left: 400px;
+	left: 50%;
+	transform: translateX(-229px);
 	z-index: 1;
 	color: white;
 	background-color: rgba(0, 0, 0, 0.4);

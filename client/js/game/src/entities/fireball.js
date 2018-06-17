@@ -12,7 +12,7 @@ export class Fireball {
 		this.travelledDistance = 0 
 		this.width            = 30
 		this.height           = 26
-		this.spriteName       = 'firebal.png'
+		this.sprite           = 'firebal.png'
 	}
 
 	get X() { return this.location.X }
@@ -34,10 +34,9 @@ export class Fireball {
 	}
 	
 	render() {
-		const renderer = this.game.renderer,
-			  image    = this.game.assets.images[this.spriteName]
+		const renderer = this.game.renderer
 		renderer.image(
-			image, 
+			this.sprite, 
 			10, 11,
 			this.width, this.height,
 			parseInt(this.X - 15 - this.game.camera.topLeft.X), 

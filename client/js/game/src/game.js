@@ -32,13 +32,13 @@ import { Client } from './client'
 
 export class Game {
 
-	constructor(socket) {
+	constructor(socket, PIXI) {
 		this.socket         = socket
 		this.heroesData     = []
 		this.ownedHeroes    = []
 		this.client         = new Client(this, socket)
 		this.soundManager   = new SoundManager()
-		this.renderer       = new Renderer(this, 1200, 768)
+		this.renderer       = new Renderer(PIXI, {width: 1200, height: 750})
 		this.chat           = new Chat(this)
 		this.heroUI         = null
 		this.loginScreen    = new LoginScreen(this)
@@ -62,7 +62,9 @@ export class Game {
 			document.getElementById('chatContainer'), 
 			document.getElementById('chatSettings')
 		)
-		this.loadAssets(ASSET_SOURCES.images, ASSET_SOURCES.sounds)
+		this.renderer.load(ASSET_SOURCES.images, 'client/assets/images/')
+		this.renderer.enableFullScreen()
+		this.loadSounds(ASSET_SOURCES.sounds)
 		.then(() => this.soundManager.init(this.assets.sounds))
 	}
 
@@ -107,6 +109,8 @@ export class Game {
 			this.dragons[id].render()
 		}
 		this.mouse.render()
+
+		this.renderer.render()
 		requestAnimationFrame(() => this.render())
 	}
 
@@ -160,26 +164,14 @@ export class Game {
 
 	//Assets
 	
-	loadAssets(imgSources, soundSources) {
+	loadSounds(soundSources) {
 		return new Promise((resolve, reject) => {
-			let loadedImages = 0
 			let loadedSounds = 0
-			imgSources.forEach(src => {
-				this.assets.images[src] = new Image
-				this.assets.images[src].src = 'client/assets/images/' + src
-				this.assets.images[src].onload = () => {
-					if(++loadedImages >= imgSources.length &&
-					   loadedSounds >= soundSources.length) {
-						resolve()
-					}
-				}
-			}) 
 			soundSources.forEach(src => {
 				this.assets.sounds[src] = document.createElement('audio')
 				this.assets.sounds[src].src = 'client/assets/sounds/' + src
 				this.assets.sounds[src].oncanplay = () => {
-					if(++loadedSounds >= soundSources.length &&
-					   loadedImages >= imgSources.length) {
+					if(++loadedSounds >= soundSources.length) {
 						resolve()
 					}
 				}
