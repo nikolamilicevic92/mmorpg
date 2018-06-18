@@ -1,0 +1,49 @@
+<div class="update-quests-page clearfix">
+	{{#quests}}
+	<form method="post" action="/admin/update-quest" id="quest-{{id}}">
+		<div>
+			<label>Name</label>
+			<input type="text" name="name" value="{{name}}">
+		</div>
+		<div>
+			<label>Gold</label>
+			<input type="number" name="gold" value="{{gold}}">
+		</div>
+		<div>
+			<label>Experience</label>
+			<input type="number" name="experience" value="{{experience}}">
+		</div>
+		<div>
+			<label>Dragon</label>
+			<select name="dragon">
+				{{#../dragons}}
+				<option 
+					value="{{name}}"
+					{{isSelected name ../dragon}}
+					>{{name}}
+				</option>
+				{{/../dragons}}
+			</select>
+		</div>
+		<div>
+			<label>Amount</label>
+			<input type="number" name="amount" value="{{amount}}">
+		</div>
+		<div>
+			<label>Description</label>
+			<textarea name="description" rows="5" cols="32">{{description}}</textarea>
+		</div>
+		<div class="clearfix">
+			<input type="hidden" name="id" value="{{id}}">
+			<input 
+				type="button" value="Delete"
+				onclick="deleteQuest({{id}})"
+			>
+			<input type="submit" value="Save">
+		</div>
+	</form>
+	{{/quests}}
+</div>
+
+
+<script src="/client/js/admin/quests/main.js"></script>

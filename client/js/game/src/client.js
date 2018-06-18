@@ -18,6 +18,13 @@ export class Client {
 			this.game.heroCreation.init(heroesData)
 		})
 
+		socket.on('quests', quests => {
+			quests.forEach(quest => {
+				this.game.quests[quest.id] = quest
+			})
+			console.log(this.game.quests)
+		})
+
 		socket.on('mapData', data => this.game.map.init(JSON.parse(data)))
 
 		socket.on('heroCreation', data => {
@@ -80,6 +87,7 @@ export class Client {
 
 		socket.on('expGoldBoost', data => {
 			this.game.self.parseDragonRewards(data)
+			this.game.questUI.onDragonKill(data.dragon)
 		})
 
 		socket.on('fireball', data => {

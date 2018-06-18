@@ -25,6 +25,7 @@ import { Chat } from './components/chat'
 import { HeroCreation } from './components/hero-creation'
 import { HeroSelection } from './components/hero-selection'
 import { HeroUI } from './components/hero-ui'
+import { QuestUI } from './components/quest-ui'
 
 import { Client } from './client'
 
@@ -41,6 +42,7 @@ export class Game {
 		this.renderer       = new Renderer(PIXI, {width: 1200, height: 750})
 		this.chat           = new Chat(this)
 		this.heroUI         = null
+		this.questUI        = null
 		this.loginScreen    = new LoginScreen(this)
 		this.map            = new Map(this)
 		this.camera         = new Camera(this)
@@ -50,7 +52,8 @@ export class Game {
 		this.assets         = {images: {}, sounds: {}}
 		this.heroes         = {}
 		this.dragons        = {}
-		this.fireballs       = {}
+		this.fireballs      = {}
+		this.quests         = {}
 		this.registerScreen = new RegisterScreen(this) 
 		this.heroCreation   = new HeroCreation(this)
 		this.heroSelection  = new HeroSelection(this)
@@ -78,6 +81,7 @@ export class Game {
 		this.render()
 		this.heroUI = new HeroUI(this)
 		this.heroUI.show()
+		this.questUI = new QuestUI(this)
 	}
 
 	update() {

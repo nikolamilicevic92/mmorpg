@@ -300,6 +300,7 @@ export class Renderer {
     text(_text, X, Y, style) {
         const text = new this.Text(_text, style)
         text.position.set(X, Y)
+        text.anchor.set(0.5, 0.5)
         this.add(text)
     }
 

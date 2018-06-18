@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `game` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `game`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: game
@@ -28,8 +30,14 @@ CREATE TABLE `ability` (
   `description` text NOT NULL,
   `sprite` varchar(40) DEFAULT NULL,
   `cooldown` int(11) DEFAULT NULL,
+  `damage` int(11) DEFAULT NULL,
+  `_range` int(11) DEFAULT NULL,
+  `speed` int(11) DEFAULT NULL,
+  `width` int(11) DEFAULT NULL,
+  `height` int(11) DEFAULT NULL,
+  `sound` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +58,7 @@ CREATE TABLE `dragon` (
   KEY `fk_default_animation_idx` (`default_animation`),
   CONSTRAINT `fk_default_animation` FOREIGN KEY (`default_animation`) REFERENCES `dragon_animation` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_id_dragon_type` FOREIGN KEY (`id_dragon_type`) REFERENCES `dragon_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +98,7 @@ CREATE TABLE `dragon_type` (
   `width` int(11) DEFAULT NULL,
   `height` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +127,7 @@ CREATE TABLE `hero` (
   CONSTRAINT `fk_id_hero_type` FOREIGN KEY (`id_hero_type`) REFERENCES `hero_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_id_player` FOREIGN KEY (`id_player`) REFERENCES `player` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_id_quest` FOREIGN KEY (`id_quest`) REFERENCES `quest` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +166,7 @@ CREATE TABLE `hero_type_abilities` (
   KEY `fk_id_ability_idx` (`id_ability`),
   CONSTRAINT `fk_id_ability` FOREIGN KEY (`id_ability`) REFERENCES `ability` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_id_hero_type2` FOREIGN KEY (`id_hero_type2`) REFERENCES `hero_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,7 +184,7 @@ CREATE TABLE `player` (
   `char_slots` int(11) NOT NULL,
   `logged_in` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,8 +199,11 @@ CREATE TABLE `quest` (
   `description` text NOT NULL,
   `experience` int(11) NOT NULL,
   `gold` int(11) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `dragon` varchar(45) NOT NULL,
+  `amount` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -204,4 +215,4 @@ CREATE TABLE `quest` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-12  0:27:56
+-- Dump completed on 2018-06-18 22:32:20

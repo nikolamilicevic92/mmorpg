@@ -1,5 +1,6 @@
-const heroModel = require('../model/hero')
-const abilityModel = require('../model/ability')
+const heroModel    = require('../model/hero'),
+      abilityModel = require('../model/ability'),
+      questModel   = require('../model/quest')
 
 module.exports = class Hero {
 
@@ -47,6 +48,12 @@ module.exports = class Hero {
 	static getHeroesData(socket) {
 		 heroModel.getHeroesData()
 		.then(data => socket.emit('heroesData', data))
+		.catch(err => console.log(err))
+	}
+
+	static sendQuests(socket) {
+		 questModel.getAll()
+		.then(quests => socket.emit('quests', quests))
 		.catch(err => console.log(err))
 	}
 

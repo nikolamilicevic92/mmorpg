@@ -32,7 +32,7 @@ header {
 	margin-bottom: 30px;
 }
 header nav {
-	width: 1200px;
+	width: 1250px;
 	margin: auto;
 }
 header nav ul {
@@ -49,7 +49,7 @@ header nav ul #logout {
 }
 header nav ul li a {
 	display: block;
-	width: 170px;
+	width: 140px;
 	text-decoration: none;
 	text-align: center;
 	color: white;
@@ -548,3 +548,56 @@ header nav ul li:hover > ul {
 
 }
 /*******End Of Players - Owned Heroes*********/
+
+
+/*****************New Quest*******************/
+
+.new-quest-page form {
+	padding-top: 70px;
+	width: 380px;
+	margin-left: 30%;
+}
+.update-quests-page form {
+	padding: 10px;
+	width: 380px;
+	margin: 10px;
+	border-radius: 10px;
+	border: 1px solid gray;
+	float: left;
+}
+.new-quest-page form > div,
+.update-quests-page form > div {
+	margin-bottom: 5px;
+}
+.new-quest-page form > div:nth-last-child(2) label,
+.update-quests-page form > div:nth-last-child(2) label {
+	vertical-align: top;
+}
+.new-quest-page label,
+.update-quests-page label {
+	display: inline-block;
+	width: 100px;
+}
+.new-quest-page input,
+.update-quests-page input,
+.new-quest-page select,
+.update-quests-page select {
+	padding: 3px;
+	width: 250px;
+}
+.new-quest-page input[type="submit"] {
+	margin-left: 123px;
+}
+.update-quests-page input[type="submit"],
+.update-quests-page input[type="button"] {
+	float: right;
+	margin-right: 5px;
+	width: 120px;
+}
+.new-quest-page textarea,
+.update-quests-page textarea {
+	padding: 3px;
+}
+
+
+/***************End Of New Quest**************/

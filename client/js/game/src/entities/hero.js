@@ -7,7 +7,9 @@ import { AbilityFactory } from './abilities/factory'
 const keybinds = {
 	'Ability1': ['RMB', '1'],
 	'Ability2': ['2'],
-	'Ability3': ['3']
+	'Ability3': ['3'],
+	'Ability4': ['4'],
+	'Ability5': ['5']
 }
 
 export class Hero {

@@ -1,0 +1,35 @@
+<div class="new-quest-page">
+	<form method="post" action="/admin/add-new-quest">
+		<div>
+			<label>Name</label>
+			<input type="text" name="name">
+		</div>
+		<div>
+			<label>Gold</label>
+			<input type="number" name="gold">
+		</div>
+		<div>
+			<label>Experience</label>
+			<input type="number" name="experience">
+		</div>
+		<div>
+			<label>Dragon</label>
+			<select name="dragon">
+				{{#types}}
+				<option value="{{name}}">{{name}}</option>
+				{{/types}}
+			</select>
+		</div>
+		<div>
+			<label>Amount</label>
+			<input type="number" name="amount">
+		</div>
+		<div>
+			<label>Description</label>
+			<textarea name="description" rows="5" cols="32"></textarea>
+		</div>
+		<div>
+			<input type="submit" value="Save">
+		</div>
+	</form>
+</div>

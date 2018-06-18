@@ -56,6 +56,9 @@ io.sockets.on('connection', socket => {
 	//Full information about every hero type is sent on connection
 
 	 Hero.getHeroesData(socket)
+
+	 //Sending quests
+	 Hero.sendQuests(socket)
 	
 
 	//Sending map 
@@ -256,8 +259,15 @@ app.get('/admin/spawn-new-dragon', (req, res) => {
 })
 
 app.get('/admin/players', (req, res) => {
-	console.log('/admin/players route hit')
 	Admin.players(req, res)
+})
+
+app.get('/admin/update-quests', (req, res) => {
+	Admin.editQuests(req, res)
+})
+
+app.get('/admin/new-quest', (req, res) => {
+	Admin.newQuest(req, res)
 })
 
 // Post requests
@@ -325,6 +335,19 @@ app.post('/admin/set-char-slots', (req, res) => {
 app.post('/admin/update-owned-hero', (req, res) => {
 	Admin.updateOwnedHero(req, res)
 })
+
+app.post('/admin/add-new-quest', (req, res) => {
+	Admin.addNewQuest(req, res)
+})
+
+app.post('/admin/update-quest', (req, res) => {
+	Admin.updateQuest(req, res)
+})
+
+app.post('/admin/delete-quest', (req, res) => {
+	Admin.deleteQuest(req, res)
+})
+
 
 
 

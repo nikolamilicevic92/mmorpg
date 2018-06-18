@@ -98,6 +98,7 @@ module.exports = class Dragon {
 	giveExperienceAndGold(NAMES_SOCKETS) {
 		for(let name in this.attackers) {
 			NAMES_SOCKETS[name].emit('expGoldBoost', {
+				dragon    : this.props.name,
 				experience: this.props.experience_worth,
 				gold      : this.props.gold_worth
 			})

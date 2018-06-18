@@ -681,7 +681,7 @@
 	background-size: contain;
 	padding: 5px;
 	line-height: 30px;
-	color: white;
+	color: black;
 	font-weight: bold;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -700,3 +700,37 @@
 }
 
 /*****************End Of Hero UI*******************/
+
+
+
+
+
+/********************Quest Screen******************/
+
+#questScreen {
+	width: 400px;
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	padding: 10px;
+	z-index: 5;
+	color: white;
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.4);
+	border-radius: 10px;
+}
+#questDescription {
+	margin-bottom: 20px;
+	text-align: justify;
+}
+#questScreen div * {
+	display: inline-block;
+	width: 185px;
+	cursor: pointer;
+}
+#questScreen span {
+	text-align: right;
+}
+
+
+/***************End Of Quest Screen****************/

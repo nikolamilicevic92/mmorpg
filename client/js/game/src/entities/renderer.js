@@ -62,7 +62,8 @@ export class HeroRenderer {
 	renderHeroInfo() {
 		this.renderer.text(this.hero.props.name, this.heroX, this.heroTopLeftY - 18, {
 			fill : this.hero.props.infoColor,
-			font : '13px sans-serif'
+			fontFamily : 'Arial',
+			fontSize   : '12px'
 		})
 	}
 
@@ -137,16 +138,18 @@ export class DragonRenderer {
 	}
 
 	renderDragonHealthPoints() {
-		this.renderer.text(parseInt(this.dragon.props.health), this.dragonX, this.dragonTopLeftY + 15, {
+		this.renderer.text(parseInt(this.dragon.props.health), this.dragonX, this.dragonTopLeftY + 10, {
 			fill: 'white',
-			font : '12px sans-serif'
+			fontFamily : 'Arial',
+			fontSize   : '12px'
 		})
 	}
 
 	renderDragonInfo() {
-		this.renderer.text(this.dragon.props.name, this.dragonX, this.dragonTopLeftY - 18, {
-			fill : this.dragon.props.infoColor,
-			font : '13px sans-serif'
+		this.renderer.text(this.dragon.props.name, this.dragonX, this.dragonTopLeftY - 28, {
+			fill       : 'white',
+			fontFamily : 'Arial',
+			fontSize   : '12px'
 		})
 	}
 }

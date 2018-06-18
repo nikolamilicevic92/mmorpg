@@ -2,10 +2,13 @@ const heroModel    = require('../model/hero'),
 	  abilityModel = require("../model/ability"),
 	  dragonModel  = require("../model/dragon"),
 	  playerModel  = require('../model/player'),
+	  questModel   = require('../model/quest'),
 	  baseUrl      = require('../base-url'),
 	  fs           = require('fs')
 
 module.exports = class Admin {
+
+	//Heroes
 
 	static heroes(req, res) {
 		 let promises = []
@@ -45,6 +48,10 @@ module.exports = class Admin {
 		}).catch(err => console.log(err))
 	}
 
+
+
+	//Abilities
+
 	static abilities(req, res) {
 		 abilityModel.getAll()
 		.then(abilities => {
@@ -71,6 +78,10 @@ module.exports = class Admin {
 			res.send('ok')
 		}).catch(err => reject(err))
 	}
+
+
+
+	//Dragons
 
 	static spawnedDragons(req, res) {
 		 let promises = []
@@ -155,6 +166,10 @@ module.exports = class Admin {
 		})
 	}
 
+
+
+	//Map
+
 	static loadMap(req, res = false) {
 		fs.readFile(`server/maps/${req.body.map_name}.json`, 'utf8', (err, data) => {
 			if(err) {
@@ -191,6 +206,10 @@ module.exports = class Admin {
 		)
 	}
 
+
+
+	//Players
+
 	static players(req, res) {
 		 playerModel.getAll()
 		.then(players => {
@@ -221,6 +240,51 @@ module.exports = class Admin {
 		.then(() => Admin.redirectTo(res, 'players'))
 		.catch(err => console.log(err))
 	}
+
+
+
+	//Quests
+
+	static editQuests(req, res) {
+		let promises = []
+		promises.push(questModel.getAll())
+		promises.push(dragonModel.getAllTypes())
+		Promise.all(promises)
+		.then(data => {
+			res.render('edit-quests', {
+				quests: data[0], dragons: data[1]
+			})
+		}).catch(err => console.log(err))
+	}
+
+	static newQuest(req, res) {
+		 dragonModel.getAllTypes()
+		.then(types => {
+			// console.log(types)
+			res.render('new-quest', {types})
+		}).catch(err => console.log(err))
+	}
+
+	static addNewQuest(req, res) {
+		 questModel.insert(req.body)
+		.then(() => Admin.redirectTo(res, 'new-quest'))
+		.catch(err => console.log(err))
+	}
+
+	static updateQuest(req, res) {
+		 questModel.update(req.body)
+		.then(() => Admin.redirectTo(res, 'update-quests'))
+		.catch(err => console.log(err))
+	}
+
+	static deleteQuest(req, res) {
+		 questModel.delete(req.body.id)
+		.then(() => {
+			res.status = 200
+			res.send('ok')
+		}).catch(err => console.log(err))
+	}
+
 
 	static redirectTo(res, page) {
 		res.writeHead(301, {
