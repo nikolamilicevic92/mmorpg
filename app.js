@@ -129,6 +129,10 @@ io.sockets.on('connection', socket => {
 		Chat.party(socket, data, PARTIES, HEROES)
 	})
 
+	socket.on('gameWon', heroID => {
+		Hero.win(heroID)
+	})
+
 	socket.on('disconnect', () => {		
 		Player.logout(PLAYERS[socket.id])
 		delete PLAYERS[socket.id]

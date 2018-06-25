@@ -57,4 +57,8 @@ module.exports = class Hero {
 		.catch(err => console.log(err))
 	}
 
+	static win(id) {
+		 heroModel.win(id)
+		.catch(err => console.log(err))
+	}
 }

@@ -72,11 +72,11 @@ module.exports = class Dragon {
 			conn.query(
 				`insert into dragon_type (name, sprite, max_health,
 				 a1_cooldown, a1_speed, a1_range, experience_worth,
-				 gold_worth, respawn_timer, a1_damage) values
+				 gold_worth, respawn_timer, a1_damage, width, height) values
 				 ('${data.name}', '${data.sprite}', ${data.max_health},
 				 ${data.a1_cooldown}, ${data.a1_speed}, ${data.a1_range}, 
 				 ${data.experience_worth}, ${data.gold_worth}, 
-				 ${data.respawn_timer}, ${data.a1_damage})`,
+				 ${data.respawn_timer}, ${data.a1_damage}, 144, 124)`,
 				(err, res) => {
 					if(err) throw err
 					resolve()

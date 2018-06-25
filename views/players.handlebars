@@ -2,7 +2,7 @@
 	{{#players}}
 	<div class="player">
 		<div class="player-info">
-			<form method="post" action="/admin/set-char-slots">
+			<form method="post" action="/admin/set-char-slots" class="interceptable">
 				<h2>{{username}}</h2>
 				<span>{{email}}</span>
 				<label>Char slots</label>
@@ -24,8 +24,8 @@
 				<label class="tiny">Y</label>
 			</div>
 			{{#ownedHeroes}}
-			<div>
-				<form method="post" action="/admin/update-owned-hero">
+			<div class="owned-hero-div">
+				<form method="post" action="/admin/update-owned-hero" class="interceptable">
 					<input type="text" value="{{name}}" class="medium" readonly>
 					<input type="text" value="{{type}}" class="medium" readonly>
 					<input type="number" name="experience" value="{{experience}}" class="medium">
@@ -44,3 +44,19 @@
 	</div>
 	{{/players}}
 </div>
+
+<script>
+	(function() {
+		const forms = document.querySelectorAll('.interceptable')
+		for(let i = 0; i < forms.length; i++) {
+			const form = forms[i]
+			interceptFormSubmit(form, data => {
+				ajax({
+					url: data.url,
+					method: data.method,
+					query: data.query
+				})
+			})
+		}
+	})()
+</script>

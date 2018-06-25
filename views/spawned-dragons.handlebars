@@ -17,7 +17,7 @@
 		</div>
 		{{#spawned}}
 		<div class="spawned-dragon" id="spawnedDragon-{{id}}">
-			<form method="post" action="/admin/updateSpawnedDragon">
+			<form method="post" action="/admin/updateSpawnedDragon" class="interceptable">
 				<div>
 					<label>Position</label>
 					<span>
@@ -68,3 +68,18 @@
 </div>
 
 <script src="/client/js/admin/dragons/main.js"></script>
+<script>
+	(function() {
+		const forms = document.querySelectorAll('.interceptable')
+		for(let i = 0; i < forms.length; i++) {
+			const form = forms[i]
+			interceptFormSubmit(form, data => {
+				ajax({
+					url: data.url,
+					method: data.method,
+					query: data.query
+				})
+			})
+		}
+	})()
+</script>

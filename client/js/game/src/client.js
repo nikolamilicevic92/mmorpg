@@ -50,6 +50,7 @@ export class Client {
 			data.dragonsProps.forEach(dragonProps => {
 				this.game.addDragon(dragonProps)
 			})
+			console.log(this.game.dragons)
 			this.game.start()
 		})
 
@@ -87,7 +88,9 @@ export class Client {
 
 		socket.on('expGoldBoost', data => {
 			this.game.self.parseDragonRewards(data)
-			this.game.questUI.onDragonKill(data.dragon)
+			if(this.game.questUI) {
+				this.game.questUI.onDragonKill(data.dragon)
+			}
 		})
 
 		socket.on('fireball', data => {

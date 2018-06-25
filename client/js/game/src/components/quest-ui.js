@@ -23,6 +23,7 @@ export class QuestUI {
 		})
 		this.container.oncontextmenu = ev => ev.preventDefault()
 		this.setQuest(this.game.self.props.id_quest)
+		this.container.style.display = 'block'
 	}
 
 	onDragonKill(name) {
@@ -86,6 +87,8 @@ export class QuestUI {
 		const id = this.game.self.props.id_quest + 1
 		if(!this.game.quests[id]) {
 			this.alertVictoryScreen()
+			this.container.style.display = 'none'
+			this.game.socket.emit('gameWon', this.game.self.props.id)
 			return
 		}
 		this.game.self.props.id_quest++

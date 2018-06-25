@@ -82,7 +82,8 @@ module.exports = class Hero {
 	static getByUsername(username) {
 		return new Promise((resolve, reject) => {
 			conn.query(
-				`select hero.id, id_quest, name, type, experience, level, gold, health, X, Y from hero 
+				`select hero.id, id_quest, name, type, experience, level, gold, 
+				 health, X, Y, won from hero 
 				 join player on
 				 hero.id_player = player.id
 				 join hero_type on
@@ -127,6 +128,18 @@ module.exports = class Hero {
 		return new Promise((resolve, reject) => {
 			conn.query(
 				`delete from hero_type_abilities where id = ${id}`,
+				(err, res) => {
+					if(err) throw err
+					resolve()
+				}
+			)
+		})
+	}
+
+	static win(id) {
+		return new Promise((resolve, reject) => {
+			conn.query(
+				`update hero set won = true where id = ${id}`,
 				(err, res) => {
 					if(err) throw err
 					resolve()

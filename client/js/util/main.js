@@ -65,3 +65,19 @@ function show(element) {
 	element.style.display = 'block'
 }
 
+function interceptFormSubmit(form, callback) {
+	form.addEventListener('submit', ev => {
+		ev.preventDefault()
+		const url = form.getAttribute('action')
+		const method = form.getAttribute('method')
+		const inputs = form.querySelectorAll('[name]');
+		let query = ''
+		for(let j = 0; j < inputs.length; j++) {
+			const input = inputs[j]
+			query += input.getAttribute('name') + '=' + input.value + '&'
+		}
+		query = query.substr(0, query.length - 1)
+		callback({url, method, query})
+	})
+}
+

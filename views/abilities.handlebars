@@ -11,7 +11,7 @@
 	<div class="abilities-container">
 		{{#abilities}}
 		<div class="ability" id="ability-{{id}}">
-			<form method="post" action="/admin/updateAbility">
+			<form method="post" action="/admin/updateAbility" class="interceptable">
 				<div 
 					class="ability-icon"
 					style="background-image:url(/client/assets/images/{{sprite}})">
@@ -73,3 +73,18 @@
 </div>
 
 <script src="/client/js/admin/abilities/main.js"></script>
+<script>
+	(function() {
+		const forms = document.querySelectorAll('.interceptable')
+		for(let i = 0; i < forms.length; i++) {
+			const form = forms[i]
+			interceptFormSubmit(form, data => {
+				ajax({
+					url: data.url,
+					method: data.method,
+					query: data.query
+				})
+			})
+		}
+	})()
+</script>

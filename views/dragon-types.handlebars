@@ -9,7 +9,7 @@
 		</div>
 		{{#types}}
 		<div class="dragon-type" id="dragonType-{{id}}">
-			<form method="post" action="/admin/updateDragon" class="clearfix">
+			<form method="post" action="/admin/updateDragon" class="interceptable clearfix">
 				<div class="dragon-img-container">
 					<div 
 						class="dragon-img"
@@ -124,3 +124,18 @@
 </div>
 
 <script src="/client/js/admin/dragons/main.js"></script>
+<script>
+	(function() {
+		const forms = document.querySelectorAll('.interceptable')
+		for(let i = 0; i < forms.length; i++) {
+			const form = forms[i]
+			interceptFormSubmit(form, data => {
+				ajax({
+					url: data.url,
+					method: data.method,
+					query: data.query
+				})
+			})
+		}
+	})()
+</script>

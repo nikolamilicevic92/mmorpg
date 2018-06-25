@@ -691,6 +691,10 @@
 }
 #heroGold {
 	color: yellow;
+	cursor: pointer;
+}
+#heroGold:hover {
+	text-decoration: underline;
 }
 #heroAttack {
 	color: red;
@@ -708,6 +712,7 @@
 /********************Quest Screen******************/
 
 #questScreen {
+	display: none;
 	width: 400px;
 	position: absolute;
 	top: 15px;
@@ -723,6 +728,9 @@
 	margin-bottom: 20px;
 	text-align: justify;
 }
+#questScreen > div {
+	margin-bottom: 5px;
+}
 #questScreen div * {
 	display: inline-block;
 	width: 185px;
@@ -734,3 +742,49 @@
 
 
 /***************End Of Quest Screen****************/
+
+
+/*****************Shop Screen*********************/
+
+#shopScreen {
+	display: none;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	background-color: rgba(0, 0, 0, 0.4);
+	color: white;
+	z-index: 5;
+	padding: 10px;
+}
+#shopScreen p {
+	width: 350px;
+}
+#shopScreen p:not(:first-child) {
+	margin-bottom: 5px;
+	width: 350px;
+	padding: 5px;
+}
+#shopScreen p:first-child span {
+	font-size: 20px;
+	font-weight: bold;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+}
+#shopScreen p:first-child span:hover {
+	background-color: rgba(0, 0, 0, 0.6);
+	cursor: pointer;
+}
+#shopScreen p:hover:not(:first-child) {
+	background-color: rgba(0, 0, 0, 0.6);
+	cursor: pointer;
+}
+#shopScreen p span {
+	padding-right: 5px;
+	float: right;
+}
+
+/************End Of Shop Screen*******************/

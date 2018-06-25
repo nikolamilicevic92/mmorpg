@@ -97,14 +97,15 @@ export class Vector {
 
 	static angle(X, Y) {
 		let angle = Math.atan(X / Y)
+		const PI_HALF = Math.PI / 2
 		if(X >= 0 && Y >= 0) {
-			angle = Math.PI / 2 - angle
+			angle = PI_HALF - angle
 		} else if(X <= 0 && Y >= 0) {
-			angle = Math.PI / 2 + Math.abs(angle)
+			angle = PI_HALF + Math.abs(angle)
 		} else if(X <= 0 && Y <= 0) {
-			angle = 3 * Math.PI / 2 - angle
+			angle = 3 * PI_HALF - angle
 		} else {
-			angle = 3 * Math.PI / 2 -  angle
+			angle = 3 * PI_HALF -  angle
 		}
 		return angle
 	}
@@ -332,8 +333,8 @@ export class Rectangle {
 		const halfScale = k / 2;
 		this._topLeft.x -= halfScale;
 		this._topLeft.y -= halfScale;
-		this._width += halfScale;
-		this._height += halfScale;
+		this._width += k;
+		this._height += k;
 	}
 	translate(v) {
 		this._topLeft.add(v);

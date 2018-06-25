@@ -26,6 +26,7 @@ import { HeroCreation } from './components/hero-creation'
 import { HeroSelection } from './components/hero-selection'
 import { HeroUI } from './components/hero-ui'
 import { QuestUI } from './components/quest-ui'
+import { Shop } from './components/shop'
 
 import { Client } from './client'
 
@@ -41,6 +42,7 @@ export class Game {
 		this.soundManager   = new SoundManager()
 		this.renderer       = new Renderer(PIXI, {width: 1200, height: 750})
 		this.chat           = new Chat(this)
+		this.shop           = new Shop(this)
 		this.heroUI         = null
 		this.questUI        = null
 		this.loginScreen    = new LoginScreen(this)
@@ -81,7 +83,9 @@ export class Game {
 		this.render()
 		this.heroUI = new HeroUI(this)
 		this.heroUI.show()
-		this.questUI = new QuestUI(this)
+		if(!this.self.props.won) {
+			this.questUI = new QuestUI(this)
+		}
 	}
 
 	update() {
@@ -99,6 +103,8 @@ export class Game {
 	}
 	
 	render() {
+		requestAnimationFrame(() => this.render())
+
 		this.renderer.clear()
 		this.map.render()	
 		for(let id in this.heroes) {
@@ -113,9 +119,7 @@ export class Game {
 			this.dragons[id].render()
 		}
 		this.mouse.render()
-
 		this.renderer.render()
-		requestAnimationFrame(() => this.render())
 	}
 
 

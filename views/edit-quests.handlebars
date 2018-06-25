@@ -1,6 +1,6 @@
 <div class="update-quests-page clearfix">
 	{{#quests}}
-	<form method="post" action="/admin/update-quest" id="quest-{{id}}">
+	<form method="post" action="/admin/update-quest" id="quest-{{id}}" class="interceptable">
 		<div>
 			<label>Name</label>
 			<input type="text" name="name" value="{{name}}">
@@ -47,3 +47,18 @@
 
 
 <script src="/client/js/admin/quests/main.js"></script>
+<script>
+	(function() {
+		const forms = document.querySelectorAll('.interceptable')
+		for(let i = 0; i < forms.length; i++) {
+			const form = forms[i]
+			interceptFormSubmit(form, data => {
+				ajax({
+					url: data.url,
+					method: data.method,
+					query: data.query
+				})
+			})
+		}
+	})()
+</script>

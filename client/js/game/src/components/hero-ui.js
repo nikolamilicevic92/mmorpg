@@ -39,6 +39,9 @@ export class HeroUI {
 			this.cooldowns[ability.id] = icon
 			this._abilities.appendChild(icon)
 		}
+		this.gold.addEventListener('click', () => {
+			this.game.shop.show()
+		})
 	}
 
 	show() {

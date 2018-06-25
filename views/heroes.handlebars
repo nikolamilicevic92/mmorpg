@@ -2,7 +2,7 @@
 	{{#data}}
 	<div class="hero-data clearfix">
 		<div>
-			<form method="post" action="/admin/heroes">
+			<form method="post" action="/admin/heroes" class="interceptable">
 			<div class="hero-data-left">
 				<div class="hero-img-container">
 					<div class="hero-img" style="background:url(/client/assets/images/{{sprite}})">
@@ -74,3 +74,18 @@
 </div>
 
 <script src="/client/js/admin/heroes/main.js"></script>
+<script>
+	(function() {
+		const forms = document.querySelectorAll('.interceptable')
+		for(let i = 0; i < forms.length; i++) {
+			const form = forms[i]
+			interceptFormSubmit(form, data => {
+				ajax({
+					url: data.url,
+					method: data.method,
+					query: data.query
+				})
+			})
+		}
+	})()
+</script>

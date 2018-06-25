@@ -1,7 +1,7 @@
 const colors = {
     red     : 0xFF0000, 
     green   : 0x00FF00, 
-    blue    : 0x00FF00,
+    blue    : 0x0000FF,
     white   : 0xFFFFFF,
     black   : 0x000000,
     yellow  : 0xFFFF00,
@@ -168,20 +168,20 @@ export class Renderer {
      strokeCircle(X, Y, r, color, lineWidth = 1) {
         color = this.resolveColor(color)
         if(!color) return false
-        const rectangle = new this.Graphics()
-        rectangle.lineStyle(lineWidth, color, 1)
-        rectangle.drawCircle(X, Y, r)
-        this.add(rectangle)
+        const circle = new this.Graphics()
+        circle.lineStyle(lineWidth, color, 1)
+        circle.drawCircle(X, Y, r)
+        this.add(circle)
     }
 
     fillCircle(X, Y, r, color) {
         color = this.resolveColor(color)
         if(!color) return false
-        const rectangle = new this.Graphics()
-        rectangle.beginFill(color)
-        rectangle.drawCircle(X, Y, r)
-        rectangle.endFill();
-        this.add(rectangle)
+        const circle = new this.Graphics()
+        circle.beginFill(color)
+        circle.drawCircle(X, Y, r)
+        circle.endFill();
+        this.add(circle)
     }
 
      circle(...data) {
@@ -195,20 +195,20 @@ export class Renderer {
     strokeEllipse(X, Y, width, height, color, lineWidth = 1) {
         color = this.resolveColor(color)
         if(!color) return false
-        const rectangle = new this.Graphics()
-        rectangle.lineStyle(lineWidth, color, 1)
-        rectangle.drawEllipse(X, Y, width, height)
-        this.add(rectangle)
+        const ellipse = new this.Graphics()
+        ellipse.lineStyle(lineWidth, color, 1)
+        ellipse.drawEllipse(X, Y, width, height)
+        this.add(ellipse)
     }
 
     fillEllipse(X, Y, width, height, color) {
         color = this.resolveColor(color)
         if(!color) return false
-        const rectangle = new this.Graphics()
-        rectangle.beginFill(color)
-        rectangle.drawEllipse(X, Y, width, height)
-        rectangle.endFill()
-        this.add(rectangle)
+        const ellipse = new this.Graphics()
+        ellipse.beginFill(color)
+        ellipse.drawEllipse(X, Y, width, height)
+        ellipse.endFill()
+        this.add(ellipse)
     }
 
     ellipse(...data) {
@@ -219,7 +219,7 @@ export class Renderer {
         }
     }
 
-    strokeLine(X1, X2, Y1, Y2, color, lineWidth = 1) {
+    strokeLine(X1, Y1, X2, Y2, color, lineWidth = 1) {
         color = this.resolveColor(color)
         if(!color) return false
         const line = new this.Graphics()

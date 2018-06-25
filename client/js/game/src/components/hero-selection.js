@@ -71,7 +71,7 @@ export class HeroSelection {
 			      questLabel    = make('label', 'Quests done:'),
 			      lvlValue      = make('span', hero.level),
 			      goldValue     = make('span', hero.gold),
-			      questValue    = make('span', hero.id_quest - 1)
+			      questValue    = make('span', hero.won ? hero.id_quest : hero.id_quest - 1)
 
 			this.setBackgroundImage(
 				img, this.game.heroesData[hero.type].sprite

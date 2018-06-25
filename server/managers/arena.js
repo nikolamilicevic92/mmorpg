@@ -1,4 +1,4 @@
-const Fireball = require('../entities/fireball')
+// const Fireball = require('../entities/fireball')
 
 module.exports = class Arena {
 
@@ -9,7 +9,6 @@ module.exports = class Arena {
 	}
 
 	update() {
-		// console.log('In loop...')
 		let closestHero, dragon, fireball
 		//First select dragons that are within certian range of player with quadtree
 		for(let id in this.DRAGONS) {
