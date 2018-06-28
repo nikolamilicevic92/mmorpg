@@ -1,3 +1,5 @@
+
+
 export class Fireball {
 
 	constructor(game, props) {
@@ -49,6 +51,7 @@ export class Fireball {
 	}
 
 	doDamageTo(hero) {
+		if(hero.props.invulnerable) return
 		const damageToDo = this.damage * (100 - (hero.props.defence + hero.props.bonusDefence)) / 100
 		if(damageToDo < 0) return
 		hero.health -= damageToDo

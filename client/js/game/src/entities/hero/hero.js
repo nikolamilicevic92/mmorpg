@@ -1,8 +1,8 @@
-import { animations } from '../config/character-animations'
-import { BasicMovement } from './movement'
-import { HeroRenderer } from './renderer'
-import { PropertiesManager } from './properties-manager'
-import { AbilityFactory } from './abilities/factory'
+import { animations } from '../../config/character-animations'
+import { BasicMovement } from '../managers/movement'
+import { HeroRenderer } from '../managers/renderer'
+import { PropertiesManager } from '../managers/properties'
+import { AbilityFactory } from '../abilities/factory'
 
 const keybinds = {
 	'Ability1': ['RMB', '1'],
@@ -25,6 +25,7 @@ export class Hero {
 	}
 
 	set health(value) {
+		if(value < this.health && this.props.invurnelable) return 
 		if(value < 0) {
 			this.props.health = 1
 			this.respawn()
@@ -112,12 +113,13 @@ export class Hero {
 			activeAnimation  : activeStats.activeAnimation ? activeStats.activeAnimation : 'walk-right', 
 			time             : 0,
 			speed            : baseStats.base_mobility / 100 * 1 + 1,
-			bonusAttack		 : 0,
+			bonusAttack		   : 0,
 			bonusDefence     : 0,
 			bonusRunningSpeed: 1,
 			energy           : 100,
 			healthRegen      : 0.00001,
 			canMove          : true,
+			invulnerable     : false,
 			infoColor        : activeStats.infoColor ? activeStats.infoColor : 'white',
 			levelUpAura      : false,
 		}	

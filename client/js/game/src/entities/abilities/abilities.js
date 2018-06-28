@@ -1,11 +1,19 @@
-import { SwordThrow, Fireball, Shuriken, Arrow, DoubleArrow, SuperArrow, EnergyBall } from './projectiles'
+import { ProjectileEmiter } from './projectile'
+import { Block } from './static-abilities/block'
+import { SelfHeal } from './static-abilities/self-heal'
+import { HealingOrbEmiter } from './static-abilities/healing-orb'
+import { LightningBolt } from './static-abilities/lightning-bolt'
 
 export const ABILITIES = {
-	'Sword throw' : SwordThrow,
-	'Fireball'    : Fireball,
-	'Shuriken'    : Shuriken,
-	'Arrow'       : Arrow,
-	'Double arrow': DoubleArrow,
-	'Super arrow' : SuperArrow,
-	'Energy ball' : EnergyBall
+	'Sword throw'    : ProjectileEmiter,
+	'Fireball'       : ProjectileEmiter,
+	'Shuriken'       : ProjectileEmiter,
+	'Arrow'          : ProjectileEmiter,
+	'Double arrow'   : ProjectileEmiter,
+	'Super arrow'    : ProjectileEmiter,
+	'Energy ball'    : ProjectileEmiter,
+	'Block'          : Block,
+	'Lightning bolt' : LightningBolt,
+	'Healing orb'    : HealingOrbEmiter,
+	'Self heal'      : SelfHeal
 }

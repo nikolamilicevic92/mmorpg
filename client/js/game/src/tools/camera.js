@@ -39,7 +39,7 @@ export class Camera {
 		   	  height = this.game.renderer.canvas.height,
 		   	  X      = this.topLeft.X,
 		   	  Y      = this.topLeft.Y
-		if(p.X > X && p.X < X + width && p.Y > Y && p.Y < Y + width) {
+		if(p.X > X && p.X < X + width && p.Y > Y && p.Y < Y + height) {
 			return true
 		}
 		return false

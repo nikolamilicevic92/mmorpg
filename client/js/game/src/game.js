@@ -6,17 +6,10 @@ import { Mouse } from './tools/mouse'
 import { SoundManager } from './tools/sound-manager'
 import { MovableDom } from './tools/movable-dom'
 
-// import { Warrior } from './entities/warrior'
-// import { Ninja } from './entities/ninja'
-// import { Archer } from './entities/archer'
-// import { Mage } from './entities/mage'
-// import { Healer } from './entities/healer'
-import { Dragon } from './entities/dragon'
-import { Fireball } from './entities/fireball'
-import { Hero } from './entities/hero'
+import { Dragon } from './entities/dragon/dragon'
+import { Fireball } from './entities/dragon/fireball'
+import { Hero } from './entities/hero/hero'
 
-// import { ANIMATIONS } from './config/animations'
-// import { MAP_DATA } from './config/map-data'
 import { ASSET_SOURCES } from './config/asset-sources'
 
 import { LoginScreen } from './components/login-screen'
@@ -79,13 +72,13 @@ export class Game {
 		this.mouse.init()
 		this.soundManager.play('Woodland Fantasy.mp3', true)
 		this.soundManager.setVolume('Woodland Fantasy.mp3', 0.2)
-		setInterval(() => this.update(), 16)
-		this.render()
 		this.heroUI = new HeroUI(this)
 		this.heroUI.show()
 		if(!this.self.props.won) {
 			this.questUI = new QuestUI(this)
 		}
+		setInterval(() => this.update(), 16)
+		this.render()
 	}
 
 	update() {
@@ -119,7 +112,7 @@ export class Game {
 			this.dragons[id].render()
 		}
 		this.mouse.render()
-		this.renderer.render()
+		// this.renderer.render()
 	}
 
 

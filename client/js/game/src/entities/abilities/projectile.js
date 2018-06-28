@@ -75,6 +75,7 @@ export class ProjectileEmiter {
 			this.activate()
 		}	
 		this.updateInstances()
+		
 		let instance, dragon
 		for(let ID in this.instances) {
 			instance = this.instances[ID]
@@ -145,8 +146,8 @@ export class ProjectileEmiter {
 
 	shootProjectile() {
 		const target   = {X: this.mouse.worldX, Y: this.mouse.worldY},
-			  location = {X: this.hero.props.X, Y: this.hero.props.Y},
-			  ID       = Math.random()
+			    location = {X: this.hero.props.X, Y: this.hero.props.Y},
+			    ID       = Math.random()
 		this.addInstance({ 
 			ID, location, target 
 		})

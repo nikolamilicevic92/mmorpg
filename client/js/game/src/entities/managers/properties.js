@@ -1,3 +1,5 @@
+
+
 export class PropertiesManager {
 
 	constructor(hero) {

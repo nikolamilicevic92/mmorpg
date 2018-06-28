@@ -51,6 +51,7 @@ export class Renderer {
         this.app.view.style.position = 'absolute'
         this.app.view.style.display  = 'block'
         this.container.appendChild(this.canvas)
+        this.render()
     }
 
     load(_sources, prefix = '') {

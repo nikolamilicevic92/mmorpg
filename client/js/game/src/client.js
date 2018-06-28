@@ -83,6 +83,8 @@ export class Client {
 		socket.on('ability', pack => {
 			if(this.game.heroes[pack.heroID]) {
 				this.game.heroes[pack.heroID].abilities[pack.id].processPackage(pack)
+			} else if(pack.forOwner && this.game.self.props.id == pack.heroID) {
+				this.game.self.abilities[pack.id].processPackage(pack)
 			}
 		})
 

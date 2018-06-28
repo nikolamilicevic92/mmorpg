@@ -5,7 +5,7 @@ export class AbilityFactory {
 	static makeAbilities(hero, keybinds) {
 		let   abilities        = {}
 		const abilitiesData    = hero.props.abilities,
-			  triggerFunctions = AbilityFactory.generateTriggerFunctions(
+			    triggerFunctions = AbilityFactory.generateTriggerFunctions(
 			  	hero.game.keyboard.keys, hero.game.mouse.buttons,
 			  	keybinds
 			  )
@@ -31,7 +31,6 @@ export class AbilityFactory {
 						return true
 					}
 				}
-				// console.log('Not triggered')
 				return false
 			})
 		}

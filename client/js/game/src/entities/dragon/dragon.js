@@ -1,4 +1,4 @@
-import { DragonRenderer } from './renderer'
+import { DragonRenderer } from '../managers/renderer'
 
 export class Dragon {
 
