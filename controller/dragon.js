@@ -1,5 +1,5 @@
 const dragonModel             = require('../model/dragon'),
-	  { StaticDragonUpdater } = require('../managers/dragon-updater')
+	    { StaticDragonUpdater } = require('../server/managers/dragon-updater')
 
 module.exports = class Dragon {
 

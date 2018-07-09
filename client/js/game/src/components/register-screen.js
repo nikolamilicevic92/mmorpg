@@ -37,6 +37,10 @@ export class RegisterScreen {
 		this.container.style.display = 'block'
 	}
 
+	die() {
+		document.querySelector('body').removeChild(this.container)
+	}
+
 	displayError(error) {
 		this.errors.innerText = error
 	}

@@ -1,4 +1,6 @@
+
 export class Camera {
+
 	constructor(canvas, mapWidth, mapHeight, mouse) {
 		this.topLeft = {X: 0, Y: 0};
 		this.canvas = canvas;
@@ -13,10 +15,12 @@ export class Camera {
 		this.cameraYRef = document.getElementById('cameraY');
 		this.init();
 	}
+
 	init() {
 		document.addEventListener('keydown', (ev) => this.onKeyDown(ev));
 		document.addEventListener('keyup', (ev) => this.onKeyUp(ev));
 	}
+
 	onKeyDown(ev) {
 		if(ev.keyCode == 87) {
 			this.velocity[1] = -1;
@@ -28,6 +32,7 @@ export class Camera {
 			this.velocity[0] = 1;
 		}
 	}
+
 	onKeyUp(ev) {
 		if(ev.keyCode == 87) {
 			this.velocity[1] = 0;
@@ -39,10 +44,12 @@ export class Camera {
 			this.velocity[0] = 0;
 		}
 	}
+
 	moveAt(X, Y) {
 		this.topLeft = {X, Y};
 		this.assertValidPosition();
 	}
+
 	update() {
 		let X = parseInt(this.cameraXRef.value);
 		let Y = parseInt(this.cameraYRef.value);
@@ -54,6 +61,7 @@ export class Camera {
 		this.cameraXRef.value = this.topLeft.X;
 		this.cameraYRef.value = this.topLeft.Y;
 	}
+	
 	assertValidPosition() {
 		if(this.topLeft.X < 0) this.topLeft.X = 0;
 		else if(this.topLeft.X + this.width > this.mapWidth) {

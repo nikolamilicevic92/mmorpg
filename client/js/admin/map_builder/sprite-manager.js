@@ -1,6 +1,7 @@
 import { Sprite } from './sprite';
 
 export class SpriteManager {
+
 	constructor(tileSize, settings) {
 		this.sprites = [];
 		this.spriteSources = [];
@@ -17,6 +18,7 @@ export class SpriteManager {
 			this.activeSprite.container.style.display = 'block';
 		});
 	}
+	
 	add(imgSrc, margin = 0) {
 		const sprite = new Sprite(imgSrc, this.tileSize, margin, this.settings);
 		this.sprites.push(sprite);

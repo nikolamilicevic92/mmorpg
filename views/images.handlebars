@@ -1,0 +1,48 @@
+<div class="image-upload-filter clearfix">
+  <form method="post" action="/admin/upload-image" enctype="multipart/form-data">
+      <label>Upload new image</label>
+      <input type="file" name="filetoupload">
+      <input type="submit" value="Upload">
+  </form>
+  <div>
+    <label>Search</label>
+    <input type="text" id="search">
+  </div>
+</div>
+<div class="images clearfix">
+  {{#images}}
+  <div class="asset-image" id="{{this}}">
+    <div class="asset-image-container">
+      <img src="/client/assets/images/{{this}}" alt="{{this}}">
+    </div>
+    <form method="post" action="/admin/rename-image" class="interceptable">
+      <div>
+        <input type="text" name="new_name" value="{{this}}">
+      </div>
+      <div>
+        <input type="hidden" name="image" value="{{this}}">
+        <input type="submit" value="Save">
+        <input type="button" value="Delete" onclick="deleteImage('{{this}}')">
+      </div>
+    </form>
+  </div>
+  {{/images}}
+</div>
+
+<script src="/client/js/admin/assets/images.js"></script>
+
+<script>
+	(function() {
+		const forms = document.querySelectorAll('.interceptable')
+		for(let i = 0; i < forms.length; i++) {
+			const form = forms[i]
+			interceptFormSubmit(form, data => {
+				ajax({
+					url: data.url,
+					method: data.method,
+					query: data.query
+				})
+			})
+		}
+	})()
+</script>

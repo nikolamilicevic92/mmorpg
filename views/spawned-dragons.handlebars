@@ -16,7 +16,7 @@
 			<h3><!-- Edit spawned dragons --></h3>
 		</div>
 		{{#spawned}}
-		<div class="spawned-dragon" id="spawnedDragon-{{id}}">
+		<div class="spawned-dragon admin-card" id="spawnedDragon-{{id}}">
 			<form method="post" action="/admin/updateSpawnedDragon" class="interceptable">
 				<div>
 					<label>Position</label>
@@ -55,11 +55,11 @@
 				<div class="clearfix">
 					<input type="hidden" name="id" value="{{id}}">
 					<input 
-						type="button" 
+						type="button" class="btn normal"
 						onclick="deleteSpawnedDragon({{id}})"
 						value="Delete"
 					>
-					<input type="submit" value="Save">
+					<input type="submit" value="Save" class="btn normal">
 				</div>
 			</form>
 		</div>

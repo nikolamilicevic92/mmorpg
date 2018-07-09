@@ -43,7 +43,7 @@ export const ASSET_SOURCES = {
 		'warrior-a3.png'
 	],
 	sounds: [
-		'ObservingTheStar.ogg',
+		'space.ogg',
 		'TownTheme.mp3',
 		'Soliloquy.mp3',
 		'Caketown_1.mp3',

@@ -1,5 +1,8 @@
+
 export class Map {
-	constructor(width, height, tileSize, canvas, spriteManager, mouse, settings, camera, ajax) {
+
+	constructor(width, height, tileSize, canvas, spriteManager, 
+							mouse, settings, camera, ajax) {
 		this.tileSize = tileSize;
 		this.tiles = [];
 		this.numOfRows = parseInt(height / this.tileSize);
@@ -8,7 +11,7 @@ export class Map {
 		this.height = tileSize * this.numOfRows;
 		this.canvas = canvas;
 		this.canvas.addEventListener('mousemove', () => this.onMousemove());
-		this.canvas.addEventListener('mouseup', (ev) => this.onMouseUp(ev))
+		this.canvas.addEventListener('mouseup', ev => this.onMouseUp(ev))
 		this.ctx = this.canvas.getContext('2d');
 		this.rect = this.canvas.getBoundingClientRect();
 		this.rectOffsetY = window.scrollY;
@@ -25,6 +28,7 @@ export class Map {
 		this.maxHistoryLength = 5000;
 		this.init();
 	}
+
 	init() {
 		this.reset();
 		document.addEventListener('keydown', (ev) => {
@@ -33,7 +37,8 @@ export class Map {
 			} else if(ev.keyCode == 89 && ev.ctrlKey == true) {
 				this.redo();
 			}
-		});
+		})
+
 		document.addEventListener('mousewheel', (ev) => {
 			if(this.settings.rectSelection) return;
 			if(this.mouse.isInRect(this.rect, this.rectOffsetY)) {
@@ -46,8 +51,7 @@ export class Map {
 					this.settings.brushSizeH--;
 				}
 			}
-			
-		});
+		})
 		document.getElementById('reset').addEventListener('click', () => this.reset(true));
 		document.getElementById('undo').addEventListener('click', () => this.undo());
 		document.getElementById('redo').addEventListener('click', () => this.redo());

@@ -6,11 +6,11 @@ const express    = require('express'),
       formidable = require('formidable'),
       serv       = require('http').Server(app),
       io         = require('socket.io')(serv, {}),
-      Player     = require('./server/controller/player'),
-      Hero       = require('./server/controller/hero'),
-      Chat       = require('./server/controller/chat'),
-      Admin      = require('./server/controller/admin'),
-      Dragon     = require('./server/controller/dragon'),
+      Player     = require('./controller/player'),
+      Hero       = require('./controller/hero'),
+      Chat       = require('./controller/chat'),
+      Admin      = require('./controller/admin'),
+      Dragon     = require('./controller/dragon'),
       Arena      = require('./server/managers/arena'),
       handlebars = require('express-handlebars').create({
       	defaultLayout: 'main',
@@ -34,7 +34,6 @@ let DRAGONS       = {}
 let FIREBALLS     = {}
 const ARENA = new Arena(DRAGONS, HEROES, FIREBALLS)
 
-//Safety measure in case of server crash
 Player.logoutEveryone()
 Dragon.getDragonsBootstrapPackage()
 .then(data => {
@@ -136,7 +135,6 @@ io.sockets.on('connection', socket => {
 	socket.on('disconnect', () => {		
 		Player.logout(PLAYERS[socket.id])
 		delete PLAYERS[socket.id]
-		//Notifying other heroes about disconnected hero so they can remove him
 
 		if(!HEROES[socket.id]) return
 		for(let id in HEROES) {
@@ -157,7 +155,6 @@ io.sockets.on('connection', socket => {
 
 setInterval(() => {
 	let heroesProps = [], dragonsProps = []
-
 	//Dragons
 	for(let id in DRAGONS) {
 		if(!DRAGONS[id].dead) {
@@ -165,7 +162,6 @@ setInterval(() => {
 			dragonsProps.push(DRAGONS[id].getProps())
 		}
 	}
-
 	//Heroes
 	for(let id in HEROES) {
 		heroesProps.push(HEROES[id].getProps())
@@ -174,7 +170,6 @@ setInterval(() => {
 	for(let id in HEROES) {
 		HEROES[id].socket.emit('updatePackage', data)
 	}
-
 	//Arena
 	ARENA.update()
 }, 16)
@@ -274,6 +269,14 @@ app.get('/admin/new-quest', (req, res) => {
 	Admin.newQuest(req, res)
 })
 
+app.get('/admin/images', (req, res) => {
+	Admin.images(req, res)
+})
+
+app.get('/admin/sounds', (req, res) => {
+	Admin.sounds(req, res)
+})
+
 // Post requests
 
 app.post('/admin/heroes', (req, res) => {
@@ -352,7 +355,31 @@ app.post('/admin/delete-quest', (req, res) => {
 	Admin.deleteQuest(req, res)
 })
 
+//Assets
 
+app.post('/admin/upload-image', (req, res) => {
+	Admin.uploadImage(req, res)
+})
+
+app.post('/admin/rename-image', (req, res) => {
+	Admin.renameImage(req, res)
+})
+
+app.post('/admin/delete-image', (req, res) => {
+	Admin.deleteImage(req, res)
+})
+
+app.post('/admin/upload-sound', (req, res) => {
+	Admin.uploadSound(req, res)
+})
+
+app.post('/admin/rename-sound', (req, res) => {
+	Admin.renameSound(req, res)
+})
+
+app.post('/admin/delete-sound', (req, res) => {
+	Admin.deleteSound(req, res)
+})
 
 
 

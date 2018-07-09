@@ -1,4 +1,3 @@
-// const Fireball = require('../entities/fireball')
 
 module.exports = class Arena {
 

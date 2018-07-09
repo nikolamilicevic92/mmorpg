@@ -20,9 +20,9 @@ export class HeroSelection {
 			this.hide()
 			this.game.heroCreation.show()
 		})
-		let height = window.innerHeight - 200
-		if(height < 500) height = 500
-		this.ownedHeroes.style.height = height + 'px'
+		// let height = window.innerHeight - 200
+		// if(height < 500) height = 500
+		// this.ownedHeroes.style.height = height + 'px'
 		this.play.addEventListener('click', () => {
 			if(this.selectedHero != '') {
 				console.log(this.game.ownedHeroes, this.selectedHero)
@@ -127,18 +127,18 @@ export class HeroSelection {
 		this.container.style.display = 'none'
 	}
 
+	die() {
+		document.querySelector('body').removeChild(this.container)
+	}
+
 	enableButtons() {
 		this.play.disabled = false
-		this.play.style.opacity = 1
 		this.delete.disabled = false
-		this.delete.style.opacity = 1
 	}
 
 	disableButtons() {
 		this.play.disabled = true
-		this.play.style.opacity = 0.5
 		this.delete.disabled = true
-		this.delete.style.opacity = 0.5
 	}
 
 	setBackgroundImage(element, img) {

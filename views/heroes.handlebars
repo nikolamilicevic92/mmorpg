@@ -1,6 +1,6 @@
 <div class="heroes-page clearfix">
 	{{#data}}
-	<div class="hero-data clearfix">
+	<div class="hero-data clearfix admin-card">
 		<div>
 			<form method="post" action="/admin/heroes" class="interceptable">
 			<div class="hero-data-left">
@@ -39,7 +39,7 @@
 				</div>
 				<div>
 					<input type="hidden" name="hero_id" value="{{id}}">
-					<input type="submit" value="Save">
+					<input type="submit" value="Save" class="btn normal">
 				</div>
 			</div>
 		</form>
@@ -55,7 +55,7 @@
 							{{/../allAbilities}}
 						</select>
 						<input type="hidden" name="heroTypeID" value="{{id}}">
-						<input type="submit" value="Add">
+						<input type="submit" value="Add" class="btn normal">
 					</div>
 				</form>
 			</div>
@@ -64,7 +64,7 @@
 			{{#abilities}}
 				<div class="hero-ability" id="{{../id}}-{{id}}">
 					<label>{{name}}</label>
-					<button onclick="removeAbilityFromHero({{../id}}, {{id}})">x</button>
+					<button onclick="removeAbilityFromHero({{../id}}, {{id}})" class="btn">x</button>
 				</div>
 			{{/abilities}}
 			</div>

@@ -1,4 +1,6 @@
+
 export class Mouse {
+
 	constructor() {
 		this.X = 0;
 		this.Y = 0;
@@ -6,6 +8,7 @@ export class Mouse {
 		this.rmbDown = false;
 		this.initializeListeners();
 	}
+
 	initializeListeners() {
 		document.addEventListener('mousemove', (ev) => {
 			this.X = ev.pageX;
@@ -20,6 +23,7 @@ export class Mouse {
 			else if(ev.button === 2) this.rmbDown = false;
 		});
 	}
+	
 	isInRect(rect, offsetY) {
 		return (this.X > rect.left && this.X < rect.right &&
 			    this.Y > rect.top + offsetY && this.Y < rect.bottom + offsetY);

@@ -1,6 +1,6 @@
 <div class="update-quests-page clearfix">
 	{{#quests}}
-	<form method="post" action="/admin/update-quest" id="quest-{{id}}" class="interceptable">
+	<form method="post" action="/admin/update-quest" id="quest-{{id}}" class="interceptable admin-card">
 		<div>
 			<label>Name</label>
 			<input type="text" name="name" value="{{name}}">
@@ -36,10 +36,10 @@
 		<div class="clearfix">
 			<input type="hidden" name="id" value="{{id}}">
 			<input 
-				type="button" value="Delete"
+				type="button" value="Delete" class="btn normal"
 				onclick="deleteQuest({{id}})"
 			>
-			<input type="submit" value="Save">
+			<input type="submit" value="Save" class="btn normal">
 		</div>
 	</form>
 	{{/quests}}

@@ -3,7 +3,6 @@ export class Client {
 
 	constructor(game, socket) {
 		this.game = game
-		this.socket = socket
 		this.init(socket)
 	}
 

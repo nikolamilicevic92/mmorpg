@@ -1,0 +1,44 @@
+<div class="sound-upload-filter clearfix">
+  <form method="post" action="/admin/upload-sound" enctype="multipart/form-data">
+      <label>Upload new sound</label>
+      <input type="file" name="filetoupload">
+      <input type="submit" value="Upload">
+  </form>
+  <div>
+    <label>Search</label>
+    <input type="text" id="search">
+  </div>
+</div>
+<div class="sounds clearfix">
+  {{#sounds}}
+  <div class="asset-sound" id="{{this}}">
+    <audio src="/client/assets/sounds/{{this}}" controls></audio>
+    <form method="post" action="/admin/rename-sound" class="interceptable">
+      <div>
+        <input type="text" name="new_name" value="{{this}}">
+        <input type="hidden" name="sound" value="{{this}}">
+        <input type="submit" value="Save">
+        <input type="button" value="Delete" onclick="deleteSound('{{this}}')">
+      </div>
+    </form>
+  </div>
+  {{/sounds}}
+</div>
+
+<script src="/client/js/admin/assets/sounds.js"></script>
+
+<script>
+	(function() {
+		const forms = document.querySelectorAll('.interceptable')
+		for(let i = 0; i < forms.length; i++) {
+			const form = forms[i]
+			interceptFormSubmit(form, data => {
+				ajax({
+					url: data.url,
+					method: data.method,
+					query: data.query
+				})
+			})
+		}
+	})()
+</script>

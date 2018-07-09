@@ -19,39 +19,122 @@
 #gameContainer canvas {
 	cursor: none!important;
 }
+body {
+	/* background-color: rgb(255, 254, 254); */
+	background-color: black;;
+	color: black;
+}
+.btn-awesome {
+	border-radius: 15px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	/* background-color: black; */
+	color: #ffc98e;
+	background: linear-gradient(to right, #202022, #464646, #202022);
+	border: 2px solid #ffc98e;
+	box-shadow: 0 0 15px #ffc98e, inset 0 0 15px black; 
+	transition: all .15s;
+}
+.btn-awesome:hover {
+	background: linear-gradient(to right, #202022, #202022, #202022);
+}
 /*****************Login Screen*****************/
 
 #loginScreen,
 #registerScreen {
-	width: 422px;
+	border: 3px solid #ffc98e;
+	border: 3px solid white;
+	box-shadow:0 0 0 5px #323232, 0 0 0 8px white, 0 0 0 13px #323232;
+	background-color: rgb(62, 188, 226);
+	color: white;
+	width: 440px;
 	margin: auto;
-	margin-top: 200px;
-	padding: 10px;
+	padding: 20px 40px;
+	/* box-shadow: inset 0px 0px 50px white; */
+	/*border-radius: 5px; */
+}
+#loginScreen {
+	height: 330px;
+	margin-top: calc(50vh - 200px);
+}
+#registerScreen {
+	height: 450px;
+	margin-top: calc(50vh - 245px);
+}
+#loginScreen h1,
+#registerScreen h1 {
+	letter-spacing: 2px;
+	margin-bottom: 30px;
+	padding-bottom: 15px;
+	border-bottom: 2px solid #ebebeb;
+	text-align: center;
 }
 #loginScreen form > div,
 #registerScreen form > div {
-	margin-bottom: 5px;
+	margin-bottom: 15px;
 }
 #loginScreen label,
 #registerScreen label {
-	display: inline-block;
-	width: 145px;
+	display: block;
+	/* display: inline-block;
+	width: 145px; */
 }
 #loginScreen input,
 #registerScreen input {
-	padding: 3px;
-	width: 250px;
+	color: rgb(62, 188, 226);
+	display: block;
+	width: 100%;
+	font-size: 16px;
+	text-align: center;
+	/* border-radius: 15px; */
+	/* border: 1px solid rgb(0, 156, 0); */
+	outline: none;
+	border: none;
+	padding: 8px;
 }
 #loginScreen input[type="submit"],
 #registerScreen input[type="submit"] {
-	width: 250px;
-	margin-left: 149px;
+	color: white;
+	cursor: pointer;
+	/* border-radius: 0; */
+	background-color: rgb(116, 116, 116);
+	font-size: 16px;
+	text-transform: uppercase;
 }
-#loginScreen a {
-	margin-left: 220px;
+#loginScreen input[type="submit"]:hover,
+#registerScreen input[type="submit"]:hover {
+	background-color: rgb(93, 93, 93);;
 }
+#loginScreen .clearfix > div,
+#registerScreen .clearfix > div {
+	float: left;
+	width: 70%;
+}
+#loginScreen .clearfix > div:last-child,
+#registerScreen .clearfix > div:last-child {
+	width: 30%;
+	margin: 0;
+}
+#loginScreen a,
 #registerScreen a {
-	margin-left: 205px;
+	font-style: italic;
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	color: white;
+}
+#loginScreen .remember-me * {
+	display: inline-block;
+}
+#loginScreen .remember-me input {
+	width: 15px;
+	height: 15px;
+	vertical-align: middle;
+}
+#loginScreen form > div.clearfix,
+#loginScreen form > div.remember-me {
+	margin-bottom: 1px;
 }
 #registerErrors,
 #loginErrors {
@@ -76,39 +159,53 @@
 
 #heroSelectionScreen {
 	display: none;
-	width: 1000px;
+	width: 1200px;
 	margin: auto;
 	padding-top: 30px;
 }
 #heroSelectionScreen h1 {
 	text-align: center;
+	color: white;
 }
 #ownedHeroes {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
-	/*height: 500px;*/
+	margin-bottom: 40px;
+	height: 550px;
 }
 .my-hero {
-	border: 1px solid gray;
-	padding: 5px;
-	margin: 15px;
-	width: 215px;
-	/*height: 170px;*/
+	color: white;
+	background: linear-gradient(0deg, #202022, #464646);
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 45px;
+	border-bottom-right-radius: 45px;
+	
+	border: 2px solid #ffc98e;
+	box-shadow: 0 0 0 5px #323232, 0 0 0 8px #ffc98e, 0 0 0 13px #323232;
+	padding: 10px;
+	margin: 20px;
+	width: 229px;
+	height: 230px;
 	position: relative;
-	transition: top 0.15s;
+	transition: all 0.15s;
 }
 .my-hero:hover {
 	top: 3px;
 	cursor: pointer;
+	border: 2px solid white;
+	box-shadow: 0 0 0 5px #323232, 0 0 0 8px white, 0 0 0 13px #323232;
 }
 .my-hero-selected {
 	top: 3px;
-	outline: 2px solid blue;
+	border: 2px solid white;
+	box-shadow: 0 0 0 5px #323232, 0 0 0 8px white, 0 0 0 13px #323232;
 }
 .my-hero h3 {
 	text-align: center;
+	letter-spacing: 2px;
 	margin-bottom: 10px;
 }
 .my-hero .hero-img {
@@ -116,8 +213,8 @@
 	margin-bottom: 10px;
 }
 .my-hero-progress > div {
-	margin-bottom: 5px;
-	border: 1px solid gray;
+	margin-bottom: 10px;
+	border-bottom: 1px solid gray;
 }
 .my-hero-progress label {
 	display: inline-block;
@@ -136,13 +233,18 @@
 }
 #heroSelectionBtns > button {
 	margin-right: 15px;
-	width: 120px;
-	padding: 3px;
-	background-color: blue;
-	color: white;
+	width: 130px;
+	outline: none;
+	border: none;
+}
+#heroSelectionBtns > button:hover:not(:disabled) {
+	/* background-color: rgb(0, 103, 221); */
 }
 #heroSelectionBtns > button:hover:not(:disabled) {
 	cursor: pointer;
+}
+#heroSelectionBtns > button:hover:disabled {
+	cursor: not-allowed;
 }
 
 
@@ -155,10 +257,13 @@
 	width: 1200px;
 	margin: auto;
 	display: none;
+	color: white;
+	padding-top: 15px;
 }
 #heroCreationScreen h1,
-#heroCreationScreen h3 {
+#heroCreationScreen h4 {
 	margin-bottom: 5px;
+	color: #ffc98e;
 }
 #heroCreationScreen > div {
 	float: left;
@@ -168,6 +273,8 @@
 	padding-top: 15px;
 }
 #heroesList > div {
+	background: linear-gradient(0deg, #202022, #464646);
+	outline: 1px solid #ffc98e;
 	float: left;
 	width: 49%;
 	position: relative;
@@ -176,6 +283,10 @@
 #heroesList > div:hover {
 	top: 3px;
 	cursor: pointer;
+	outline: 1px solid white;
+}
+#heroesList > div:hover h4 {
+	color: white;
 }
 .hero-card:nth-child(2n+1) {
 	margin-right: 10px;
@@ -183,8 +294,8 @@
 .hero-card {
 	height: 120px;
 	margin-bottom: 15px;
-	outline: 1px solid gray;
-	padding-left: 5px;
+	padding-left: 10px;
+	padding-top: 5px;
 	cursor: pointer;
 }
 .hero-card > div > div {
@@ -196,8 +307,10 @@
 	height: 18px;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
+	border: 1px solid white;
 }
 .hero-card label {
+	font-size: 14px;
 	display: inline-block;
 	width: 70px;
 }
@@ -225,15 +338,44 @@
 	height: 565px;
 	padding: 15px;
 }
+#heroesDetailed h1 {
+	padding-left: 10px;
+}
 .hero-description {
 	height: 180px;
 	overflow: hidden;
 	margin-bottom: 10px;
+	color: #ffc98e;
+	padding: 15px;
+	box-shadow: inset 0 0 50px black;
+	background: linear-gradient(to right, rgb(112, 58, 21), rgb(138, 84, 48), rgb(112, 58, 21));
+}
+.hero-description + div {
+	overflow-y: auto;
+	height: 300px;
+	padding-right: 5px;
+}
+.hero-description + div::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+.hero-description + div::-webkit-scrollbar-track {
+	background: gray;
+	border-radius: 5px; 
+}
+
+/* Handle */
+.hero-description + div::-webkit-scrollbar-thumb {
+	background: linear-gradient(0deg, #202022, #464646, #202022);
+	border-radius: 5px; 
 }
 .ability {
-	height: 95px;
-	outline: 1px solid gray;
+	padding: 5px 10px 15px 10px;
+	box-shadow: inset 0 0 50px black;
+	background: linear-gradient(to right, rgb(112, 58, 21), rgb(138, 84, 48), rgb(112, 58, 21));
 	margin-bottom: 5px;
+	border-radius: 5px;
 }
 .ability-description {
 	padding: 5px;
@@ -254,14 +396,25 @@
 	background-position: center center;
 	float: left;
 }
+.creation-ability-icon {
+	float: left;
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+} 
 .ability-name {
 	height: 40px;
 	width: 200px;
 	line-height: 40px;
 	float: left;
+	color: #ffc98e;
 }
 .ability-description {
 	clear: both;
+	color: #ffc98e;
 }
 
 
@@ -274,15 +427,26 @@
 }
 #heroCreationForm input {
 	width: 200px;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 3px;
+	padding-left: 5px;
+	box-shadow: inset 0 0 30px black;
+	border: none;
+	outline: none;
+}
+#selectedHero {
+	font-size: 16px;
+	font-weight: bold;
+	color: #ffc98e;
+	font-style: italic;
 }
 #create {
 	float: right;
-	background-color: blue;
-	color: white;
-	display: inline-block;
+	/* display: inline-block; */
 	width: 165px;
-	text-align: center;
-	padding: 3px;
+	outline: none;
+	border: none;
 	cursor: pointer;
 }
 #heroCreationForm > div {
@@ -291,6 +455,7 @@
 #heroCreationForm a {
 	display: block;
 	text-align: right;
+	color: white;
 }
 #creationErrors {
 	height: 25px;
@@ -718,6 +883,7 @@
 	top: 15px;
 	right: 15px;
 	padding: 10px;
+	padding-top: 5px;
 	z-index: 5;
 	color: white;
 	cursor: pointer;
@@ -728,13 +894,28 @@
 	margin-bottom: 20px;
 	text-align: justify;
 }
-#questScreen > div {
+#questScreen > div:not(.clearfix) {
 	margin-bottom: 5px;
 }
-#questScreen div * {
+#questMaximize {
+	display: none;
+}
+#questScreen div:not(.clearfix) * {
 	display: inline-block;
 	width: 185px;
 	cursor: pointer;
+}
+#questScreen .clearfix > div {
+	float: right;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+}
+#questScreen .clearfix > div:hover {
+	background-color: rgba(0, 0, 0, 0.6);
 }
 #questScreen span {
 	text-align: right;
@@ -756,35 +937,51 @@
 	color: white;
 	z-index: 5;
 	padding: 10px;
+	padding-top: 5px;
+	height: 235px;
+	overflow-y: auto;
 }
 #shopScreen p {
 	width: 350px;
 }
-#shopScreen p:not(:first-child) {
+#showHealthItems, #showDamageItems, #showDefenceItems {
+	padding: 1px 10px;
+}
+#showHealthItems { color: green }
+#showDamageItems { color: red }
+#showDefenceItems { color: aqua }
+#damageItemsContainer, #defenceItemsContainer {
+	display: none;
+}
+#shopScreen div p {
 	margin-bottom: 5px;
 	width: 350px;
 	padding: 5px;
 }
-#shopScreen p:first-child span {
+#shopScreen > p:first-child span:last-child {
 	font-size: 20px;
 	font-weight: bold;
 	display: inline-block;
-	width: 40px;
-	height: 40px;
-	line-height: 40px;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
 	text-align: center;
 }
 #shopScreen p:first-child span:hover {
 	background-color: rgba(0, 0, 0, 0.6);
 	cursor: pointer;
 }
-#shopScreen p:hover:not(:first-child) {
+#shopScreen div p:hover {
 	background-color: rgba(0, 0, 0, 0.6);
 	cursor: pointer;
 }
-#shopScreen p span {
+#shopScreen div p span,
+#shopScreen #hideShopScreen {
 	padding-right: 5px;
 	float: right;
+}
+#shopScreen div p span {
+	color: yellow;
 }
 
 /************End Of Shop Screen*******************/

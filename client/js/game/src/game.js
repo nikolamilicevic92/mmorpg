@@ -68,6 +68,10 @@ export class Game {
 
 
 	start() {
+		this.loginScreen.die()
+		this.registerScreen.die()
+		this.heroCreation.die()
+		this.heroSelection.die()
 		this.renderer.show()
 		this.mouse.init()
 		this.soundManager.play('Woodland Fantasy.mp3', true)

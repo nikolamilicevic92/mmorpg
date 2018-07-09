@@ -1,10 +1,12 @@
-import { getById } from '../util/dom-functions'
+import { getById, hide, show } from '../util/dom-functions'
 
 export class QuestUI {
 
 	constructor(game) {
 		this.game        = game
 		this.container   = getById('questScreen')
+		this.minimize    = getById('questMinimize')
+		this.maximize    = getById('questMaximize')
 		this.description = getById('questDescription')
 		this.gold        = getById('questGold')
 		this.experience  = getById('questExperience')
@@ -21,9 +23,28 @@ export class QuestUI {
 		this.container.addEventListener('mouseout', () => {
 			this.game.mouse.show()
 		})
+		const toHide = this.container.querySelectorAll('.hidable')
+		this.minimize.addEventListener('click', () => {
+			hide(this.minimize)
+			show(this.maximize)
+			for(let i = 0; i < toHide.length; i++) {
+				hide(toHide[i])
+			}
+		})
+		this.maximize.addEventListener('click', () => {
+			hide(this.maximize)
+			show(this.minimize)
+			for(let i = 0; i < toHide.length; i++) {
+				show(toHide[i])
+			}
+		})
 		this.container.oncontextmenu = ev => ev.preventDefault()
 		this.setQuest(this.game.self.props.id_quest)
 		this.container.style.display = 'block'
+	}
+
+	minimize() {
+
 	}
 
 	onDragonKill(name) {

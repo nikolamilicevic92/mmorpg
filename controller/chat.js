@@ -1,3 +1,4 @@
+
 module.exports = class Chat {
 
 	static process(socket, data, NAMES_SOCKETS, io) {

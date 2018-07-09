@@ -57,8 +57,8 @@ export class HeroUI {
 		this.level.innerText   = this.props.level
 		this.exp.innerText     = this.props.experience + '/' + this.props.expToNextLevel
 		this.gold.innerText    = this.props.gold
-		this.attack.innerText  = this.props.attack
-		this.defence.innerText = this.props.defence
+		this.attack.innerText  = this.props.attack + parseInt(this.props.bonusAttack)
+		this.defence.innerText = this.props.defence + this.props.bonusDefence
 		this.updateCooldowns()
 		this.setHealth()
 		this.setEnergy()    

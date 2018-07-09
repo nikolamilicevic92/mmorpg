@@ -1,7 +1,8 @@
+
 export class Sprite {
+
 	constructor(imgSrc, tileSize, margin = 0, settings) {
 		this.img = new Image();
-		// this.src = imgSrc;
 		this.img.src = '/client/assets/images/' + imgSrc;		
 		this.img.onload = () => {
 			this.width = this.img.width;
@@ -17,6 +18,7 @@ export class Sprite {
 		this.selectedTilesPosition = null;
 		this.container = document.createElement('div');
 	}
+
 	init() {
 		this.container.classList.add('clearfix');
 		this.container.classList.add('spriteContainer');
@@ -34,6 +36,7 @@ export class Sprite {
 		}
 		document.getElementById('spritesContainer').appendChild(this.container);
 	}
+
 	setPieceEventListener(piece, i, j) {
 		const sX = j * this.tileSize + j * this.margin;
 		const sY = i * this.tileSize + i * this.margin;
@@ -72,6 +75,7 @@ export class Sprite {
 			}
 		});
 	}
+
 	removeSelectedStyles() {
 		const sp = document.getElementsByClassName('selected-piece');
 		for(let i = 0; i < sp.length; i++) {
@@ -79,6 +83,7 @@ export class Sprite {
 			i--;
 		}
 	}
+
 	setPieceStyle(piece, i, j) {
 		piece.classList.add('piece');
 		piece.style.width = this.tileSize + 'px';
@@ -87,6 +92,7 @@ export class Sprite {
 		piece.style.backgroundPosition = (-j * this.tileSize - this.margin * j) + 'px ' + 
 										 (-i * this.tileSize - this.margin * i) + 'px';
 	}
+	
 	updateSelectedTilesPosition() {
 		this.selectedTilesPosition = [];
 		for(let sY = this.topLeft[1]; sY <= this.bottomRight[1]; sY += this.tileSize + this.margin) {

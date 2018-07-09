@@ -27,7 +27,7 @@ header {
 	width: 100%;
 	top: 0;
 	left: 0;
-	padding: 30px 0 0px 0;
+	padding: 15px 0 0px 0;
 	background-color: black;
 	margin-bottom: 30px;
 	z-index: 5;
@@ -53,14 +53,15 @@ header nav ul li a {
 	width: 140px;
 	text-decoration: none;
 	text-align: center;
-	color: white;
+	color: rgb(201, 201, 201);
 	height: 40px;
 	line-height: 40px;
 	transition: all 0.1s ease-out;
 }
 header nav a:hover {
-	background-color: white;
-	color: black;
+	/* background-color: white;
+	color: black; */
+	color: white;
 }
 header nav ul li ul a {
 	outline: 1px solid black;
@@ -75,9 +76,33 @@ header nav ul li > ul {
 header nav ul li:hover > ul {
 	display: block;
 }
-
-
-
+.admin-card {
+	background: radial-gradient( #64b5f6, #4c8dc2);
+	color: white;
+	box-shadow: 0 0 0 2px #337ab7, 0 0 0 4px white, 0 0 0 6px #337ab7;
+}
+.admin-card input[type="text"],
+.admin-card input[type="number"],
+.admin-card textarea,
+.admin-card select {
+	color: #2985a1;
+}
+.btn {
+	cursor: pointer;
+}
+.normal {
+	background-color: #337ab7;
+	color: white;
+	border: none;
+	box-shadow: 0 0 0 1px white;
+	outline: none;
+	height: 22px;
+	line-height: 22px;
+	border-radius: 3px;
+}
+.normal:hover {
+	background-color: #286090;
+}
 /*********************Heroes Page********************/
 .heroes-page {
 	width: 1200px;
@@ -106,14 +131,15 @@ header nav ul li:hover > ul {
 	display: inline-block;
 	width: 110px;
 }
-.hero-data-left input[type="submit"] {
-	margin-left: 114px;
-}
 .hero-data-left > div {
 	margin-bottom: 5px;
 }
 .hero-data-left input {
 	width: 150px;
+}
+.hero-data-left input[type="submit"] {
+	margin-left: 194px;
+	width: 70px;
 }
 .hero-img-container {
 	display: flex;
@@ -221,7 +247,7 @@ header nav ul li:hover > ul {
 .abilities-page .new-ability label {
 	display: inline-block;
 	width: 105px;
-	border-bottom: 1px dashed gray;
+	border-bottom: 1px dashed white;
 	margin-right: 3px;
 }
 .abilities-page .description label,
@@ -237,7 +263,7 @@ header nav ul li:hover > ul {
 .abilities-page .ability input[type="button"] {
 	width: 97px;
 	float: right;
-	padding: 3px;
+	padding: 0;
 	margin-right: 7px;
 }
 .abilities-page .ability input[type="button"] {
@@ -253,7 +279,8 @@ header nav ul li:hover > ul {
 }
 .abilities-page .new-ability input[type="submit"] {
 	float: right;
-	padding: 3px;
+	padding: 0;
+	width: 80px;
 	margin-right: 12px;
 }
 .abilities-page textarea {
@@ -276,7 +303,7 @@ header nav ul li:hover > ul {
 	width: 720px;
 }
 #newDragonType input[type="submit"] {
-	width: 180px;
+	width: 80px;
 	float: right;
 	margin-right: 15px;
 }
@@ -308,8 +335,8 @@ header nav ul li:hover > ul {
 #newDragonType h3 {
 	padding: 5px;
 }
-#newDragonType form {
-
+#newDragonType label {
+	border-bottom: 1px dashed white;
 }
 #newDragonType form > div:not(:last-child) {
 	float: left;
@@ -321,6 +348,9 @@ header nav ul li:hover > ul {
 .dragons-page-types .dragon-type {
 	float: left;
 	margin: 10px;
+}
+.dragons-page-types .dragon-type label {
+	border-bottom: 1px dashed white;
 }
 .dragons-page-types label {
 	display: inline-block;
@@ -339,7 +369,8 @@ header nav ul li:hover > ul {
 .dragons-page-types form > div > div {
 	margin-bottom: 5px;
 }
-.dragons-page-types input {
+.dragons-page-types input[type="text"],
+.dragons-page-types input[type="number"] {
 	padding: 3px;
 }
 
@@ -379,10 +410,10 @@ header nav ul li:hover > ul {
 	padding-top: 30px;
 }
 #spawnNewDragon input[type="submit"] {
-	width: 165px;
+	width: 80px;
 	float: right;
 	margin-right: 10px;
-	padding: 5px;
+	padding: 0;
 }
 .spawned-dragon {
 	border: 1px solid gray;
@@ -478,12 +509,42 @@ header nav ul li:hover > ul {
 }
 .map-editor #brushSettings > div {
 	padding-left: 5px;
-	margin-bottom: 4px;
+	margin-bottom: 6px;
 }
 .map-editor #brushSize [type="number"],
 .map-editor #tileID {
 	display: inline-block;
-	width: 50px;
+	width: 60px;
+	text-align: right;
+}
+#brushSize label {
+	margin-right: 5px;
+}
+#brushSizeH {
+	margin-right: 20px;
+}
+#newLayer {
+	margin-right: 23px;
+	margin-left: 10px;
+}
+#tileID {
+	margin-left: 5px;
+}
+#changeIDOnly {
+	margin-left: 5px;
+}
+#eraser {
+	margin-right: 86px;
+}
+#showMatchingIDs {
+	margin-left: 5px;
+}
+#tileX, #cameraX, #mouseX {
+	margin-right: 25px;
+	margin-left: 5px;
+}
+#tileY, #cameraY, #mouseY {
+	margin-left: 4px;
 }
 .map-editor #cameraPosition [type="number"],
 .map-editor #mousePosition [type="number"],
@@ -494,11 +555,14 @@ header nav ul li:hover > ul {
 }
 .map-editor .divided > div {
 	float: left;
-	width: 45%;
+	width: 49%;
 }
-.map-editor #mapSaveName, #mapLoadName {
+.map-editor .divided > div:first-child {
+	margin-right: 2%;
+}
+#mapSaveName, #mapLoadName {
 	display: inline-block;
-	width: 130px;
+	width: 150px;
 }
 
 /**************End Of Map Editor**************/
@@ -517,10 +581,13 @@ header nav ul li:hover > ul {
 .player-info {
 	margin-bottom: 15px;
 }
+.player-info input[type="submit"] {
+	width: 50px;
+}
 .player-info h2,
 .player-info span {
 	display: inline-block;
-	width: 380px;
+	width: 372px;
 }
 .player-info input[type="number"] {
 	width: 50px;
@@ -529,7 +596,7 @@ header nav ul li:hover > ul {
 	margin-bottom: 20px;
 }
 .owned-heroes label {
-	outline: 1px solid gray;
+	outline: 1px solid white;
 }
 .owned-heroes > div:first-of-type {
 	margin-bottom: 10px;
@@ -549,7 +616,9 @@ header nav ul li:hover > ul {
 .owned-heroes .tiny {
 	display: inline-block;
 	width: 85px;
-
+}
+.owned-heroes .tiny[type="submit"] {
+	padding: 0;
 }
 /*******End Of Players - Owned Heroes*********/
 
@@ -557,7 +626,10 @@ header nav ul li:hover > ul {
 /*****************New Quest*******************/
 
 .new-quest-page form {
-	padding-top: 70px;
+	margin-top: 70px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 5px;
 	width: 380px;
 	margin-left: 30%;
 }
@@ -590,12 +662,15 @@ header nav ul li:hover > ul {
 	width: 250px;
 }
 .new-quest-page input[type="submit"] {
-	margin-left: 103px;
+	margin-left: 283px;
+	padding: 0;
+	width: 70px;
 }
 .update-quests-page input[type="submit"],
 .update-quests-page input[type="button"] {
 	float: right;
 	margin-right: 5px;
+	padding: 0;
 	width: 120px;
 }
 .new-quest-page textarea,
@@ -605,3 +680,90 @@ header nav ul li:hover > ul {
 
 
 /***************End Of New Quest**************/
+
+
+
+
+/***************Images and Sounds**************/
+
+.image-upload-filter,
+.sound-upload-filter {
+	margin-bottom: 30px;
+}
+.image-upload-filter > form,
+.sound-upload-filter > form {
+	float: left
+}
+.image-upload-filter > div,
+.sound-upload-filter > div {
+	float: right;
+	margin-right: 25px;
+}
+.image-upload-filter input[type="submit"],
+.sound-upload-filter input[type="submit"] {
+	padding: 1px 3px;
+}
+#search {
+	padding: 3px;
+	margin-left: 5px;
+}
+.images, .sounds {
+	width: 1200px;
+}
+.asset-image {
+	float: left;
+	width: 150px;
+	margin: 10px;
+	outline: 1px solid gray;
+}
+.asset-image input[type="text"] {
+	padding: 1px 3px;
+	display: block;
+	margin: auto;
+	width: 145px;
+	margin-bottom: 5px;
+	text-align: center;
+}
+.asset-image input:not([type="text"]) {
+	width: 70px;
+	margin-bottom: 2px;
+}
+.asset-image input[type="submit"] {
+	margin-right: 1px;
+	margin-left: 2px;
+}
+.asset-image-container {
+	width: 150px;
+	height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 5px;
+}
+.asset-image-container img {
+	max-width: 145px;
+	max-height: 145px;
+}
+
+/*Sounds*/
+.asset-sound {
+	width: 286px;
+	outline: 1px solid gray;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	float: left;
+}
+.asset-sound audio {
+	width: 286px;
+}
+.asset-sound input {
+	padding: 1px 3px;
+	text-align: center;
+	margin-bottom: 3px;
+}
+.asset-sound input[type="text"] {
+	margin-left: 3px;
+}
+
+
+/********End Of Images and Sounds*********/

@@ -1,3 +1,5 @@
+
+
 class StaticDragonUpdater {
 
 	constructor(dragon) {

@@ -8,7 +8,7 @@
 			</span>
 		</div>
 		{{#types}}
-		<div class="dragon-type" id="dragonType-{{id}}">
+		<div class="dragon-type admin-card" id="dragonType-{{id}}">
 			<form method="post" action="/admin/updateDragon" class="interceptable clearfix">
 				<div class="dragon-img-container">
 					<div 
@@ -102,20 +102,12 @@
 					</div>
 				</div>
 				<div class="clearfix">
+					<input type="hidden" name="id" value="{{id}}">
 					<input 
-						type="hidden" 
-						name="id" 
-						value="{{id}}"
-					>
-					<input 
-						type="button" 
-						value="Delete"
+						type="button" class="btn normal"	value="Delete"
 						onclick="deleteDragonType({{id}})"
 					>
-					<input 
-						type="submit" 
-						value="Save"
-					>
+					<input type="submit" class="btn normal"	value="Save">
 				</div>
 			</form>
 		</div>

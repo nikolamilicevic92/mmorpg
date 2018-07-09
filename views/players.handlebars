@@ -1,6 +1,6 @@
 <div class="players-page">
 	{{#players}}
-	<div class="player">
+	<div class="player admin-card">
 		<div class="player-info">
 			<form method="post" action="/admin/set-char-slots" class="interceptable">
 				<h2>{{username}}</h2>
@@ -8,7 +8,7 @@
 				<label>Char slots</label>
 				<input type="number" name="char_slots" value="{{char_slots}}">
 				<input type="hidden" name="id" value={{id}}>
-				<input type="submit" value="Save">
+				<input type="submit" value="Save" class="btn normal">
 			</form>
 		</div>
 		<div class="owned-heroes">
@@ -36,7 +36,7 @@
 					<input type="number" name="Y" value="{{Y}}" class="tiny">
 					<input type="hidden" name="id" value="{{id}}">
 					<input type="hidden" name="questID" value="{{id_quest}}">
-					<input type="submit" value="Save" class="tiny">
+					<input type="submit" value="Save" class="tiny btn normal">
 				</form>
 			</div>
 			{{/ownedHeroes}}

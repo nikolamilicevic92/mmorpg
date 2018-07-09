@@ -30,14 +30,11 @@ export class HeroCreation {
 		})
 		heroesData.forEach(heroData => {
 			const card     = this.makeHeroCard(heroData),
-				  detailed = this.makeHeroDetailed(heroData)
-
-			card.addEventListener('mouseover', () => {
-				this.hideHeroesDetailed()
-				detailed.style.display = 'block'
-			})
+				    detailed = this.makeHeroDetailed(heroData)
 
 			card.addEventListener('click', () => {
+				this.hideHeroesDetailed()
+				detailed.style.display = 'block'
 				this.selectedHero.innerText = heroData.type
 			})
 
@@ -50,14 +47,14 @@ export class HeroCreation {
 		const card 		        = make('div.hero-card clearfix'),
 			  stats             = make('div'),
 			  heroImgContainer  = make('div.hero-img-container'),
-			  type              = make('h3', heroData.type),
+			  type              = make('h4', heroData.type),
 			  attackContainer   = make('div'),
 			  defenceContainer  = make('div'),
 			  mobilityContainer = make('div'),
 			  heroImg           = make('div.hero-img'),
-			  attackLabel       = make('label', 'Attack:'),
-			  defenceLabel      = make('label', 'Defence:'),
-			  mobilityLabel     = make('label', 'Mobility:'),
+			  attackLabel       = make('label', 'Attack'),
+			  defenceLabel      = make('label', 'Defence'),
+			  mobilityLabel     = make('label', 'Mobility'),
 			  attack            = make('span.red'),
 			  defence           = make('span.red'),
 			  mobility          = make('span.red')
@@ -95,14 +92,14 @@ export class HeroCreation {
 
 	makeHeroDetailed(heroData) {
 		const heroDetailed       = make('div.hero-detailed'),
-			  type               = make('h1', heroData.type),
-			  desc 		         = make('div.hero-description', heroData.description),
-			  abilitiesContainer = make('div')
+					type               = make('h1', heroData.type),
+					desc 		           = make('div.hero-description', heroData.description),
+					abilitiesContainer = make('div')
 
 		heroData.abilities.forEach(ability => {
 			const abilityContainer = make('div.ability'),
 			      abilityHeader    = make('div.ability-header'),
-			      abilityIcon      = make('div.ability-icon'),
+			      abilityIcon      = make('div.creation-ability-icon'),
 			      abilityName      = make('div.ability-name', ability.name),
 			      abilityDesc      = make('p.ability-description', ability.description)
 
@@ -147,6 +144,10 @@ export class HeroCreation {
 
 	show() {
 		this.container.style.display = 'block'
+	}
+
+	die() {
+		document.querySelector('body').removeChild(this.container)
 	}
 
 	displayError(error) {

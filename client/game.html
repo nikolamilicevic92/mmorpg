@@ -117,12 +117,16 @@
 			</div>
 
 			<div id="questScreen">
-				<p id="questDescription"></p>
-				<div>
+				<div class="clearfix">
+					<div id="questMinimize">&#9866;</div>
+					<div id="questMaximize">+</div>
+				</div>
+				<p id="questDescription" class="hidable"></p>
+				<div class="hidable">
 					<label>Experience</label>
 					<span id="questExperience"></span>
 				</div>
-				<div>
+				<div class="hidable">
 					<label>Gold</label>
 					<span id="questGold"></span>
 				</div>
@@ -136,30 +140,46 @@
 			</div>
 
 			<div id="shopScreen">
-				<p class="clearfix"><span id="hideShopScreen">&times;</span></p>
-				<!-- <p>Restore 20% of your HP<span>50g</span></p>
-				<p>Restore 30% of your HP<span>100g</span></p>
-				<p>Restore 40% of your HP<span>200g</span></p>
-				<p>Restore 50% of your HP<span>350g</span></p>
-				<p>Restore 100% of your HP<span>500g</span></p> -->
+				<p class="clearfix">
+					<span id="showHealthItems">Health</span>
+					<span id="showDamageItems">Damage</span>
+					<span id="showDefenceItems">Defence</span>
+					<span id="hideShopScreen">&times;</span>
+				</p>
+				<div id="healthItemsContainer">
+
+				</div>
+				<div id="damageItemsContainer">
+
+				</div>
+				<div id="defenceItemsContainer">
+
+				</div>
 			</div>
 		</div>
 			
 		<div id="loginScreen">
 			<form>
+				<h1>Login</h1>
 				<div>
-					<label for="loginUsername">Username: </label>
-					<input type="text" id="loginUsername" value="nikolamilicevic">
+					<input 
+						type="text" id="loginUsername" placeholder="Username">
 				</div>
 				<div>
-					<label for="loginPassword">Password: </label>
-					<input type="password" id="loginPassword" value="12345">
+					<input 
+						type="password" id="loginPassword" placeholder="Password">
 				</div>
-				<div>
-					<input type="submit" id="loginBtn" value="Login"></input>
+				<div class="clearfix">
+					<div>
+							<a href="#" id="showRegisterScreen">Don't have an account?</a>
+					</div>
+					<div>
+							<input type="submit" id="loginBtn" value="Login"/>
+					</div>
 				</div>
-				<div>
-					<a href="#" id="showRegisterScreen">Don't have an account?</a>
+				<div class="remember-me">
+					<label>Remember me</label>
+					<input type="checkbox" id="rememberMe">
 				</div>
 				<div id="loginErrors">
 					
@@ -168,28 +188,30 @@
 		</div>
 
 		<div id="registerScreen">
-			<form>				
+			<form>
+				<h1>Register</h1>				
 				<div>
-					<label for="registerEmail">Email: </label>
-					<input type="email" id="registerEmail">
+					<input type="email" id="registerEmail" placeholder="Email">
 				</div>
 				<div>
-					<label for="registerUsername">Username: </label>
-					<input type="text" id="registerUsername">
+					<input type="text" id="registerUsername" placeholder="Username">
 				</div>
 				<div>
-					<label for="registerPassword">Password: </label>
-					<input type="password" id="registerPassword">
+					<input type="password" id="registerPassword" placeholder="Password">
 				</div>
 				<div>
-					<label for="registerPasswordConfirm">Confirm password: </label>
-					<input type="password" id="registerPasswordConfirm">
+					<input type="password" id="registerPasswordConfirm" placeholder="Confirm Password">
 				</div>				
-				<div>
-					<input type="submit" id="registerBtn" value="Register"></input>
+				<div class="clearfix">
+					<div>
+							<a href="#" id="showLoginScreen">Already have an account?</a>
+					</div>
+					<div>
+							<input type="submit" id="registerBtn" value="Register"></input>
+					</div>
 				</div>
 				<div>
-					<a href="#" id="showLoginScreen">Already have an account?</a>
+					
 				</div>
 				<div id="registerErrors">
 					
@@ -207,13 +229,13 @@
 				</div>
 				<div id="heroCreationForm">
 					<div>
-						<label>Selected hero: </label>
+						<label>Selected hero </label>
 						<span id="selectedHero"></span>
 					</div>
 					<div>
-						<label for="heroName">Hero name: </label>
+						<label for="heroName">Hero name </label>
 						<input type="text" id="heroName">
-						<span id="create">Create</span>
+						<span id="create" class="btn-awesome">Create</span>
 					</div>
 					<div id="creationErrors">
 						
@@ -246,9 +268,9 @@
 				</div>
 			</div>
 			<div id="heroSelectionBtns">
-				<button id="play">Play</button>
-				<button id="deleteHero">Delete hero</button>
-				<button id="showHeroCreation">Create hero</button>
+				<button id="play" class="btn-awesome">Play</button>
+				<button id="deleteHero" class="btn-awesome">Delete hero</button>
+				<button id="showHeroCreation" class="btn-awesome">Create hero</button>
 			</div>
 		</div>
 

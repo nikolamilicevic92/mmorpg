@@ -1,7 +1,8 @@
 const heroModel    = require('../model/hero'),
 	  abilityModel = require("../model/ability"),
 	  dragonModel  = require("../model/dragon"),
-	  playerModel  = require('../model/player'),
+		playerModel  = require('../model/player'),
+		assetsModel  = require('../model/assets'),
 	  questModel   = require('../model/quest'),
 	  baseUrl      = require('../base-url'),
 	  fs           = require('fs')
@@ -285,6 +286,63 @@ module.exports = class Admin {
 		}).catch(err => console.log(err))
 	}
 
+	//Assets
+
+	static images(req, res) {
+		 assetsModel.getImages()
+		.then(images => res.render('images', { images }))
+		.catch(err => console.log(err))
+	}
+
+	static uploadImage(req, res) {		 
+		 assetsModel.uploadImage(req)
+		.then(() => {			
+			Admin.redirectTo(res, 'images')			
+		})
+		.catch(err => console.log(err))
+	}
+
+	static renameImage(req, res) {
+		 assetsModel.renameImage(req.body.image, req.body.new_name)
+		.then(() => Admin.redirectTo(res, 'images'))
+		.catch(err => console.log(err))
+	}
+
+	static deleteImage(req, res) {
+		 assetsModel.deleteImage(req.body.image)
+		.then(() => Admin.redirectTo(res, 'images'))
+		.catch((err) => console.log(err))
+	}
+
+	static sounds(req, res) {
+		 assetsModel.getSounds()
+	  .then(sounds => {
+			const weird = sounds.indexOf('Folder.jpg')
+			if(weird != -1) {
+				sounds.splice(weird, 1)
+			}
+			res.render('sounds', { sounds })
+		})
+	  .catch(err => console.log(err))
+  }
+
+  static uploadSound(req, res) {
+	  assetsModel.uploadSound(req)
+	  .then(() => Admin.redirectTo(res, 'sounds'))
+	  .catch(err => console.log(err))
+	}
+
+  static renameSound(req, res) {
+	   assetsModel.renameSound(req.body.sound, req.body.new_name)
+		.then(() => Admin.redirectTo(res, 'sounds'))
+		.catch(err => console.log(err))
+	}
+
+	static deleteSound(req, res) {
+		 assetsModel.deleteSound(req.body.sound)
+		.then(() => Admin.redirectTo(res, 'sounds'))
+		.catch((err) => console.log(err))
+  }
 
 	static redirectTo(res, page) {
 		res.writeHead(301, {

@@ -1,4 +1,5 @@
-const conn = require('../database')
+const conn = require('../database'),
+	    md5  = require('md5')
 
 class Player {
 
@@ -32,7 +33,7 @@ class Player {
 		return new Promise((resolve, reject) => {
 			conn.query(
 				`insert into player(email, username, password, char_slots)
-				 values('${data.email}', '${data.username}', '${data.password}', 2)`,
+				 values('${data.email}', '${data.username}', '${md5(data.password)}', 2)`,
 				 (err, res) => {
 				 	if(err) throw err
 				 	resolve()
@@ -96,7 +97,7 @@ class Player {
 		return new Promise((resolve, reject) => {
 			conn.query(
 				`select * from player where 
-				 username = '${data.username}' and password = '${data.password}'`,
+				 username = '${data.username}' and password = '${md5(data.password)}'`,
 				(err, res) => {
 					if(err) throw err
 					if(res.length == 1) resolve()
@@ -110,7 +111,7 @@ class Player {
 		return new Promise((resolve, reject) => {
 			conn.query(
 				`select logged_in from player where 
-				 username = '${data.username}' and password = '${data.password}'`,
+				 username = '${data.username}' and password = '${md5(data.password)}'`,
 				(err, res) => {
 					if(err) throw err
 					if(res[0].logged_in == false) resolve()
@@ -124,7 +125,7 @@ class Player {
 		return new Promise((resolve, reject) => {
 			conn.query(
 				`update player set logged_in = true where 
-				 username = '${data.username}' and password = '${data.password}'`,
+				 username = '${data.username}' and password = '${md5(data.password)}'`,
 				(err, res) => {
 					if(err) throw err
 					resolve()

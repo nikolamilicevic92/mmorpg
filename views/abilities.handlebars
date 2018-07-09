@@ -11,7 +11,7 @@
 	<div class="abilities-container">
 		{{#abilities}}
 		<div class="ability" id="ability-{{id}}">
-			<form method="post" action="/admin/updateAbility" class="interceptable">
+			<form method="post" action="/admin/updateAbility" class="interceptable admin-card">
 				<div 
 					class="ability-icon"
 					style="background-image:url(/client/assets/images/{{sprite}})">
@@ -60,11 +60,11 @@
 				<div>
 					<input type="hidden" name="id" value={{id}}>
 					<input 
-						type="button" 
+						type="button" class="normal"
 						onclick="deleteAbility({{id}})"
 						value="Delete"
 					>
-					<input type="submit" value="Save">
+					<input type="submit" value="Save" class="normal">
 				</div>
 			</form>
 		</div>
