@@ -1,5 +1,5 @@
 const conn = require('../database'),
-	    md5  = require('md5')
+	  md5  = require('md5')
 
 class Player {
 

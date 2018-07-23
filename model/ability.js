@@ -42,7 +42,6 @@ module.exports = class Ability {
 		})
 	}
 
-	//Make this generic key value building query !!!
 	static newAbility(data) {
 		return new Promise((resolve, reject) => {
 			conn.query(

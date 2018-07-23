@@ -101,7 +101,7 @@ export class QuestUI {
 	}
 
 	alertVictoryScreen() {
-		alert('A humble victory screen (work in progress!)')
+		alert('Congratulations, you\' ve completed all quests!')
 	}
 
 	nextQuest() {

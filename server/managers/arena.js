@@ -94,7 +94,6 @@ module.exports = class Arena {
 				range: dragon.props.a1_range
 			})
 		}
-		// console.log('Fireball added')
 	}
 
 	fireballSpawnLocation(dragon) {

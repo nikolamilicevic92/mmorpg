@@ -1,6 +1,7 @@
 const heroModel    = require('../model/hero'),
       abilityModel = require('../model/ability'),
-      questModel   = require('../model/quest')
+	  questModel   = require('../model/quest'),
+	  logger       = require('../logger')
 
 module.exports = class Hero {
 
@@ -42,23 +43,23 @@ module.exports = class Hero {
 			experience: this.props.experience, health: this.props.health,
 			gold: this.props.gold, X: this.props.X, Y: this.props.Y,
 			id: this.props.id
-		}).catch(err => console.log(err))
+		}).catch(err => logger.log(err))
 	}
 
 	static getHeroesData(socket) {
 		 heroModel.getHeroesData()
 		.then(data => socket.emit('heroesData', data))
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static sendQuests(socket) {
 		 questModel.getAll()
 		.then(quests => socket.emit('quests', quests))
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static win(id) {
 		 heroModel.win(id)
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 }

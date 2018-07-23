@@ -5,7 +5,8 @@ const heroModel    = require('../model/hero'),
 		assetsModel  = require('../model/assets'),
 	  questModel   = require('../model/quest'),
 	  baseUrl      = require('../base-url'),
-	  fs           = require('fs')
+	  fs           = require('fs'),
+	  logger       = require('../logger')
 
 module.exports = class Admin {
 
@@ -21,13 +22,13 @@ module.exports = class Admin {
 				data: result[0],
 				allAbilities: result[1]
 			})
-		 }).catch(err => console.log(err))
+		 }).catch(err => logger.log(err))
 	}
 
 	static updateHeroes(req, res) {
 		 heroModel.updateHeroTypeData(req.body)
 		.then(() => Admin.heroes(req, res))
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static removeAbilityFromHero(req, res) {
@@ -46,7 +47,7 @@ module.exports = class Admin {
 				Location: baseUrl + 'admin/heroes'
 			})
 			res.end()
-		}).catch(err => console.log(err))
+		}).catch(err => logger.log(err))
 	}
 
 
@@ -57,19 +58,19 @@ module.exports = class Admin {
 		 abilityModel.getAll()
 		.then(abilities => {
 			res.render('abilities', {abilities: abilities})
-		}).catch(err => console.log(err))
+		}).catch(err => logger.log(err))
 	}
 
 	static updateAbility(req, res) {
 		 abilityModel.update(req.body)
 		.then(() => Admin.redirectTo(res, 'abilities'))
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static newAbility(req, res) {
 		 abilityModel.newAbility(req.body)
 		.then(() => Admin.redirectTo(res, 'abilities'))
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static deleteAbility(req, res) {
@@ -96,13 +97,13 @@ module.exports = class Admin {
 				spawned:    data[1],
 				animations: data[2]
 			})
-		}).catch(err => console.log(err))
+		}).catch(err => logger.log(err))
 	}
 
 	static spawnNewDragon(req, res) {
 		 dragonModel.spawnNewDragon(req.body)
 		.then(() => Admin.redirectTo(res, 'spawned-dragons'))
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static showSpawnNewDragon(req, res) {
@@ -115,13 +116,13 @@ module.exports = class Admin {
 				types:      data[0],
 				animations: data[1]
 			})
-		}).catch(err => console.log(err))
+		}).catch(err => logger.log(err))
 	}
 
 	static updateSpawnedDragon(req, res) {
 		 dragonModel.updateSpawnedDragon(req.body)
 		.then(() => Admin.redirectTo(res, 'spawned-dragons'))
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static deleteSpawnedDragon(req, res) {
@@ -130,7 +131,7 @@ module.exports = class Admin {
 			res.status(200)
 			res.send(JSON.stringify({success: true}))
 		}).catch(err => {
-			console.log(err)
+			logger.log(err)
 			res.status(200)
 			res.send(JSON.stringify({success: false, message: err}))
 		})
@@ -140,19 +141,19 @@ module.exports = class Admin {
 		 dragonModel.getAllTypes()
 		.then(types => {
 			res.render('dragon-types', {types: types})
-		}).catch(err => console.log(err))
+		}).catch(err => logger.log(err))
 	}
 
 	static newDragonType(req, res) {
 		 dragonModel.newDragonType(req.body)
 		.then(() => Admin.redirectTo(res, 'dragon-types'))
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static updateDragon(req, res) {
 		 dragonModel.updateDragonType(req.body)
 		.then(() => Admin.redirectTo(res, 'dragon-types'))
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static deleteDragonType(req, res) {
@@ -161,7 +162,7 @@ module.exports = class Admin {
 			res.status(200)
 			res.send(JSON.stringify({success: true}))
 		}).catch(err => {
-			console.log(err)
+			logger.log(err)
 			res.status(200)
 			res.send(JSON.stringify({success: false, message: err}))
 		})
@@ -198,7 +199,7 @@ module.exports = class Admin {
 			`server/maps/${req.body.map_name}.json`,
 			req.body.map_data,
 			err => {
-				if(err) console.log(err)
+				if(err) logger.log(err)
 				else {
 					res.status(200)
 					res.send('ok')
@@ -222,24 +223,24 @@ module.exports = class Admin {
 			.then(heroes => {
 				heroes.forEach((ownedHeroes, i) => {
 					players[i].ownedHeroes = ownedHeroes
-					console.log(ownedHeroes)
+					logger.log(ownedHeroes)
 				})
-				console.log(players)
+				logger.log(players)
 				res.render('players', { players })
-			}).catch(err => console.log(err))
-		}).catch(err => console.log(err))
+			}).catch(err => logger.log(err))
+		}).catch(err => logger.log(err))
 	}
 
 	static setCharSlots(req, res) {
 		 playerModel.setCharSlots(req.body.id, req.body.char_slots)
 		.then(() => Admin.redirectTo(res, 'players'))
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static updateOwnedHero(req, res) {
 		 heroModel.update(req.body)
 		.then(() => Admin.redirectTo(res, 'players'))
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 
@@ -255,27 +256,27 @@ module.exports = class Admin {
 			res.render('edit-quests', {
 				quests: data[0], dragons: data[1]
 			})
-		}).catch(err => console.log(err))
+		}).catch(err => logger.log(err))
 	}
 
 	static newQuest(req, res) {
 		 dragonModel.getAllTypes()
 		.then(types => {
-			// console.log(types)
+			// logger.log(types)
 			res.render('new-quest', {types})
-		}).catch(err => console.log(err))
+		}).catch(err => logger.log(err))
 	}
 
 	static addNewQuest(req, res) {
 		 questModel.insert(req.body)
 		.then(() => Admin.redirectTo(res, 'new-quest'))
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static updateQuest(req, res) {
 		 questModel.update(req.body)
 		.then(() => Admin.redirectTo(res, 'update-quests'))
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static deleteQuest(req, res) {
@@ -283,7 +284,7 @@ module.exports = class Admin {
 		.then(() => {
 			res.status = 200
 			res.send('ok')
-		}).catch(err => console.log(err))
+		}).catch(err => logger.log(err))
 	}
 
 	//Assets
@@ -291,7 +292,7 @@ module.exports = class Admin {
 	static images(req, res) {
 		 assetsModel.getImages()
 		.then(images => res.render('images', { images }))
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static uploadImage(req, res) {		 
@@ -299,19 +300,19 @@ module.exports = class Admin {
 		.then(() => {			
 			Admin.redirectTo(res, 'images')			
 		})
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static renameImage(req, res) {
 		 assetsModel.renameImage(req.body.image, req.body.new_name)
 		.then(() => Admin.redirectTo(res, 'images'))
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static deleteImage(req, res) {
 		 assetsModel.deleteImage(req.body.image)
 		.then(() => Admin.redirectTo(res, 'images'))
-		.catch((err) => console.log(err))
+		.catch((err) => logger.log(err))
 	}
 
 	static sounds(req, res) {
@@ -323,25 +324,25 @@ module.exports = class Admin {
 			}
 			res.render('sounds', { sounds })
 		})
-	  .catch(err => console.log(err))
+	  .catch(err => logger.log(err))
   }
 
   static uploadSound(req, res) {
 	  assetsModel.uploadSound(req)
 	  .then(() => Admin.redirectTo(res, 'sounds'))
-	  .catch(err => console.log(err))
+	  .catch(err => logger.log(err))
 	}
 
   static renameSound(req, res) {
 	   assetsModel.renameSound(req.body.sound, req.body.new_name)
 		.then(() => Admin.redirectTo(res, 'sounds'))
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static deleteSound(req, res) {
 		 assetsModel.deleteSound(req.body.sound)
 		.then(() => Admin.redirectTo(res, 'sounds'))
-		.catch((err) => console.log(err))
+		.catch((err) => logger.log(err))
   }
 
 	static redirectTo(res, page) {

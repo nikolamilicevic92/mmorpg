@@ -1,11 +1,10 @@
 const playerModel = require('../model/player')
 const heroModel = require('../model/hero')
+const logger = require('../logger')
 
 module.exports = class Player {
 
-	constructor() {
-		
-	}
+	constructor() {	}
 
 	static login(data, socket, PLAYERS) {
 		 playerModel.exists(data)
@@ -70,7 +69,7 @@ module.exports = class Player {
 		.then(ownedHeroes => {
 			socket.emit('heroDeleted', ownedHeroes)
 		})
-		.catch(err => console.log(err))
+		.catch(err => logger.log(err))
 	}
 
 	static getOwnedHeroes(data) {
